@@ -1,0 +1,1954 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SHIELD AI – Project Report | ET AI Hackathon 2.0</title>
+<style>
+
+:root {
+  --navy-deep:   #020817;
+  --navy-dark:   #0a1628;
+  --navy-mid:    #0f2044;
+  --navy-light:  #1a3055;
+  --blue-primary:#1e90ff;
+  --blue-bright: #00d4ff;
+  --blue-glow:   #0050ff;
+  --gold:        #f59e0b;
+  --gold-light:  #fbbf24;
+  --green:       #10b981;
+  --red:         #ef4444;
+  --text-primary:#e2e8f0;
+  --text-muted:  #94a3b8;
+  --border:      rgba(30,144,255,0.25);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Times New Roman', Times, Georgia, serif;
+  background: #f1f5f9;
+  color: #1e293b;
+  font-size: 10pt;
+  line-height: 1.5;
+}
+
+@page {
+  size: A4 portrait;
+  margin: 12mm;
+}
+
+@media print {
+  body {
+    background: white;
+    color: black;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
+
+.page {
+  width: 210mm;
+  min-height: 297mm;
+  margin: 10px auto;
+  padding: 12mm;
+  background: white;
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+@media print {
+  .page {
+    margin: 0;
+    box-shadow: none;
+    page-break-after: always;
+    break-after: page;
+  }
+}
+
+.page::before {
+  content: "";
+  position: absolute;
+  top: 8mm;
+  left: 8mm;
+  right: 8mm;
+  bottom: 8mm;
+  border: 2px solid #000;
+  pointer-events: none;
+  box-sizing: border-box;
+}
+
+.page::after {
+  content: "";
+  position: absolute;
+  top: 11mm;
+  left: 11mm;
+  right: 11mm;
+  bottom: 11mm;
+  border: 1px solid #000;
+  pointer-events: none;
+  box-sizing: border-box;
+}
+
+.page-break {
+  page-break-before: always;
+  break-before: page;
+}
+
+p {
+  text-align: justify;
+  margin-bottom: 2mm;
+  color: #334155;
+}
+
+h1, h2, h3, h4, th, .section-title, .sub-title, .mini-title, .toc-group {
+  font-family: Cambria, Georgia, serif;
+  font-weight: bold;
+  color: #020817;
+}
+
+h2.section-title {
+  font-size: 16pt;
+  border-left: 5px solid var(--blue-primary);
+  padding-left: 4mm;
+  margin-bottom: 4mm;
+  line-height: 1.2;
+}
+
+h3.sub-title {
+  font-size: 12pt;
+  margin: 3.5mm 0 1.5mm;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+h3.sub-title::before {
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: linear-gradient(135deg, var(--blue-primary), var(--blue-bright));
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+h4.mini-title {
+  font-size: 10.5pt;
+  margin: 3mm 0 1mm;
+  padding-bottom: 0.5mm;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-bottom: 1px solid #000;
+  padding-bottom: 1.5mm;
+  margin-bottom: 4mm;
+}
+
+.ph-logo {
+  display: flex;
+  flex-direction: column;
+}
+
+.ph-title {
+  font-family: Cambria, Georgia, serif;
+  font-weight: bold;
+  font-size: 11pt;
+  color: #020817;
+  line-height: 1.1;
+}
+
+.ph-subtitle {
+  font-family: 'Times New Roman', Times, Georgia, serif;
+  font-size: 7.5pt;
+  color: #475569;
+  margin-top: 1px;
+}
+
+.ph-section {
+  font-family: Cambria, Georgia, serif;
+  font-weight: bold;
+  font-size: 9pt;
+  color: #020817;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.page-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #000;
+  padding-top: 1.5mm;
+  margin-top: auto;
+}
+
+.pf-left {
+  font-family: 'Times New Roman', Times, Georgia, serif;
+  font-size: 8.5pt;
+  color: #475569;
+  font-style: italic;
+}
+
+.pf-right {
+  font-family: Cambria, Georgia, serif;
+  font-weight: bold;
+  font-size: 9.5pt;
+  color: #020817;
+}
+
+img, .screen-mock, .arch-diagram, .workflow, .er-grid, table, .metrics-row, .feature-grid, .callout, .tech-badges {
+  page-break-inside: avoid;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  page-break-inside: avoid;
+}
+
+.mock-group, .diagram-group {
+  page-break-inside: avoid;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 3mm 0;
+  font-size: 8.5pt;
+}
+
+thead tr {
+  background: linear-gradient(90deg, #0a1628, #1e3a5f);
+  color: #fff;
+}
+
+thead th {
+  padding: 2mm 3mm;
+  text-align: left;
+  font-size: 9pt;
+}
+
+tbody tr {
+  border-bottom: 1px solid #e8edf4;
+}
+
+tbody tr:nth-child(even) {
+  background: #f8fafc;
+}
+
+tbody td {
+  padding: 1.8mm 3mm;
+  color: #334155;
+  vertical-align: top;
+}
+
+.index-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 4mm;
+  font-size: 9.5pt;
+}
+
+.index-table thead tr {
+  background: #020817;
+  color: #fff;
+}
+
+.index-table thead th {
+  padding: 3mm 4mm;
+  font-size: 10pt;
+}
+
+.index-table tbody tr {
+  border-bottom: 1px dotted #cbd5e1;
+}
+
+.index-table tbody tr:nth-child(even) {
+  background: #f8fafc;
+}
+
+.index-table tbody td {
+  padding: 2.5mm 4mm;
+  vertical-align: middle;
+}
+
+.index-table td.chapter-cell {
+  font-family: Cambria, Georgia, serif;
+  font-weight: bold;
+  color: #1e3a5f;
+  text-transform: uppercase;
+  font-size: 8.5pt;
+  letter-spacing: 1px;
+}
+
+.index-table td.title-cell {
+  font-family: 'Times New Roman', Times, Georgia, serif;
+}
+
+.index-table td.page-cell {
+  font-family: Cambria, Georgia, serif;
+  font-weight: bold;
+  text-align: right;
+}
+
+.callout {
+  background: rgba(30,144,255,0.04);
+  border: 1px solid rgba(30,144,255,0.2);
+  border-left: 4px solid var(--blue-primary);
+  border-radius: 6px;
+  padding: 3mm 5mm;
+  margin: 3mm 0;
+}
+
+.callout-gold { background: rgba(245,158,11,0.04); border-left-color: var(--gold); }
+.callout-green { background: rgba(16,185,129,0.04); border-left-color: var(--green); }
+.callout-red { background: rgba(239,68,68,0.04); border-left-color: var(--red); }
+
+.metrics-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 3mm;
+  margin: 3mm 0;
+}
+
+.metric-card {
+  background: linear-gradient(135deg, #020817, #0a1628);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 3mm 4mm;
+  color: #fff;
+  text-align: center;
+}
+
+.metric-card .mv {
+  font-family: Cambria, Georgia, serif;
+  font-size: 16pt;
+  font-weight: bold;
+  color: var(--blue-bright);
+}
+
+.metric-card .ml {
+  font-size: 7.5pt;
+  color: var(--text-muted);
+  margin-top: 0.5mm;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3mm;
+  margin: 3mm 0;
+}
+
+.feature-item {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-left: 3px solid var(--blue-primary);
+  border-radius: 6px;
+  padding: 2.5mm 3.5mm;
+}
+
+.feature-item .fi-title {
+  font-family: Cambria, Georgia, serif;
+  font-weight: bold;
+  font-size: 9.5pt;
+  color: #0f2044;
+  margin-bottom: 0.5mm;
+}
+
+.feature-item .fi-desc {
+  font-size: 8.5pt;
+  color: #475569;
+}
+
+.page-dark {
+  background: linear-gradient(160deg, #020817 0%, #0a1628 40%, #0f2044 100%);
+  color: var(--text-primary);
+}
+
+.page-dark h2.section-title {
+  color: #fff;
+}
+
+.page-dark p {
+  color: var(--text-primary);
+}
+
+.page-dark td {
+  color: var(--text-primary);
+}
+
+.page-dark::before {
+  border-color: #fff;
+}
+
+.page-dark::after {
+  border-color: #fff;
+}
+
+.page-dark .page-header {
+  border-bottom-color: rgba(255,255,255,0.2);
+}
+
+.page-dark .ph-title, .page-dark .ph-section {
+  color: #fff;
+}
+
+.page-dark .ph-subtitle {
+  color: var(--text-muted);
+}
+
+.page-dark .page-footer {
+  border-top-color: rgba(255,255,255,0.2);
+}
+
+.page-dark .pf-left {
+  color: var(--text-muted);
+}
+
+.page-dark .pf-right {
+  color: #fff;
+}
+
+.cover {
+  background: linear-gradient(160deg, #020817 0%, #050f25 50%, #0a1a40 100%);
+  color: var(--text-primary);
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20mm;
+}
+
+.cover::before, .cover::after {
+  border-color: rgba(255,255,255,0.3);
+}
+
+.cover h1 {
+  font-size: 32pt;
+  background: linear-gradient(90deg, #fff, #1e90ff, #00d4ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 2mm;
+}
+
+.cover-sub {
+  font-size: 12pt;
+  color: var(--blue-bright);
+  font-weight: bold;
+}
+
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- PAGE 1: COVER                                           -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="page cover page-break">
+  <div class="cover-grid"></div>
+  <div class="cover-corner corner-tl"></div>
+  <div class="cover-corner corner-br"></div>
+
+  <div class="shield-logo">🛡</div>
+  <div class="cover-badge">National Fraud Intelligence System</div>
+  <h1>SHIELD AI</h1>
+  <div class="cover-sub">National Fraud Intelligence Operating System</div>
+  <div class="cover-divider"></div>
+
+  <p style="color:#94a3b8;font-size:9pt;letter-spacing:1px;margin:2mm 0;">
+    A Next-Generation AI-Powered Platform for Real-Time Digital Fraud Detection,<br/>
+    Investigation Automation, and Public Safety Intelligence
+  </p>
+
+  <div class="cover-divider"></div>
+
+  <div class="cover-hackathon">
+    <div class="ht">Submitted To</div>
+    <div class="hn">⚡ ET AI Hackathon 2.0</div>
+  </div>
+
+  <br/>
+
+  <div class="cover-team-box">
+    <div class="tl">Team Information</div>
+    <div class="tn">⚡ Team SHIELD</div>
+    <div class="tm">
+      👤 Sukumar — Lead Developer &amp; AI Architect<br/>
+      👤 Shaik Mujeeb Basha — Backend &amp; Data Engineering<br/>
+      👤 Bondada Tejendra — Frontend &amp; UX Design
+    </div>
+    <div class="cname">🏛 Nalanda degree collegre | Computer Science Department</div>
+  </div>
+
+  <div style="margin-top:6mm;color:#94a3b8;font-size:8pt;letter-spacing:1px;">
+    Submitted: June 2026 &nbsp;|&nbsp; Version 1.0.0 &nbsp;|&nbsp; CONFIDENTIAL
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- PAGE 2: CERTIFICATE                                     -->
+<!-- ═══════════════════════════════════════════════════════ -->
+</div>
+
+<div class="page page-dark page-break">
+  
+  <div class="page-header">
+    <div class="ph-logo">
+      <div class="ph-title">SHIELD AI</div>
+      <div class="ph-subtitle">National Fraud Intelligence Operating System</div>
+    </div>
+    <div class="ph-section">Certificate of Authenticity</div>
+  </div>
+  <div class="page-body" style="background:linear-gradient(160deg,#020817,#0a1628);color:#e2e8f0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16mm 20mm;flex:1;">
+    </div>
+  </div>
+  
+    <div class="pf-right">Page 2</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- PAGE 3: ACKNOWLEDGEMENT                                 -->
+<!-- ═══════════════════════════════════════════════════════ -->
+  </div>
+  
+  <div class="page-footer">
+    <div class="pf-left">ET AI Hackathon 2.0</div>
+    <div class="pf-right">Page 2</div>
+  </div>
+</div>
+
+<div class="page page-break">
+  
+  <div class="page-header">
+    <div class="ph-logo">
+      <div class="ph-title">SHIELD AI</div>
+      <div class="ph-subtitle">National Fraud Intelligence Operating System</div>
+    </div>
+    <div class="ph-section">Acknowledgement</div>
+  </div>
+  <div class="page-body" style="padding: 8mm 14mm 6mm; flex: 1; background: #fff; color: #1e293b;">
+    </div>
+  
+    <div class="pf-right">Page 3</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- PAGE 4: TABLE OF CONTENTS                               -->
+<!-- ═══════════════════════════════════════════════════════ -->
+  </div>
+  
+  <div class="page-footer">
+    <div class="pf-left">ET AI Hackathon 2.0</div>
+    <div class="pf-right">Page 3</div>
+  </div>
+</div>
+
+<div class="page page-break">
+  
+  <div class="page-header">
+    <div class="ph-logo">
+      <div class="ph-title">SHIELD AI</div>
+      <div class="ph-subtitle">National Fraud Intelligence Operating System</div>
+    </div>
+    <div class="ph-section">Table of Contents</div>
+  </div>
+  <div class="page-body" style="padding: 8mm 14mm 6mm; flex: 1; background: #fff; color: #1e293b;">
+    
+    <h2 class="section-title">Table of Contents</h2>
+    <table class="index-table">
+      <thead>
+        <tr>
+          <th>Chapter</th>
+          <th>Title</th>
+          <th>Page</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="chapter-cell">Preliminary Sections</td>
+          <td class="title-cell">Certificate of Authenticity</td>
+          <td class="page-cell">Page 2</td>
+        </tr>
+        <tr>
+          <td class="chapter-cell">Preliminary Sections</td>
+          <td class="title-cell">Acknowledgement</td>
+          <td class="page-cell">Page 3</td>
+        </tr>
+        <tr>
+          <td class="chapter-cell">Preliminary Sections</td>
+          <td class="title-cell">Table of Contents</td>
+          <td class="page-cell">Page 4</td>
+        </tr>
+        <tr>
+          <td class="chapter-cell">Project Overview</td>
+          <td class="title-cell">Executive Summary</td>
+          <td class="page-cell">Page 5</td>
+        </tr>
+        <tr>
+          <td class="chapter-cell">Project Overview</td>
+          <td class="title-cell">Abstract</td>
+          <td class="page-cell">Page 5</td>
+        </tr>
+        <tr>
+          <td class="chapter-cell">Project Overview</td>
+          <td class="title-cell">Problem Statement</td>
+          <td class="page-cell">Page 6</td>
+        </tr>
+        <tr>
+          <td class="chapter-cell">Project Overview</td>
+          <td class="title-cell">Existing System Limitations</td>
+          <td class="page-cell">Page 6</td>
+        </tr>
+        <tr>
+          <td class="chapter-cell">Project Overview</td>
+          <td class="title-cell">Proposed Solution</td>
+          <td class="page-cell">Page 7</td>
+        </tr>
+        <tr>
+          <td class="chapter-cell">Project Overview</td>
+          <td class="title-cell">Objectives</td>
+          <td class="page-cell">Page 7</td>
+        </tr>
+        <tr>
+          <td class="chapter-cell">Project Overview</td>
+          <td class="title-cell">Key Innovations</td>
+          <td class="page-cell">Page 8</td>
+        </tr>
+        <tr>
+          <td class="chapter-cell">Technical Architecture</td>
+          <td class="title-cell">Technology Stack</td>
+          <td class="page-cell">Page 9</td>
+        </tr>
+        <tr>
+          <td class="chapter-cell">Technical Architecture</td>
+          <td class="title-cell">System Architecture</td>
+          <td class="page-cell">Page 10</td>
+        </tr>
+        <tr>
+          <td class="chapter-cell">Technical Architecture</td>
+          <td class="title-cell">Workflow Diagram</td>
+          <td class="page-cell">Page 11</td>
+        </tr>
+        <tr>
+          <td class="chapter-cell">Technical Architecture</td>
+          <td class="title-cell">Database Design & ER Diagram</td>
+          <td class="page-cell">Page 12</td>
+        </tr>
+        <tr>
+          <td class="chapter-cell">Technical Architecture</td>
+          <td class="title-cell">Module Description</td>
+          <td class="page-cell">Page 13</td>
+        </tr>
+        <tr>
+          <td class="chapter-cell">Platform Intelligence Modules</td>
+          <td class="title-cell">Executive Command Center Dashboard</td>
+          <td class="page-cell">Page 14</td>
+        </tr>
+        <tr>
+          <td class="chapter-cell">Platform Intelligence Modules</td>
+          <td class="title-cell">Fraud DNA Genome Index</td>
+          <td class="page-cell">Page 15</td>
+        </tr>
+        <tr>
+          <td class="chapter-cell">Platform Intelligence Modules</td>
+          <td class="title-cell">DNA Analytics Engine</td>
+          <td class="page-cell">Page 16</td>
+        </tr>
+        <tr>
+          <td class="chapter-cell">Platform Intelligence Modules</td>
+          <td class="title-cell">Fraud Family Classification System</td>
+          <td class="page-cell">Page 15</td>
+        </tr>
+        <tr>
+          <td class="chapter-cell">Platform Intelligence Modules</td>
+          <td class="title-cell">Fraud Entity Graph Intelligence</td>
+          <td class="page-cell">Page 17</td>
+        </tr>
+        <tr>
+          <td class="chapter-cell">Platform Intelligence Modules</td>
+          <td class="title-cell">Investigation Operations Desk</td>
+          <td class="page-cell">Page 18</td>
+        </tr>
+        <tr>
+          <td class="chapter-cell">Platform Intelligence Modules</td>
+          <td class="title-cell">National Threat Intelligence Map</td>
+          <td class="page-cell">Page 19</td>
+        </tr>
+        <tr>
+          <td class="chapter-cell">Platform Intelligence Modules</td>
+          <td class="title-cell">Citizen Copilot</td>
+          <td class="page-cell">Page 20</td>
+        </tr>
+        <tr>
+          <td class="chapter-cell">Platform Intelligence Modules</td>
+          <td class="title-cell">API Documentation</td>
+          <td class="page-cell">Page 21</td>
+        </tr>
+        <tr>
+          <td class="chapter-cell">Evaluation & Future</td>
+          <td class="title-cell">Security Features</td>
+          <td class="page-cell">Page 22</td>
+        </tr>
+        <tr>
+          <td class="chapter-cell">Evaluation & Future</td>
+          <td class="title-cell">Innovation & Uniqueness</td>
+          <td class="page-cell">Page 23</td>
+        </tr>
+        <tr>
+          <td class="chapter-cell">Evaluation & Future</td>
+          <td class="title-cell">Impact Analysis</td>
+          <td class="page-cell">Page 24</td>
+        </tr>
+        <tr>
+          <td class="chapter-cell">Evaluation & Future</td>
+          <td class="title-cell">Future Scope</td>
+          <td class="page-cell">Page 25</td>
+        </tr>
+        <tr>
+          <td class="chapter-cell">Evaluation & Future</td>
+          <td class="title-cell">Conclusion</td>
+          <td class="page-cell">Page 26</td>
+        </tr>
+        <tr>
+          <td class="chapter-cell">Evaluation & Future</td>
+          <td class="title-cell">References</td>
+          <td class="page-cell">Page 27</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <div class="page-footer">
+    <div class="pf-left">ET AI Hackathon 2.0</div>
+    <div class="pf-right">Page 4</div>
+  </div>
+</div>
+
+<div class="page page-break">
+  
+  <div class="page-header">
+    <div class="ph-logo">
+      <div class="ph-title">SHIELD AI</div>
+      <div class="ph-subtitle">National Fraud Intelligence Operating System</div>
+    </div>
+    <div class="ph-section">Executive Summary &amp; Abstract</div>
+  </div>
+  <div class="page-body" style="padding: 8mm 14mm 6mm; flex: 1; background: #fff; color: #1e293b;">
+    <p>
+      India faces an unprecedented surge in digital financial fraud, with losses exceeding <strong>₹1.25 lakh crore annually</strong>. Existing cybercrime systems operate in fragmented silos — complaints, investigation, and enforcement are disconnected, causing systemic delays and allowing fraud syndicates to operate unchecked.
+    </p>
+    <p>
+      <strong>SHIELD AI</strong> is a national-level, full-stack, AI-powered digital fraud prevention and public safety intelligence platform purpose-built to solve this crisis. It unifies fraud detection, network graph analysis, geospatial threat mapping, investigation automation, DNA-based fraud profiling, and a citizen-facing AI safety copilot into one coherent operating system for law enforcement and the public alike.
+    </p>
+    <div class="callout callout-green">
+      <strong>Core Achievement:</strong> SHIELD AI integrates six intelligence modules with a shared FastAPI backend and React frontend, delivering real-time threat intelligence to investigators, policymakers, and citizens simultaneously.
+    </div>
+
+    <hr class="sec-divider" />
+
+    <h2 class="section-title">Abstract</h2>
+    <p>
+      Digital fraud in India has evolved from isolated phishing incidents to sophisticated multi-layered syndicate operations employing money mules, SIM swapping, UPI exploits, and AI-generated deception. Traditional complaint-centric systems lack the analytical depth to detect, map, and dismantle these networks at scale.
+    </p>
+    <p>
+      This paper presents <strong>SHIELD AI (Systematic Hybrid Intelligence Engine for Law Enforcement and Digital threat mitigation)</strong>, a six-module intelligence operating system. The platform introduces the concept of <em>Fraud DNA</em> — a multi-dimensional digital fingerprint profiling fraud entities across communication, financial, behavioral, geographic, and linguistic vectors. A <em>Graph Intelligence Engine</em> maps entity relationships across fraud networks using interactive node-link visualizations. An <em>AI Investigation Agent</em> automates case analysis and FIR generation, while a <em>Geospatial module</em> provides heatmap-based risk visualization at state and district levels. The <em>Citizen Copilot</em> — a multilingual conversational AI — enables real-time public fraud detection assistance.
+    </p>
+    <p>
+      SHIELD AI is built using FastAPI, React, PostgreSQL, JWT authentication, Recharts, React Flow, and a custom AI engine, delivering a production-grade platform for national fraud intelligence operations.
+    </p>
+    <div class="tech-badges">
+      <span class="tech-badge">FastAPI</span>
+      <span class="tech-badge">React 18</span>
+      <span class="tech-badge">TypeScript</span>
+      <span class="tech-badge">PostgreSQL</span>
+      <span class="tech-badge">React Flow</span>
+      <span class="tech-badge">Recharts</span>
+      <span class="tech-badge">JWT Auth</span>
+      <span class="tech-badge">SQLAlchemy</span>
+      <span class="tech-badge">Alembic</span>
+      <span class="tech-badge">Docker</span>
+      <span class="tech-badge">Nginx</span>
+      <span class="tech-badge">Tailwind CSS</span>
+    </div>
+  </div>
+  
+    <div class="pf-right">Page 5</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- PAGE 6: PROBLEM STATEMENT + EXISTING LIMITATIONS       -->
+<!-- ═══════════════════════════════════════════════════════ -->
+  </div>
+  
+  <div class="page-footer">
+    <div class="pf-left">ET AI Hackathon 2.0</div>
+    <div class="pf-right">Page 5</div>
+  </div>
+</div>
+
+<div class="page page-break">
+  
+  <div class="page-header">
+    <div class="ph-logo">
+      <div class="ph-title">SHIELD AI</div>
+      <div class="ph-subtitle">National Fraud Intelligence Operating System</div>
+    </div>
+    <div class="ph-section">Problem Statement &amp; Existing Limitations</div>
+  </div>
+  <div class="page-body" style="padding: 8mm 14mm 6mm; flex: 1; background: #fff; color: #1e293b;">
+    </div>
+  
+    <div class="pf-right">Page 6</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- PAGE 7: PROPOSED SOLUTION + OBJECTIVES                  -->
+<!-- ═══════════════════════════════════════════════════════ -->
+  </div>
+  
+  <div class="page-footer">
+    <div class="pf-left">ET AI Hackathon 2.0</div>
+    <div class="pf-right">Page 6</div>
+  </div>
+</div>
+
+<div class="page page-break">
+  
+  <div class="page-header">
+    <div class="ph-logo">
+      <div class="ph-title">SHIELD AI</div>
+      <div class="ph-subtitle">National Fraud Intelligence Operating System</div>
+    </div>
+    <div class="ph-section">Proposed Solution &amp; Objectives</div>
+  </div>
+  <div class="page-body" style="padding: 8mm 14mm 6mm; flex: 1; background: #fff; color: #1e293b;">
+    </div>
+  
+    <div class="pf-right">Page 7</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- PAGE 8: KEY INNOVATIONS                                 -->
+<!-- ═══════════════════════════════════════════════════════ -->
+  </div>
+  
+  <div class="page-footer">
+    <div class="pf-left">ET AI Hackathon 2.0</div>
+    <div class="pf-right">Page 7</div>
+  </div>
+</div>
+
+<div class="page page-break">
+  
+  <div class="page-header">
+    <div class="ph-logo">
+      <div class="ph-title">SHIELD AI</div>
+      <div class="ph-subtitle">National Fraud Intelligence Operating System</div>
+    </div>
+    <div class="ph-section">Key Innovations</div>
+  </div>
+  <div class="page-body" style="padding: 8mm 14mm 6mm; flex: 1; background: #fff; color: #1e293b;">
+    <!-- ═══════════════════════════════════════════════════════ -->
+<!-- PAGE 9: TECHNOLOGY STACK                                -->
+<!-- ═══════════════════════════════════════════════════════ -->
+  </div>
+  
+  <div class="page-footer">
+    <div class="pf-left">ET AI Hackathon 2.0</div>
+    <div class="pf-right">Page 8</div>
+  </div>
+</div>
+
+<div class="page page-break">
+  
+  <div class="page-header">
+    <div class="ph-logo">
+      <div class="ph-title">SHIELD AI</div>
+      <div class="ph-subtitle">National Fraud Intelligence Operating System</div>
+    </div>
+    <div class="ph-section">Technology Stack</div>
+  </div>
+  <div class="page-body" style="padding: 8mm 14mm 6mm; flex: 1; background: #fff; color: #1e293b;">
+    <div class="callout callout-gold">
+      <strong>Design Decision:</strong> The choice of FastAPI + React + Docker ensures SHIELD AI can be deployed on any cloud provider (AWS, GCP, Azure, Render, Railway) without modification, making it instantly production-ready for national-scale deployment.
+    </div>
+  </div>
+  
+    <div class="pf-right">Page 9</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- PAGE 10: SYSTEM ARCHITECTURE                            -->
+<!-- ═══════════════════════════════════════════════════════ -->
+  </div>
+  
+  <div class="page-footer">
+    <div class="pf-left">ET AI Hackathon 2.0</div>
+    <div class="pf-right">Page 9</div>
+  </div>
+</div>
+
+<div class="page page-break">
+  
+  <div class="page-header">
+    <div class="ph-logo">
+      <div class="ph-title">SHIELD AI</div>
+      <div class="ph-subtitle">National Fraud Intelligence Operating System</div>
+    </div>
+    <div class="ph-section">System Architecture</div>
+  </div>
+  <div class="page-body" style="padding: 8mm 14mm 6mm; flex: 1; background: #fff; color: #1e293b;">
+    <div class="arch-row">
+        <div class="arch-box">
+          <div class="ab-icon">🧬</div>
+          <div class="ab-title">Fraud DNA</div>
+          <div class="ab-tech">Recharts + Tables</div>
+        </div>
+        <div class="arch-box">
+          <div class="ab-icon">⚖️</div>
+          <div class="ab-title">Investigation</div>
+          <div class="ab-tech">React + Download</div>
+        </div>
+        <div class="arch-box">
+          <div class="ab-icon">🗺</div>
+          <div class="ab-title">Geospatial Map</div>
+          <div class="ab-tech">React + Heat Layer</div>
+        </div>
+      </div>
+      <div class="arch-arrow">↕ &nbsp; REST API (JSON) over HTTPS &nbsp; ↕</div>
+      <div class="arch-label">[ API GATEWAY — Nginx Reverse Proxy ]</div>
+      <div class="arch-arrow">↕</div>
+      <div class="arch-label">[ APPLICATION LAYER ]</div>
+      <div class="arch-row">
+        <div class="arch-box">
+          <div class="ab-icon">⚡</div>
+          <div class="ab-title">FastAPI Server</div>
+          <div class="ab-tech">Python 3.10+ / Uvicorn</div>
+        </div>
+        <div class="arch-box">
+          <div class="ab-icon">🔐</div>
+          <div class="ab-title">Auth Service</div>
+          <div class="ab-tech">JWT + RBAC</div>
+        </div>
+        <div class="arch-box">
+          <div class="ab-icon">🧬</div>
+          <div class="ab-title">AI Engine</div>
+          <div class="ab-tech">DNA + Graph + Copilot</div>
+        </div>
+      </div>
+      <div class="arch-arrow">↕</div>
+      <div class="arch-label">[ DATA LAYER ]</div>
+      <div class="arch-row">
+        <div class="arch-box">
+          <div class="ab-icon">🗄</div>
+          <div class="ab-title">PostgreSQL DB</div>
+          <div class="ab-tech">SQLAlchemy ORM</div>
+        </div>
+        <div class="arch-box">
+          <div class="ab-icon">🔄</div>
+          <div class="ab-title">Alembic Migrations</div>
+          <div class="ab-tech">Schema versioning</div>
+        </div>
+        <div class="arch-box">
+          <div class="ab-icon">🌱</div>
+          <div class="ab-title">Seed Engine</div>
+          <div class="ab-tech">Realistic data gen</div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="sub-title">Deployment Architecture</h3>
+    <div class="callout">
+      <strong>Docker Compose Orchestration:</strong> The platform runs as three coordinated containers — <code>db</code> (PostgreSQL), <code>web</code> (FastAPI + Uvicorn), and <code>frontend</code> (Nginx serving the React build). A shared Docker network enables inter-container communication via service names, while environment-based configuration ensures zero-touch production promotion.
+    </div>
+    <div class="code-snippet">
+docker-compose up --build<br/>
+# Starts: PostgreSQL → FastAPI → Nginx<br/>
+# Frontend: http://localhost:80<br/>
+# API Docs: http://localhost:8000/docs
+    </div>
+  </div>
+  
+    <div class="pf-right">Page 10</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- PAGE 11: WORKFLOW DIAGRAM                               -->
+<!-- ═══════════════════════════════════════════════════════ -->
+  </div>
+  
+  <div class="page-footer">
+    <div class="pf-left">ET AI Hackathon 2.0</div>
+    <div class="pf-right">Page 10</div>
+  </div>
+</div>
+
+<div class="page page-break">
+  
+  <div class="page-header">
+    <div class="ph-logo">
+      <div class="ph-title">SHIELD AI</div>
+      <div class="ph-subtitle">National Fraud Intelligence Operating System</div>
+    </div>
+    <div class="ph-section">Workflow Diagram</div>
+  </div>
+  <div class="page-body" style="padding: 8mm 14mm 6mm; flex: 1; background: #fff; color: #1e293b;">
+    <table style="margin-top:5mm;">
+      <thead><tr><th>Stage</th><th>Process</th><th>Output</th><th>System Module</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="td-badge">01</span> Complaint Intake</td>
+          <td>Citizen submits complaint via portal or Copilot. Structured complaint data captured with metadata.</td>
+          <td>Complaint record with entity extraction</td>
+          <td>Citizen Copilot / NCRP</td>
+        </tr>
+        <tr>
+          <td><span class="td-badge">02</span> AI Processing</td>
+          <td>NLP pipeline extracts entities (phone numbers, UPI IDs, bank accounts), classifies fraud type, and assigns initial threat score.</td>
+          <td>Entity list, fraud category tag, threat score</td>
+          <td>AI Engine (ai_engine.py)</td>
+        </tr>
+        <tr>
+          <td><span class="td-badge">03</span> Fraud DNA</td>
+          <td>Six-vector DNA profiling generates a fraud fingerprint. Compared against known fraud family database.</td>
+          <td>DNA profile, family match, confidence score</td>
+          <td>DNA Engine (dna_engine.py)</td>
+        </tr>
+        <tr>
+          <td><span class="td-badge">04</span> Graph Intelligence</td>
+          <td>New entities added to the graph. Relationship edges drawn to existing nodes. Cluster analysis run to detect syndicate membership.</td>
+          <td>Graph nodes, edges, cluster assignment</td>
+          <td>Graph Service (graph_service.py)</td>
+        </tr>
+        <tr>
+          <td><span class="td-badge">05</span> Investigation</td>
+          <td>Case auto-queued based on threat level. AI agent generates investigation brief, evidence collection checklist, and FIR draft.</td>
+          <td>Investigation case record, FIR document</td>
+          <td>Investigation Agent</td>
+        </tr>
+        <tr>
+          <td><span class="td-badge">06</span> Threat Intelligence</td>
+          <td>Geographic coordinates logged. State/district risk scores updated. Heatmap recalculated. National threat indicators refreshed.</td>
+          <td>Updated geospatial risk layer, KPI refresh</td>
+          <td>Geospatial Service</td>
+        </tr>
+        <tr>
+          <td><span class="td-badge">07</span> Actionable Output</td>
+          <td>Investigators receive prioritized case queue. Dashboard updated. Citizen receives SHIELD score if Copilot-initiated.</td>
+          <td>Case queue, FIR, SHIELD score, dashboard</td>
+          <td>All Modules</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 class="sub-title">Real-Time Data Flow</h3>
+    <p>All data flows through the FastAPI backend via RESTful API endpoints. The frontend React application polls key endpoints on a configurable interval (default: 30 seconds) to refresh threat metrics, ensuring the intelligence displayed is always current. The Citizen Copilot uses a conversational endpoint (<code>/api/v1/copilot/chat</code>) that processes queries synchronously with sub-2-second response times.</p>
+  </div>
+  
+    <div class="pf-right">Page 11</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- PAGE 12: DATABASE DESIGN                                -->
+<!-- ═══════════════════════════════════════════════════════ -->
+  </div>
+  
+  <div class="page-footer">
+    <div class="pf-left">ET AI Hackathon 2.0</div>
+    <div class="pf-right">Page 11</div>
+  </div>
+</div>
+
+<div class="page page-break">
+  
+  <div class="page-header">
+    <div class="ph-logo">
+      <div class="ph-title">SHIELD AI</div>
+      <div class="ph-subtitle">National Fraud Intelligence Operating System</div>
+    </div>
+    <div class="ph-section">Database Design &amp; ER Diagram</div>
+  </div>
+  <div class="page-body" style="padding: 8mm 14mm 6mm; flex: 1; background: #fff; color: #1e293b;">
+    <h3 class="sub-title">Key Relationships</h3>
+    <p>
+      <strong>Users → Complaints</strong> (1:N) · <strong>Complaints → Investigations</strong> (1:1) · <strong>FraudFamilies → FraudEntities</strong> (1:N) · <strong>Complaints → FraudFamilies</strong> (N:1 via entity matching) · <strong>FraudEntities → GeospatialThreats</strong> (N:1 via state/district)
+    </p>
+  </div>
+  
+    <div class="pf-right">Page 12</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- PAGE 13: MODULE DESCRIPTIONS                            -->
+<!-- ═══════════════════════════════════════════════════════ -->
+  </div>
+  
+  <div class="page-footer">
+    <div class="pf-left">ET AI Hackathon 2.0</div>
+    <div class="pf-right">Page 12</div>
+  </div>
+</div>
+
+<div class="page page-break">
+  
+  <div class="page-header">
+    <div class="ph-logo">
+      <div class="ph-title">SHIELD AI</div>
+      <div class="ph-subtitle">National Fraud Intelligence Operating System</div>
+    </div>
+    <div class="ph-section">Module Description</div>
+  </div>
+  <div class="page-body" style="padding: 8mm 14mm 6mm; flex: 1; background: #fff; color: #1e293b;">
+    <p class="small">The operational nerve center providing unified, real-time national threat intelligence. Aggregates KPIs from all modules into a single command view with threat alerts, distribution charts, and risk rankings. Built with Recharts for analytics visualization and polling-based live data refresh.</p>
+    </div>
+
+    <div class="module-card">
+      <div class="mc-header">
+        <div class="mc-icon" style="background:linear-gradient(135deg,#7c3aed,#4f46e5);">🧬</div>
+        <div><div class="mc-title">Fraud DNA Genome Intelligence System</div><div class="mc-route">Route: /dna</div></div>
+      </div>
+      <p class="small">The AI backbone of SHIELD AI. Profiles every fraud family across six DNA vectors using a proprietary scoring engine. Provides interactive DNA distribution charts, behavioral pattern analysis, temporal trend visualization, and the Fraud Family Directory with confidence scores.</p>
+    </div>
+
+    <div class="module-card">
+      <div class="mc-header">
+        <div class="mc-icon" style="background:linear-gradient(135deg,#0891b2,#0e7490);">🕸</div>
+        <div><div class="mc-title">Fraud Entity Graph Intelligence Engine</div><div class="mc-route">Route: /graph</div></div>
+      </div>
+      <p class="small">An interactive React Flow-based network visualization engine mapping relationships between fraudsters, victims, UPI IDs, phone numbers, and bank accounts. Supports zoom, pan, node expansion, cluster filtering, entity search, and connection highlighting for deep network forensics.</p>
+    </div>
+
+    <div class="module-card">
+      <div class="mc-header">
+        <div class="mc-icon" style="background:linear-gradient(135deg,#059669,#047857);">⚖️</div>
+        <div><div class="mc-title">Investigation Operations Desk</div><div class="mc-route">Route: /investigations</div></div>
+      </div>
+      <p class="small">A complete case management system for law enforcement officers. Provides a prioritized investigation queue with threat level badges, full case timelines, AI-generated investigation briefs, and one-click FIR generation with preview and download capabilities.</p>
+    </div>
+
+    <div class="module-card">
+      <div class="mc-header">
+        <div class="mc-icon" style="background:linear-gradient(135deg,#b45309,#92400e);">🗺</div>
+        <div><div class="mc-title">National Threat Intelligence Map</div><div class="mc-route">Route: /geospatial</div></div>
+      </div>
+      <p class="small">A geographic intelligence layer providing state and district-level fraud hotspot visualization, heatmap rendering, fraud family geographic spread analysis, and risk ranking tables for 36 Indian states and UTs. Enables data-driven resource allocation for cybercrime units.</p>
+    </div>
+
+    <div class="module-card">
+      <div class="mc-header">
+        <div class="mc-icon" style="background:linear-gradient(135deg,#be185d,#9d174d);">🤖</div>
+        <div><div class="mc-title">Citizen Copilot — AI Safety Assistant</div><div class="mc-route">Route: /copilot</div></div>
+      </div>
+      <p class="small">A multilingual conversational AI interface for the Indian public. Citizens can submit phone numbers, UPI IDs, or describe suspicious activity to receive an instant SHIELD Safety Score, threat level assessment, fraud family awareness briefing, and preventive safety guidance in their preferred language.</p>
+    </div>
+  </div>
+  
+    <div class="pf-right">Page 13</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- PAGE 14: EXECUTIVE COMMAND CENTER DASHBOARD             -->
+<!-- ═══════════════════════════════════════════════════════ -->
+  </div>
+  
+  <div class="page-footer">
+    <div class="pf-left">ET AI Hackathon 2.0</div>
+    <div class="pf-right">Page 13</div>
+  </div>
+</div>
+
+<div class="page page-break">
+  
+  <div class="page-header">
+    <div class="ph-logo">
+      <div class="ph-title">SHIELD AI</div>
+      <div class="ph-subtitle">National Fraud Intelligence Operating System</div>
+    </div>
+    <div class="ph-section">Executive Command Center Dashboard</div>
+  </div>
+  <div class="page-body" style="padding: 8mm 14mm 6mm; flex: 1; background: #fff; color: #1e293b;">
+    <div class="sm-chart-row">
+          <div class="sm-chart">
+            <div class="sm-chart-label">📊 High Risk States</div>
+            <div class="sm-bar-row">
+              <div class="sm-bbar" style="height:16mm;"></div>
+              <div class="sm-bbar" style="height:14mm;"></div>
+              <div class="sm-bbar" style="height:12mm;"></div>
+              <div class="sm-bbar" style="height:10mm;"></div>
+              <div class="sm-bbar" style="height:9mm;"></div>
+              <div class="sm-bbar" style="height:7mm;"></div>
+            </div>
+          </div>
+          <div class="sm-chart">
+            <div class="sm-chart-label">🍩 Fraud Family Distribution</div>
+            <div class="sm-pie"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="sub-title">Key Performance Indicators (KPIs)</h3>
+    <table>
+      <thead><tr><th>KPI</th><th>Current Value</th><th>Change (30d)</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>Total Complaints Registered</td><td>12,847</td><td>+18.4%</td><td><span class="td-badge td-badge-red">⬆ Critical</span></td></tr>
+        <tr><td>Active Fraud Families Tracked</td><td>34</td><td>+2 new families</td><td><span class="td-badge td-badge-red">⬆ Rising</span></td></tr>
+        <tr><td>SHIELD National Threat Score</td><td>78.4 / 100</td><td>+5.1 pts</td><td><span class="td-badge td-badge-red">⚠ High</span></td></tr>
+        <tr><td>Active Investigations</td><td>1,293</td><td>+234 new</td><td><span class="td-badge">⚡ Active</span></td></tr>
+        <tr><td>FIRs Auto-Generated</td><td>847</td><td>+127 this week</td><td><span class="td-badge td-badge-green">✓ Active</span></td></tr>
+        <tr><td>Fraud Amount Tracked</td><td>₹4,820 Cr</td><td>+₹340 Cr</td><td><span class="td-badge td-badge-red">⬆ Rising</span></td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="sub-title">Intelligence Insights &amp; Benefits</h3>
+    <div class="feature-grid">
+      <div class="feature-item">
+        <div class="fi-title">🔴 Live Threat Alerts</div>
+        <div class="fi-desc">Real-time threat alert feed with severity color-coding. Officers see emerging threats within seconds of detection by the AI engine.</div>
+      </div>
+      <div class="feature-item">
+        <div class="fi-title">📍 High-Risk District Rankings</div>
+        <div class="fi-desc">Auto-ranked list of the top 10 most impacted districts, enabling targeted resource deployment by cybercrime units.</div>
+      </div>
+      <div class="feature-item">
+        <div class="fi-title">📈 Threat Timeline</div>
+        <div class="fi-desc">30-day trend visualization of fraud complaint volume, helping policymakers identify seasonal patterns and syndicate escalations.</div>
+      </div>
+      <div class="feature-item">
+        <div class="fi-title">🍩 Fraud Family Distribution</div>
+        <div class="fi-desc">Pie chart showing percentage contribution of each active fraud family, enabling strategic prioritization of enforcement resources.</div>
+      </div>
+    </div>
+  </div>
+  
+    <div class="pf-right">Page 14</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- PAGE 15: FRAUD DNA GENOME INDEX                         -->
+<!-- ═══════════════════════════════════════════════════════ -->
+  </div>
+  
+  <div class="page-footer">
+    <div class="pf-left">ET AI Hackathon 2.0</div>
+    <div class="pf-right">Page 14</div>
+  </div>
+</div>
+
+<div class="page page-break">
+  
+  <div class="page-header">
+    <div class="ph-logo">
+      <div class="ph-title">SHIELD AI</div>
+      <div class="ph-subtitle">National Fraud Intelligence Operating System</div>
+    </div>
+    <div class="ph-section">Fraud DNA Genome Index</div>
+  </div>
+  <div class="page-body" style="padding: 8mm 14mm 6mm; flex: 1; background: #fff; color: #1e293b;">
+    <div class="sm-chart-row">
+          <div class="sm-chart">
+            <div class="sm-chart-label">Top Fraud Families</div>
+            <div class="sm-list-item"><span class="sli-l">Pig Butchering</span><span class="sli-r">CRITICAL</span></div>
+            <div class="sm-list-item"><span class="sli-l">OTP Mafia</span><span class="sli-r">HIGH</span></div>
+            <div class="sm-list-item"><span class="sli-l">FakeKYC Ring</span><span class="sli-r">HIGH</span></div>
+            <div class="sm-list-item"><span class="sli-l">SIM Box Gang</span><span class="sli-r">MEDIUM</span></div>
+          </div>
+          <div class="sm-chart">
+            <div class="sm-chart-label">DNA Distribution</div>
+            <div class="sm-pie"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="sub-title">Digital Fingerprinting Technology</h3>
+    <p>
+      Each fraud family receives a <strong>6-vector DNA profile</strong> — a mathematical representation of its operational signature. The DNA Engine processes complaint metadata, financial transaction patterns, behavioral indicators, and geolocation data through a scoring pipeline to produce a confidence-weighted profile that uniquely identifies the syndicate.
+    </p>
+
+    <h3 class="sub-title">Fraud Family Classification Engine</h3>
+    <table>
+      <thead><tr><th>Fraud Family</th><th>Code</th><th>Threat Level</th><th>Complaints</th><th>DNA Confidence</th></tr></thead>
+      <tbody>
+        <tr><td class="td-highlight">Pig Butchering Syndicate</td><td><code>PB-01</code></td><td><span class="td-badge td-badge-red">CRITICAL</span></td><td>2,847</td><td>96.2%</td></tr>
+        <tr><td class="td-highlight">OTP Mafia Network</td><td><code>OTP-07</code></td><td><span class="td-badge td-badge-red">HIGH</span></td><td>3,421</td><td>91.8%</td></tr>
+        <tr><td class="td-highlight">FakeKYC Ring</td><td><code>KYC-03</code></td><td><span class="td-badge td-badge-red">HIGH</span></td><td>1,930</td><td>88.5%</td></tr>
+        <tr><td class="td-highlight">SIM Box Gang</td><td><code>SIM-12</code></td><td><span class="td-badge td-badge-gold">MEDIUM</span></td><td>980</td><td>84.1%</td></tr>
+        <tr><td class="td-highlight">Crypto Laundry Ring</td><td><code>CRY-05</code></td><td><span class="td-badge td-badge-red">CRITICAL</span></td><td>712</td><td>93.4%</td></tr>
+      </tbody>
+    </table>
+    <p>
+      The confidence score reflects the DNA Engine's certainty that a complaint cluster maps to the identified fraud family. Scores above 85% trigger an automated investigation case creation.
+    </p>
+  </div>
+  
+    <div class="pf-right">Page 15</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- PAGE 16: DNA ANALYTICS ENGINE                           -->
+<!-- ═══════════════════════════════════════════════════════ -->
+  </div>
+  
+  <div class="page-footer">
+    <div class="pf-left">ET AI Hackathon 2.0</div>
+    <div class="pf-right">Page 15</div>
+  </div>
+</div>
+
+<div class="page page-break">
+  
+  <div class="page-header">
+    <div class="ph-logo">
+      <div class="ph-title">SHIELD AI</div>
+      <div class="ph-subtitle">National Fraud Intelligence Operating System</div>
+    </div>
+    <div class="ph-section">DNA Analytics Engine</div>
+  </div>
+  <div class="page-body" style="padding: 8mm 14mm 6mm; flex: 1; background: #fff; color: #1e293b;">
+    <div class="sm-chart">
+            <div class="sm-chart-label">🌐 Geo DNA Spread</div>
+            <div class="sm-bar-row">
+              <div class="sm-bbar" style="height:16mm;"></div>
+              <div class="sm-bbar" style="height:13mm;"></div>
+              <div class="sm-bbar" style="height:11mm;"></div>
+              <div class="sm-bbar" style="height:10mm;"></div>
+              <div class="sm-bbar" style="height:9mm;"></div>
+              <div class="sm-bbar" style="height:7mm;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="sub-title">Chart Analytics Explained</h3>
+    <div class="feature-grid">
+      <div class="feature-item">
+        <div class="fi-title">📊 Pie Chart — DNA Vector Distribution</div>
+        <div class="fi-desc">Shows the relative weight of each DNA vector (Communication, Financial, Behavioral, Geo, Language, Temporal) across all active fraud families. Analysts use this to identify the dominant operational mode of current fraud syndicates — e.g., if Financial DNA dominates, syndicates are scaling money movement operations.</div>
+      </div>
+      <div class="feature-item">
+        <div class="fi-title">📊 Bar Chart — Communication DNA</div>
+        <div class="fi-desc">Compares communication channel preferences across fraud families. Channels analyzed include WhatsApp, Telegram, SMS, email, phone calls, and social media ads. Enables targeting of specific communication vectors for interception operations.</div>
+      </div>
+      <div class="feature-item">
+        <div class="fi-title">📈 Area Chart — Fraud Trend Timeline</div>
+        <div class="fi-desc">12-month rolling area chart of complaint volume per fraud family. Seasonality analysis reveals festive-season spikes, lockdown-driven surges, and cyclical patterns that predict future escalation periods.</div>
+      </div>
+      <div class="feature-item">
+        <div class="fi-title">📊 Grouped Bar — Financial DNA</div>
+        <div class="fi-desc">Multi-series bar chart comparing financial DNA vectors: average transaction size, mule chain depth, layering frequency, and withdrawal speed across fraud families. Identifies which syndicates pose the highest financial risk per incident.</div>
+      </div>
+    </div>
+
+    <h3 class="sub-title">Behavioral &amp; Language DNA Analysis</h3>
+    <p>
+      <strong>Behavioral DNA</strong> profiles the psychological manipulation tactics used by each syndicate — including urgency engineering, authority impersonation, romantic grooming, fear exploitation, and greed activation. The score (0–100) reflects the sophistication of the social engineering employed.
+    </p>
+    <p>
+      <strong>Language DNA</strong> analyzes the linguistic fingerprints of fraudster communications — script distribution (Devanagari, Roman, Bengali, Tamil), dialect mixing, loanword frequency, and code-switching patterns. This enables attribution of complaint clusters to geographically specific origin zones even when phone numbers are spoofed.
+    </p>
+  </div>
+  
+    <div class="pf-right">Page 16</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- PAGE 17: FRAUD ENTITY GRAPH INTELLIGENCE               -->
+<!-- ═══════════════════════════════════════════════════════ -->
+  </div>
+  
+  <div class="page-footer">
+    <div class="pf-left">ET AI Hackathon 2.0</div>
+    <div class="pf-right">Page 16</div>
+  </div>
+</div>
+
+<div class="page page-break">
+  
+  <div class="page-header">
+    <div class="ph-logo">
+      <div class="ph-title">SHIELD AI</div>
+      <div class="ph-subtitle">National Fraud Intelligence Operating System</div>
+    </div>
+    <div class="ph-section">Fraud Entity Graph Intelligence</div>
+  </div>
+  <div class="page-body" style="padding: 8mm 14mm 6mm; flex: 1; background: #fff; color: #1e293b;">
+    <h3 class="sub-title">Network Mapping Capabilities</h3>
+    <div class="feature-grid">
+      <div class="feature-item">
+        <div class="fi-title">🔍 Entity Search</div>
+        <div class="fi-desc">Search any phone number, UPI ID, or bank account across the entire fraud network graph. Returns all connected nodes and relationship paths instantly.</div>
+      </div>
+      <div class="feature-item">
+        <div class="fi-title">🔗 Node Expansion</div>
+        <div class="fi-desc">Click any node to expand its connections. Recursively reveals hidden relationships up to 4 degrees of separation from the selected entity.</div>
+      </div>
+      <div class="feature-item">
+        <div class="fi-title">🎯 Cluster Filtering</div>
+        <div class="fi-desc">Filter the graph by fraud family cluster to isolate specific syndicate networks. Color-coded clusters make visual identification immediate.</div>
+      </div>
+      <div class="feature-item">
+        <div class="fi-title">💡 Connection Highlighting</div>
+        <div class="fi-desc">Select any entity to highlight all its direct and indirect connections. Non-connected nodes are dimmed, bringing the active network into sharp focus.</div>
+      </div>
+    </div>
+
+    <h3 class="sub-title">Fraud Network Types Visualized</h3>
+    <table>
+      <thead><tr><th>Network Type</th><th>Node Types</th><th>Relationship</th><th>Intelligence Value</th></tr></thead>
+      <tbody>
+        <tr><td class="td-highlight">Fraud Family Network</td><td>Family → Members</td><td>Membership</td><td>Identifies syndicate organizational structure</td></tr>
+        <tr><td class="td-highlight">Victim Relationship Map</td><td>Fraudster → Victims</td><td>Victimized</td><td>Reveals targeting patterns and victim profiles</td></tr>
+        <tr><td class="td-highlight">UPI Transaction Network</td><td>Sender → Receiver UPIs</td><td>Transaction</td><td>Traces money movement and mule chains</td></tr>
+        <tr><td class="td-highlight">Phone Number Web</td><td>Phone → Complaints</td><td>Used in</td><td>Links multiple fraud incidents to common actors</td></tr>
+        <tr><td class="td-highlight">Bank Account Chain</td><td>Account → Account</td><td>Transfer</td><td>Maps layering and fund aggregation pipelines</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout callout-green">
+      <strong>Investigation Impact:</strong> In traditional cybercrime investigation, manually linking 50 complaints to a single fraud ring takes 4–8 weeks. SHIELD AI's Graph Engine performs this analysis automatically within seconds of each new complaint being ingested.
+    </div>
+  </div>
+  
+    <div class="pf-right">Page 17</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- PAGE 18: INVESTIGATION OPERATIONS DESK                  -->
+<!-- ═══════════════════════════════════════════════════════ -->
+  </div>
+  
+  <div class="page-footer">
+    <div class="pf-left">ET AI Hackathon 2.0</div>
+    <div class="pf-right">Page 17</div>
+  </div>
+</div>
+
+<div class="page page-break">
+  
+  <div class="page-header">
+    <div class="ph-logo">
+      <div class="ph-title">SHIELD AI</div>
+      <div class="ph-subtitle">National Fraud Intelligence Operating System</div>
+    </div>
+    <div class="ph-section">Investigation Operations Desk</div>
+  </div>
+  <div class="page-body" style="padding: 8mm 14mm 6mm; flex: 1; background: #fff; color: #1e293b;">
+    <h3 class="sub-title">Case Management System</h3>
+    <div class="feature-grid">
+      <div class="feature-item">
+        <div class="fi-title">🔍 Case Search &amp; Filter</div>
+        <div class="fi-desc">Full-text search across all case fields. Filter by threat level (Critical, High, Medium, Low), fraud type, state, date range, and officer assignment status.</div>
+      </div>
+      <div class="feature-item">
+        <div class="fi-title">⚡ Priority Queue Sorting</div>
+        <div class="fi-desc">Cases automatically sorted by composite priority score (threat level × amount lost × complaint count). Highest-impact cases surface at the top of every officer's queue.</div>
+      </div>
+      <div class="feature-item">
+        <div class="fi-title">📅 Investigation Timeline</div>
+        <div class="fi-desc">Chronological case timeline showing every event — complaint receipt, entity extraction, DNA profiling, officer assignment, updates, and FIR generation.</div>
+      </div>
+      <div class="feature-item">
+        <div class="fi-title">🤖 AI Investigation Brief</div>
+        <div class="fi-desc">AI-generated investigation summary including suspect entity list, recommended evidence collection steps, jurisdictional transfer recommendations, and estimated resolution pathway.</div>
+      </div>
+    </div>
+
+    <h3 class="sub-title">AI-Assisted FIR Generation Workflow</h3>
+    <p>SHIELD AI's FIR generation system is one of its most impactful features for law enforcement. The workflow is:</p>
+    <div class="workflow" style="flex-direction:column;gap:2mm;">
+      <div style="display:flex;align-items:center;gap:3mm;">
+        <div style="background:#0a1628;border:1px solid var(--border);border-radius:6px;padding:2mm 4mm;color:#00d4ff;font-size:9pt;white-space:nowrap;"><strong>01.</strong> Case Selected</div>
+        <div style="font-size:9pt;color:#475569;">Officer opens a case from the investigation queue and reviews the AI-generated brief.</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:3mm;">
+        <div style="background:#0a1628;border:1px solid var(--border);border-radius:6px;padding:2mm 4mm;color:#00d4ff;font-size:9pt;white-space:nowrap;"><strong>02.</strong> FIR Preview</div>
+        <div style="font-size:9pt;color:#475569;">One-click FIR preview loads a structured legal document pre-filled with complaint details, entity list, fraud DNA classification, and AI investigation notes.</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:3mm;">
+        <div style="background:#0a1628;border:1px solid var(--border);border-radius:6px;padding:2mm 4mm;color:#00d4ff;font-size:9pt;white-space:nowrap;"><strong>03.</strong> Download FIR</div>
+        <div style="font-size:9pt;color:#475569;">Officer downloads the formatted FIR document for review, editing, and official filing. Estimated time saved: <strong>3–5 hours per FIR</strong>.</div>
+      </div>
+    </div>
+  </div>
+  
+    <div class="pf-right">Page 18</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- PAGE 19: NATIONAL THREAT INTELLIGENCE MAP               -->
+<!-- ═══════════════════════════════════════════════════════ -->
+  </div>
+  
+  <div class="page-footer">
+    <div class="pf-left">ET AI Hackathon 2.0</div>
+    <div class="pf-right">Page 18</div>
+  </div>
+</div>
+
+<div class="page page-break">
+  
+  <div class="page-header">
+    <div class="ph-logo">
+      <div class="ph-title">SHIELD AI</div>
+      <div class="ph-subtitle">National Fraud Intelligence Operating System</div>
+    </div>
+    <div class="ph-section">National Threat Intelligence Map</div>
+  </div>
+  <div class="page-body" style="padding: 8mm 14mm 6mm; flex: 1; background: #fff; color: #1e293b;">
+    </div>
+      </div>
+    </div>
+
+    <h3 class="sub-title">Geographic Intelligence Features</h3>
+    <div class="feature-grid">
+      <div class="feature-item">
+        <div class="fi-title">🔥 Heatmap Visualization</div>
+        <div class="fi-desc">Color-gradient heatmap overlaid on India's administrative map. Intensity reflects complaint density — from low (blue) to extreme (deep red). Updated in real-time as new complaints arrive.</div>
+      </div>
+      <div class="feature-item">
+        <div class="fi-title">📍 Threat Hotspot Pins</div>
+        <div class="fi-desc">Dynamic pin markers for districts exceeding risk thresholds. Click any pin to view district-level fraud statistics, dominant fraud type, and recent complaint trend.</div>
+      </div>
+      <div class="feature-item">
+        <div class="fi-title">🏳️ Fraud Family Spread</div>
+        <div class="fi-desc">Filter by specific fraud family to see their geographic footprint across India — origin states vs. target states, highlighting cross-state jurisdiction requirements.</div>
+      </div>
+      <div class="feature-item">
+        <div class="fi-title">📊 Risk Ranking Table</div>
+        <div class="fi-desc">Sortable table of all 36 Indian states and UTs ranked by composite risk score, complaint volume, amount lost, and active investigation count.</div>
+      </div>
+    </div>
+
+    <h3 class="sub-title">District-Level Risk Analysis</h3>
+    <table>
+      <thead><tr><th>Rank</th><th>District</th><th>State</th><th>Complaint Count</th><th>Amount Lost</th><th>Risk Level</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Mumbai City</td><td>Maharashtra</td><td>1,247</td><td>₹892 Cr</td><td><span class="td-badge td-badge-red">CRITICAL</span></td></tr>
+        <tr><td>2</td><td>New Delhi</td><td>Delhi NCR</td><td>1,089</td><td>₹720 Cr</td><td><span class="td-badge td-badge-red">CRITICAL</span></td></tr>
+        <tr><td>3</td><td>Pune</td><td>Maharashtra</td><td>847</td><td>₹490 Cr</td><td><span class="td-badge td-badge-red">HIGH</span></td></tr>
+        <tr><td>4</td><td>Jamtara</td><td>Jharkhand</td><td>623</td><td>₹310 Cr</td><td><span class="td-badge td-badge-red">HIGH</span></td></tr>
+        <tr><td>5</td><td>Mewat</td><td>Haryana</td><td>591</td><td>₹280 Cr</td><td><span class="td-badge td-badge-red">HIGH</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  
+    <div class="pf-right">Page 19</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- PAGE 20: CITIZEN COPILOT                                -->
+<!-- ═══════════════════════════════════════════════════════ -->
+  </div>
+  
+  <div class="page-footer">
+    <div class="pf-left">ET AI Hackathon 2.0</div>
+    <div class="pf-right">Page 19</div>
+  </div>
+</div>
+
+<div class="page page-break">
+  
+  <div class="page-header">
+    <div class="ph-logo">
+      <div class="ph-title">SHIELD AI</div>
+      <div class="ph-subtitle">National Fraud Intelligence Operating System</div>
+    </div>
+    <div class="ph-section">Citizen Copilot — AI Safety Assistant</div>
+  </div>
+  <div class="page-body" style="padding: 8mm 14mm 6mm; flex: 1; background: #fff; color: #1e293b;">
+    </div>
+      </div>
+    </div>
+
+    <h3 class="sub-title">Core Capabilities</h3>
+    <div class="feature-grid">
+      <div class="feature-item">
+        <div class="fi-title">🔍 Real-Time Fraud Detection</div>
+        <div class="fi-desc">Submit any phone number, UPI ID, bank account, or describe a suspicious interaction. The AI cross-references against live fraud entity databases and returns an instant risk verdict.</div>
+      </div>
+      <div class="feature-item">
+        <div class="fi-title">🌐 Multilingual Support</div>
+        <div class="fi-desc">Supports English, Hindi, Tamil, Bengali, and Telugu — ensuring accessibility for citizens across all of India's linguistic regions regardless of education level.</div>
+      </div>
+      <div class="feature-item">
+        <div class="fi-title">📊 SHIELD Safety Score</div>
+        <div class="fi-desc">A proprietary 0–100 composite risk score synthesizing historical fraud data, entity blacklists, behavioral patterns, and real-time threat intelligence into a single actionable number.</div>
+      </div>
+      <div class="feature-item">
+        <div class="fi-title">🛡 Preventive Guidance</div>
+        <div class="fi-desc">Personalized safety recommendations based on the specific fraud type detected — including reporting links, emergency contacts, and step-by-step recovery actions for victims.</div>
+      </div>
+    </div>
+
+    <h3 class="sub-title">Fraud Awareness &amp; Complaint Pre-Check</h3>
+    <p>
+      The Copilot serves a dual role as both a detection tool and a <strong>public education platform</strong>. When a query matches a known fraud pattern, the Copilot provides a brief on the identified fraud family — how it operates, common lures used, and national statistics — transforming each interaction into an awareness moment that protects future potential victims.
+    </p>
+    <p>
+      The <strong>Complaint Pre-Check</strong> feature allows citizens to validate their complaint details before formal submission to NCRP, ensuring that critical metadata (fraudster phone numbers, UPI IDs, transaction details) is accurately captured for maximum investigative value.
+    </p>
+  </div>
+  
+    <div class="pf-right">Page 20</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- PAGE 21: API DOCUMENTATION                              -->
+<!-- ═══════════════════════════════════════════════════════ -->
+  </div>
+  
+  <div class="page-footer">
+    <div class="pf-left">ET AI Hackathon 2.0</div>
+    <div class="pf-right">Page 20</div>
+  </div>
+</div>
+
+<div class="page page-break">
+  
+  <div class="page-header">
+    <div class="ph-logo">
+      <div class="ph-title">SHIELD AI</div>
+      <div class="ph-subtitle">National Fraud Intelligence Operating System</div>
+    </div>
+    <div class="ph-section">API Documentation</div>
+  </div>
+  <div class="page-body" style="padding: 8mm 14mm 6mm; flex: 1; background: #fff; color: #1e293b;">
+    </div>
+
+    <h3 class="sub-title">API Endpoint Reference</h3>
+    <table>
+      <thead><tr><th>Method</th><th>Endpoint</th><th>Module</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><span class="td-badge td-badge-green">GET</span></td><td><code>/api/v1/dna/families</code></td><td>DNA</td><td>List all fraud families with DNA profiles</td></tr>
+        <tr><td><span class="td-badge td-badge-green">GET</span></td><td><code>/api/v1/dna/overview</code></td><td>DNA</td><td>National DNA statistics and distribution</td></tr>
+        <tr><td><span class="td-badge td-badge-green">GET</span></td><td><code>/api/v1/graph/network</code></td><td>Graph</td><td>Full fraud entity network data</td></tr>
+        <tr><td><span class="td-badge td-badge-green">GET</span></td><td><code>/api/v1/graph/entity/{id}</code></td><td>Graph</td><td>Single entity connections &amp; relationships</td></tr>
+        <tr><td><span class="td-badge td-badge-green">GET</span></td><td><code>/api/v1/investigation/cases</code></td><td>Investigation</td><td>Investigation queue with priority sorting</td></tr>
+        <tr><td><span class="td-badge td-badge-green">GET</span></td><td><code>/api/v1/investigation/fir/{id}</code></td><td>Investigation</td><td>Generate and retrieve FIR for a case</td></tr>
+        <tr><td><span class="td-badge td-badge-green">GET</span></td><td><code>/api/v1/geospatial/states</code></td><td>Geospatial</td><td>State-level threat data</td></tr>
+        <tr><td><span class="td-badge td-badge-green">GET</span></td><td><code>/api/v1/geospatial/hotspots</code></td><td>Geospatial</td><td>District-level hotspot data for mapping</td></tr>
+        <tr><td><span class="td-badge td-badge-gold">POST</span></td><td><code>/api/v1/copilot/chat</code></td><td>Copilot</td><td>Process citizen fraud query, return SHIELD score</td></tr>
+        <tr><td><span class="td-badge td-badge-gold">POST</span></td><td><code>/api/v1/auth/login</code></td><td>Auth</td><td>Authenticate user, return JWT access token</td></tr>
+        <tr><td><span class="td-badge td-badge-gold">POST</span></td><td><code>/api/v1/complaints/submit</code></td><td>Complaints</td><td>Submit new fraud complaint</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="sub-title">Authentication Architecture</h3>
+    <p>All protected endpoints require a <strong>Bearer JWT token</strong> in the Authorization header. Tokens are issued at login, signed with a configurable secret key, and expire after a configurable TTL (default: 24 hours). Role-based access ensures investigators cannot access admin endpoints and vice versa.</p>
+    <div class="code-snippet">
+Authorization: Bearer &lt;JWT_ACCESS_TOKEN&gt;<br/>
+Content-Type: application/json
+    </div>
+  </div>
+  
+    <div class="pf-right">Page 21</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- PAGE 22: SECURITY FEATURES                              -->
+<!-- ═══════════════════════════════════════════════════════ -->
+  </div>
+  
+  <div class="page-footer">
+    <div class="pf-left">ET AI Hackathon 2.0</div>
+    <div class="pf-right">Page 21</div>
+  </div>
+</div>
+
+<div class="page page-break">
+  
+  <div class="page-header">
+    <div class="ph-logo">
+      <div class="ph-title">SHIELD AI</div>
+      <div class="ph-subtitle">National Fraud Intelligence Operating System</div>
+    </div>
+    <div class="ph-section">Security Features</div>
+  </div>
+  <div class="page-body" style="padding: 8mm 14mm 6mm; flex: 1; background: #fff; color: #1e293b;">
+    </div>
+  
+    <div class="pf-right">Page 22</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- PAGE 23: INNOVATION & UNIQUENESS                        -->
+<!-- ═══════════════════════════════════════════════════════ -->
+  </div>
+  
+  <div class="page-footer">
+    <div class="pf-left">ET AI Hackathon 2.0</div>
+    <div class="pf-right">Page 22</div>
+  </div>
+</div>
+
+<div class="page page-break">
+  
+  <div class="page-header">
+    <div class="ph-logo">
+      <div class="ph-title">SHIELD AI</div>
+      <div class="ph-subtitle">National Fraud Intelligence Operating System</div>
+    </div>
+    <div class="ph-section">Innovation &amp; Uniqueness</div>
+  </div>
+  <div class="page-body" style="padding: 8mm 14mm 6mm; flex: 1; background: #fff; color: #1e293b;">
+    <!-- ═══════════════════════════════════════════════════════ -->
+<!-- PAGE 24: IMPACT ANALYSIS                                -->
+<!-- ═══════════════════════════════════════════════════════ -->
+  </div>
+  
+  <div class="page-footer">
+    <div class="pf-left">ET AI Hackathon 2.0</div>
+    <div class="pf-right">Page 23</div>
+  </div>
+</div>
+
+<div class="page page-break">
+  
+  <div class="page-header">
+    <div class="ph-logo">
+      <div class="ph-title">SHIELD AI</div>
+      <div class="ph-subtitle">National Fraud Intelligence Operating System</div>
+    </div>
+    <div class="ph-section">Impact Analysis</div>
+  </div>
+  <div class="page-body" style="padding: 8mm 14mm 6mm; flex: 1; background: #fff; color: #1e293b;">
+    <h3 class="sub-title">Impact by Stakeholder</h3>
+    <table>
+      <thead><tr><th>Stakeholder</th><th>Current Situation</th><th>SHIELD AI Impact</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="td-highlight">🚔 Investigating Officers</td>
+          <td>Manual complaint review; no cross-case intelligence; FIR preparation: 4–8 hrs</td>
+          <td>AI investigation briefs; automated FIR drafts; real-time network intelligence. Time saved: 74%</td>
+        </tr>
+        <tr>
+          <td class="td-highlight">🏛 Senior Leadership</td>
+          <td>No unified national threat picture; resource allocation by intuition</td>
+          <td>Real-time national KPI dashboard; evidence-based resource deployment; trend forecasting</td>
+        </tr>
+        <tr>
+          <td class="td-highlight">🏦 Banking Sector</td>
+          <td>Isolated fraud detection; no network graph context; reactive blocking</td>
+          <td>SHIELD API integration for mule account detection; real-time UPI risk scoring; proactive blocking</td>
+        </tr>
+        <tr>
+          <td class="td-highlight">🌍 Citizens</td>
+          <td>No pre-transaction fraud check tool; limited awareness; delayed complaint filing</td>
+          <td>Real-time SHIELD score for any entity; multilingual safety guidance; instant complaint pre-check</td>
+        </tr>
+        <tr>
+          <td class="td-highlight">📊 Policymakers</td>
+          <td>Lag-based reports; no geographic granularity; reactive policy formulation</td>
+          <td>Real-time geospatial intelligence; fraud family trend data; evidence-base for legislative action</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 class="sub-title">Economic Impact Projection</h3>
+    <div class="feature-grid">
+      <div class="feature-item">
+        <div class="fi-title">💰 Direct Fraud Prevention</div>
+        <div class="fi-desc">If SHIELD AI enables even a 10% increase in case resolution rates across India's 12.3M annual complaints, the economic impact exceeds <strong>₹12,500 crore</strong> in prevented or recovered fraud losses annually.</div>
+      </div>
+      <div class="feature-item">
+        <div class="fi-title">⚡ Investigation Efficiency</div>
+        <div class="fi-desc">With 74% reduction in FIR preparation time, 5,000 cybercrime officers across India collectively save over <strong>35 lakh man-hours annually</strong> — equivalent to 1,700 additional officers at zero cost.</div>
+      </div>
+      <div class="feature-item">
+        <div class="fi-title">🌐 Citizen Empowerment</div>
+        <div class="fi-desc">The Citizen Copilot targets India's 600 million smartphone users. If even 1% use it monthly to verify a suspicious contact, it potentially prevents <strong>6 lakh fraud attempts per month</strong>.</div>
+      </div>
+      <div class="feature-item">
+        <div class="fi-title">🏦 Banking Integration Potential</div>
+        <div class="fi-desc">Integration with India's UPI ecosystem (via NPCI API partnership) would enable real-time fraud scoring on 14 billion monthly UPI transactions, potentially detecting <strong>85-90% of mule account transactions</strong>.</div>
+      </div>
+    </div>
+  </div>
+  
+    <div class="pf-right">Page 24</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- PAGE 25: FUTURE SCOPE                                   -->
+<!-- ═══════════════════════════════════════════════════════ -->
+  </div>
+  
+  <div class="page-footer">
+    <div class="pf-left">ET AI Hackathon 2.0</div>
+    <div class="pf-right">Page 24</div>
+  </div>
+</div>
+
+<div class="page page-break">
+  
+  <div class="page-header">
+    <div class="ph-logo">
+      <div class="ph-title">SHIELD AI</div>
+      <div class="ph-subtitle">National Fraud Intelligence Operating System</div>
+    </div>
+    <div class="ph-section">Future Scope</div>
+  </div>
+  <div class="page-body" style="padding: 8mm 14mm 6mm; flex: 1; background: #fff; color: #1e293b;">
+    <div class="future-item">
+      <div class="future-num">2</div>
+      <div class="future-content">
+        <div class="ft">🎙 Voice Scam Detection Engine</div>
+        <div class="fd">Real-time voice call analysis using speech pattern recognition and speaker verification to detect AI voice cloning and robocall fraud. Integration with telecom operators (Jio, Airtel, Vi) to flag suspicious call patterns before the victim is victimized. Prototype targets: <3-second real-time analysis latency.</div>
+      </div>
+    </div>
+
+    <div class="future-item">
+      <div class="future-num">3</div>
+      <div class="future-content">
+        <div class="ft">🏦 Banking Integration API Layer</div>
+        <div class="fd">Direct API integration with NPCI, RBI's Fraud Registry, and top 20 Indian banks to enable real-time transaction risk scoring, mule account flagging, and cross-bank fraud pattern sharing — all under the regulatory framework established by RBI Master Directions on Digital Payments fraud.</div>
+      </div>
+    </div>
+
+    <div class="future-item">
+      <div class="future-num">4</div>
+      <div class="future-content">
+        <div class="ft">📡 Telecom Intelligence Integration</div>
+        <div class="fd">Partnership with DoT's TRAI and telecom operators to access SIM card activation patterns, IMEI blacklists, and call record metadata (CDR analytics). This will enable SHIELD AI to identify SIM Box gangs, spoofed number patterns, and OTP interception operations at the network level before they reach victims.</div>
+      </div>
+    </div>
+
+    <div class="future-item">
+      <div class="future-num">5</div>
+      <div class="future-content">
+        <div class="ft">🔮 Predictive Threat Intelligence</div>
+        <div class="fd">Machine learning models trained on historical fraud patterns to predict upcoming fraud campaigns — including seasonal surge prediction (festive fraud spikes), new fraud family emergence alerts, and geographic spread forecasting. Target: 14-day advance warning on emerging fraud trends with 78% accuracy.</div>
+      </div>
+    </div>
+
+    <div class="future-item">
+      <div class="future-num">6</div>
+      <div class="future-content">
+        <div class="ft">🌐 Social Media Intelligence Layer</div>
+        <div class="fd">Integration with social media APIs to monitor fraud-related keywords, fake investment advertisements, and fraudulent account patterns across platforms — feeding real-time intelligence into SHIELD AI's Fraud DNA engine.</div>
+      </div>
+    </div>
+
+    <div class="future-item">
+      <div class="future-num">7</div>
+      <div class="future-content">
+        <div class="ft">📱 Mobile App — SHIELD Safe</div>
+        <div class="fd">A citizen-facing mobile application bringing the Citizen Copilot, SHIELD Safety Score, and real-time fraud alerts to Android and iOS platforms. Target: 50 million downloads within 24 months of national deployment, positioning SHIELD Safe as India's primary personal cybersecurity companion.</div>
+      </div>
+    </div>
+  </div>
+  
+    <div class="pf-right">Page 25</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- PAGE 26: CONCLUSION                                     -->
+<!-- ═══════════════════════════════════════════════════════ -->
+  </div>
+  
+  <div class="page-footer">
+    <div class="pf-left">ET AI Hackathon 2.0</div>
+    <div class="pf-right">Page 25</div>
+  </div>
+</div>
+
+<div class="page page-break">
+  
+  <div class="page-header">
+    <div class="ph-logo">
+      <div class="ph-title">SHIELD AI</div>
+      <div class="ph-subtitle">National Fraud Intelligence Operating System</div>
+    </div>
+    <div class="ph-section">Conclusion</div>
+  </div>
+  <div class="page-body" style="padding: 8mm 14mm 6mm; flex: 1; background: #fff; color: #1e293b;">
+    <p>
+      SHIELD AI is not a prototype or a proof-of-concept. It is a working, deployable national intelligence platform. The GitHub repository contains a complete, version-controlled codebase with 59 files, 13,702 lines of production code, and comprehensive deployment documentation. It is ready to be evaluated, deployed, and scaled.
+    </p>
+
+    <div class="callout callout-green">
+      <strong>Vision for National Deployment:</strong> SHIELD AI is designed to serve as the core intelligence backbone for India's evolving National Cybercrime Coordination Centre (I4C) 2.0 — a unified, AI-powered, real-time fraud intelligence operating system for the world's largest democracy and fastest-growing digital payments market.
+    </div>
+
+    <div style="text-align:center;margin-top:6mm;padding:5mm;background:linear-gradient(135deg,rgba(30,144,255,.06),rgba(0,212,255,.04));border:1px solid rgba(30,144,255,.2);border-radius:12px;">
+      <div style="font-family:'Rajdhani',sans-serif;font-size:18pt;font-weight:900;color:#0f2044;">🛡 SHIELD AI</div>
+      <div style="font-size:10pt;color:#64748b;margin-top:1mm;font-style:italic;">"Every complaint. Every pattern. Every criminal. Identified."</div>
+    </div>
+  </div>
+  
+    <div class="pf-right">Page 26</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- PAGE 27: REFERENCES                                     -->
+<!-- ═══════════════════════════════════════════════════════ -->
+  </div>
+  
+  <div class="page-footer">
+    <div class="pf-left">ET AI Hackathon 2.0</div>
+    <div class="pf-right">Page 26</div>
+  </div>
+</div>
+
+<div class="page page-break">
+  
+  <div class="page-header">
+    <div class="ph-logo">
+      <div class="ph-title">SHIELD AI</div>
+      <div class="ph-subtitle">National Fraud Intelligence Operating System</div>
+    </div>
+    <div class="ph-section">References</div>
+  </div>
+  <div class="page-body" style="padding: 8mm 14mm 6mm; flex: 1; background: #fff; color: #1e293b;">
+    <div class="pf-right">Page 27</div>
+  </div>
+</div>
+
+</body>
+</html>
+  </div>
+  
+  <div class="page-footer">
+    <div class="pf-left">ET AI Hackathon 2.0</div>
+    <div class="pf-right">Page 27</div>
+  </div>
+</div>
+
+</body>
+</html>
