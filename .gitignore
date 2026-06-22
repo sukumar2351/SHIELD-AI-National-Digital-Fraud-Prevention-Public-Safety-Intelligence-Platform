@@ -1,0 +1,44 @@
+# Dependency directories
+node_modules/
+frontend/node_modules/
+
+# Environments
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+backend/.env
+frontend/.env
+
+# Python caching
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+backend/.pytest_cache/
+
+# Virtual environments
+.venv/
+venv/
+env/
+backend/venv/
+backend/env/
+backend/.venv/
+
+# Databases
+*.db
+*.sqlite3
+backend/shield_fios.db
+
+# Build outputs
+dist/
+frontend/dist/
+build/
+
+# IDE / System files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

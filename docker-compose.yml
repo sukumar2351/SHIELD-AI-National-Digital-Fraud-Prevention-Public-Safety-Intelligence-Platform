@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: shield_db
+    restart: always
+    environment:
+      POSTGRES_USER: shield_admin
+      POSTGRES_PASSWORD: shield_fios_secure_pwd
+      POSTGRES_DB: shield_fios
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U shield_admin -d shield_fios"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  web:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: shield_api
+    restart: always
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000
+    volumes:
+      - ./backend:/workspace
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://shield_admin:shield_fios_secure_pwd@db:5432/shield_fios
+      - JWT_SECRET=9d36fa89cde8a5f0b5d92e85a21bcfe83c61d5ab68e1a1716ea6c87df7e7e8b6
+      - ALGORITHM=HS256
+      - ACCESS_TOKEN_EXPIRE_MINUTES=1440
+    depends_on:
+      db:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: shield_ui
+    restart: always
+    ports:
+      - "3000:80"
+    depends_on:
+      - web
+
+volumes:
+  postgres_data:
