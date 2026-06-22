@@ -628,9 +628,7 @@ html,body{width:100%;height:100%;background:#000;font-family:'Inter',sans-serif;
       &nbsp;·&nbsp; Use ← → keys to navigate · SPACE to pause
     </div>
     <div style="display:flex;gap:10px;align-items:center;">
-      <div id="rec-indicator"><div id="rec-dot"></div>REC</div>
-      <button class="cb-btn gold" id="btn-rec" onclick="toggleRecord()">⏺ RECORD</button>
-      <button class="cb-btn success" id="btn-dl" style="display:none;" onclick="downloadVideo()">⬇ DOWNLOAD VIDEO</button>
+      <a class="cb-btn success" id="btn-dl" href="SHIELD_AI_ET_AI_HACKATHON_DEMO.mp4" download="SHIELD_AI_ET_AI_HACKATHON_DEMO.mp4" style="text-decoration:none;display:inline-flex;align-items:center;gap:8px;">⬇ DOWNLOAD VIDEO</a>
       <button class="cb-btn" onclick="toggleVoice()">🔊 <span id="voice-label">VOICE ON</span></button>
       <button class="cb-btn danger" onclick="stopAll()">⏹ STOP</button>
     </div>
@@ -907,88 +905,6 @@ function toggleFullscreen(){
 }
 
 // ════════════════════════════════════════════════════════
-//  MEDIARECORDER — RECORD + DOWNLOAD VIDEO
-// ════════════════════════════════════════════════════════
-let mediaRecorder=null, recChunks=[], isRecording=false;
-
-async function toggleRecord(){
-  if(isRecording){ stopRecording(); return; }
-  try{
-    initAudio();
-    // Capture the stage element as a canvas stream
-    const stageEl=document.getElementById('stage');
-
-    // Use getDisplayMedia if available for best quality, else use captureStream
-    let stream;
-    try{
-      // Try to capture the window/tab
-      stream=await navigator.mediaDevices.getDisplayMedia({
-        video:{width:1920,height:1080,frameRate:30},
-        audio:true
-      });
-    }catch(e){
-      // Fallback: capture canvas only
-      const c=document.createElement('canvas');
-      c.width=1920; c.height=1080;
-      stream=c.captureStream(30);
-      alert('For best quality, please use the "Share Tab" option in the next dialog. Recording started with canvas fallback.');
-    }
-
-    // Add Web Audio output to stream if possible
-    if(audioCtx){
-      const dest=audioCtx.createMediaStreamDestination();
-      masterGain.connect(dest);
-      dest.stream.getAudioTracks().forEach(t=>stream.addTrack(t));
-    }
-
-    const mimeType=MediaRecorder.isTypeSupported('video/webm;codecs=vp9')?'video/webm;codecs=vp9':'video/webm';
-    mediaRecorder=new MediaRecorder(stream,{mimeType,videoBitsPerSecond:5000000});
-    recChunks=[];
-
-    mediaRecorder.ondataavailable=e=>{ if(e.data.size>0) recChunks.push(e.data); };
-    mediaRecorder.onstop=()=>{ enableDownload(); };
-
-    mediaRecorder.start(500);
-    isRecording=true;
-    document.getElementById('rec-indicator').classList.add('active');
-    document.getElementById('btn-rec').textContent='⏹ STOP REC';
-    document.getElementById('btn-dl').style.display='none';
-
-    // Start narration + music
-    startMusic();
-    setTimeout(()=>speak(VOICEOVERS[current]),400);
-  }catch(err){
-    console.error(err);
-    alert('Recording Error: '+err.message+'\n\nTip: Use Chrome browser and click "Share Tab" when prompted.');
-  }
-}
-
-function stopRecording(){
-  if(mediaRecorder&&mediaRecorder.state!=='inactive'){
-    mediaRecorder.stop();
-    mediaRecorder.stream.getTracks().forEach(t=>t.stop());
-  }
-  isRecording=false;
-  document.getElementById('rec-indicator').classList.remove('active');
-  document.getElementById('btn-rec').textContent='⏺ RECORD';
-}
-
-function enableDownload(){
-  document.getElementById('btn-dl').style.display='flex';
-}
-
-function downloadVideo(){
-  if(recChunks.length===0){ alert('No recording data found. Please record first.'); return; }
-  const blob=new Blob(recChunks,{type:'video/webm'});
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement('a');
-  a.href=url; a.download='SHIELD_AI_Demo_ET_Hackathon2.webm';
-  document.body.appendChild(a); a.click();
-  document.body.removeChild(a);
-  setTimeout(()=>URL.revokeObjectURL(url),5000);
-}
-
-// ════════════════════════════════════════════════════════
 //  KEYBOARD SHORTCUTS
 // ════════════════════════════════════════════════════════
 document.addEventListener('keydown',e=>{
@@ -996,7 +912,6 @@ document.addEventListener('keydown',e=>{
   if(e.key==='ArrowLeft') prevScene();
   if(e.key===' '){ e.preventDefault(); togglePlay(); }
   if(e.key==='f'||e.key==='F') toggleFullscreen();
-  if(e.key==='r'||e.key==='R') toggleRecord();
   if(e.key==='v'||e.key==='V') toggleVoice();
 });
 
