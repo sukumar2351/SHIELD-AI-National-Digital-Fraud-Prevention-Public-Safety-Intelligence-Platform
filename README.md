@@ -157,3 +157,8 @@ For in-depth setup, demonstration flows, and deployment configurations, refer to
 
 ## 📄 License
 This project is developed for the National Digital Fraud Prevention Hackathon. All rights reserved.
+## 🛠️ developed by
+👤 Sukumar — Lead Developer & AI Architect
+👤 Shaik Mujeeb Basha — Backend & Data Engineering
+👤 Bondada Tejendra — Frontend & UX Design
+🏛 Nalanda degree collegre | Computer Science Department
