@@ -22,7 +22,18 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
     const interval = setInterval(() => {
       setAlertIndex((prev) => (prev + 1) % mockAlerts.length);
     }, 5000);
-    return () => clearInterval(interval);
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setDropdownOpen(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener('keydown', handleKeyDown);
+    };
   }, []);
 
   const fullName = user?.full_name || user?.username || 'Sukumar';
@@ -85,7 +96,14 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
         {dropdownOpen && (
           <>
             <div className="fixed inset-0 z-40" onClick={() => setDropdownOpen(false)}></div>
-            <div className="absolute right-0 top-[58px] w-[320px] rounded-2xl glass-panel border border-white/10 shadow-2xl z-50 p-3 font-mono text-xs divide-y divide-blue-500/10">
+            <div 
+              className="absolute right-0 top-[60px] w-[95vw] xs:w-[320px] sm:w-[280px] md:w-[320px] max-w-[340px] rounded-[18px] z-50 p-3 font-mono text-xs divide-y divide-blue-500/10 shadow-[0_20px_60px_rgba(0,0,0,0.45)] bg-[#0e1628]/45"
+              style={{
+                border: '1px solid rgba(80, 160, 255, 0.25)',
+                backdropFilter: 'blur(20px)',
+                WebkitBackdropFilter: 'blur(20px)'
+              }}
+            >
               <div className="p-3 text-left space-y-1 font-mono">
                 <p className="text-white font-bold text-sm tracking-wide">{fullName}</p>
                 <p className="text-[9px] text-gray-400 uppercase tracking-widest">OFFICER_SHIELD</p>
