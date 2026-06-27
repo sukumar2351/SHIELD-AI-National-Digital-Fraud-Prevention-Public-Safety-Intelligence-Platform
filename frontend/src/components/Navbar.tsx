@@ -61,19 +61,22 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
       {/* User Controls with Dropdown */}
       <div className="relative flex items-center gap-4">
         <div 
-          className="flex items-center gap-2 cursor-pointer border-r border-blue-500/10 pr-4 hover:opacity-90 select-none"
+          className="flex items-center gap-3 cursor-pointer border-r border-blue-500/10 pr-4 hover:opacity-90 select-none"
           onClick={() => setDropdownOpen(!dropdownOpen)}
         >
           {profilePic ? (
-            <img src={profilePic} alt="avatar" className="w-8 h-8 rounded-full border border-blue-500/30 object-cover" />
+            <img src={profilePic} alt="avatar" className="w-[48px] h-[48px] rounded-full border border-blue-500/35 object-cover hover:shadow-[0_0_15px_rgba(59,130,246,0.5)] transition-all duration-300 hover:scale-105" />
           ) : (
-            <div className="w-8 h-8 rounded-full bg-blue-950/30 border border-blue-500/30 flex items-center justify-center text-blue-400 font-mono text-xs font-bold">
-              {fullName.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase()}
+            <div className="w-[48px] h-[48px] rounded-full bg-[#0e1628]/45 border border-blue-500/35 flex items-center justify-center text-blue-400 hover:text-white transition-all duration-300 hover:shadow-[0_0_15px_rgba(59,130,246,0.55)] hover:border-blue-400 hover:scale-105 active:scale-95 glass-panel relative overflow-hidden group">
+              <User className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
             </div>
           )}
-          <div className="hidden xs:block text-left">
-            <p className="text-xs text-white font-medium font-mono truncate max-w-[120px]">{fullName}</p>
-            <p className="text-[9px] text-blue-400 font-mono tracking-wider uppercase">{displayRole}</p>
+          <div className="hidden xs:flex flex-col text-left justify-center font-mono">
+            <span className="text-xs font-bold text-white tracking-wide leading-none">{fullName}</span>
+            <span className="text-[8px] text-gray-400 mt-1 uppercase tracking-widest leading-none">OFFICER_SHIELD</span>
+            <span className="mt-1 inline-block px-1.5 py-0.5 rounded-md bg-blue-500/10 border border-blue-500/30 text-blue-400 text-[7px] font-bold uppercase tracking-wider leading-none text-center w-max">
+              {displayRole}
+            </span>
           </div>
           <ChevronDown className="w-3.5 h-3.5 text-gray-400" />
         </div>
@@ -82,10 +85,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
         {dropdownOpen && (
           <>
             <div className="fixed inset-0 z-40" onClick={() => setDropdownOpen(false)}></div>
-            <div className="absolute right-4 top-12 w-56 rounded-2xl glass-panel border border-white/10 shadow-2xl z-50 p-2 font-mono text-xs divide-y divide-blue-500/10">
-              <div className="p-3 text-left">
-                <p className="text-white font-medium truncate">{fullName}</p>
-                <span className="mt-1.5 inline-block px-2 py-0.5 rounded bg-blue-500/10 border border-blue-500/30 text-blue-400 text-[8px] font-bold uppercase tracking-wider">
+            <div className="absolute right-4 top-14 w-56 rounded-2xl glass-panel border border-white/10 shadow-2xl z-50 p-2 font-mono text-xs divide-y divide-blue-500/10">
+              <div className="p-3 text-left space-y-1 font-mono">
+                <p className="text-white font-bold text-sm tracking-wide">{fullName}</p>
+                <p className="text-[9px] text-gray-400 uppercase tracking-widest">OFFICER_SHIELD</p>
+                <span className="inline-block px-2 py-0.5 rounded bg-blue-500/10 border border-blue-500/30 text-blue-400 text-[8px] font-bold uppercase tracking-wider">
                   {displayRole}
                 </span>
               </div>
