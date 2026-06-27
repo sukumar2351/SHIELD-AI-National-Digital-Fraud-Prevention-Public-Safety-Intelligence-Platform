@@ -27,6 +27,10 @@ class UserResponse(BaseModel):
     role: str
     is_active: bool
     created_at: datetime
+    google_id: Optional[str] = None
+    full_name: Optional[str] = None
+    profile_picture: Optional[str] = None
+    last_login: Optional[datetime] = None
 
     class Config:
         from_attributes = True
@@ -203,3 +207,6 @@ class CopilotResponse(BaseModel):
     reporting_steps: str
     language: str
     translated_reply: str
+
+class GoogleLoginRequest(BaseModel):
+    id_token: str
