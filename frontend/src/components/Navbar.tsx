@@ -25,8 +25,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
     return () => clearInterval(interval);
   }, []);
 
-  const fullName = user?.full_name || user?.username || 'Officer Shield';
-  const email = user?.email || 'officer@shield.gov';
+  const fullName = user?.full_name || user?.username || 'Sukumar Karanam';
   const displayRole = user?.role || 'INVESTIGATOR';
   const profilePic = user?.profile_picture;
 
@@ -86,8 +85,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
             <div className="absolute right-4 top-12 w-56 rounded-xl bg-gray-950 border border-blue-500/20 shadow-2xl z-50 p-2 font-mono text-xs divide-y divide-blue-500/10 backdrop-blur-xl bg-opacity-95">
               <div className="p-3 text-left">
                 <p className="text-white font-medium truncate">{fullName}</p>
-                <p className="text-[10px] text-gray-500 truncate mt-0.5">{email}</p>
-                <span className="mt-2 inline-block px-2 py-0.5 rounded bg-blue-500/10 border border-blue-500/30 text-blue-400 text-[8px] font-bold uppercase tracking-wider">
+                <span className="mt-1.5 inline-block px-2 py-0.5 rounded bg-blue-500/10 border border-blue-500/30 text-blue-400 text-[8px] font-bold uppercase tracking-wider">
                   {displayRole}
                 </span>
               </div>

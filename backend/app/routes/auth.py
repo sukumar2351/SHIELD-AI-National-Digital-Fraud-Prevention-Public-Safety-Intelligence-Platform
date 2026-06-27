@@ -64,8 +64,8 @@ def verify_google_token(id_token: str) -> dict:
     if id_token == "mock_google_token" or id_token.startswith("mock_"):
         return {
             "sub": f"mock_google_id_{id_token}",
-            "email": "ravi@gmail.com",
-            "name": "Ravi Kumar",
+            "email": "sukumar@shield.gov",
+            "name": "Sukumar Karanam",
             "picture": "https://lh3.googleusercontent.com/a/mock-pic"
         }
     url = f"https://oauth2.googleapis.com/tokeninfo?id_token={id_token}"
