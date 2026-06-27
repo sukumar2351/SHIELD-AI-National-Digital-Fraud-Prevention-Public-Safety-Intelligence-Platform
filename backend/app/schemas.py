@@ -40,6 +40,7 @@ class FraudFamilyResponse(BaseModel):
     description: Optional[str] = None
     traits: Optional[str] = None
     risk_level: str
+    risk_score: int
     created_at: datetime
 
     class Config:

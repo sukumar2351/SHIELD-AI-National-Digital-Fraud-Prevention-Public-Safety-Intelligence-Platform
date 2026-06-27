@@ -105,7 +105,7 @@ export const FraudDNA: React.FC = () => {
           'Content-Type': 'application/json',
           ...(token ? { 'Authorization': `Bearer ${token}` } : {})
         };
-        const BASE_URL = 'http://localhost:8000/api/v1';
+        const BASE_URL = 'https://backend-gray-alpha-78.vercel.app/api/v1';
 
         // Load stats
         let statsData = null;

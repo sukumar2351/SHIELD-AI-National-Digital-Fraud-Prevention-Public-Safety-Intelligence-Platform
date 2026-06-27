@@ -102,7 +102,7 @@ export const CitizenCopilot: React.FC = () => {
     // Load prevention tips from API
     const loadTips = async () => {
       try {
-        const res = await fetch('http://localhost:8000/api/v1/copilot/prevention-tips');
+        const res = await fetch('https://backend-gray-alpha-78.vercel.app/api/v1/copilot/prevention-tips');
         if (res.ok) {
           const tipsData = await res.json();
           setPreventionTips(tipsData);
@@ -147,7 +147,7 @@ export const CitizenCopilot: React.FC = () => {
       'Content-Type': 'application/json',
       ...(token ? { 'Authorization': `Bearer ${token}` } : {})
     };
-    const BASE_URL = 'http://localhost:8000/api/v1';
+    const BASE_URL = 'https://backend-gray-alpha-78.vercel.app/api/v1';
 
     try {
       // 1. Trigger Risk analysis Pre-Check

@@ -62,6 +62,7 @@ class FraudFamily(Base):
     main_scam_type = Column(String, nullable=False)
     description = Column(Text, nullable=True)
     traits = Column(Text, nullable=True)  # Comma-separated list of traits
+    risk_score = Column(Integer, default=50)
     risk_level = Column(String, default="Medium Risk")  # Low, Medium, High, Critical
     created_at = Column(DateTime, default=datetime.datetime.utcnow)
 

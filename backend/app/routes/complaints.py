@@ -42,8 +42,8 @@ def get_dashboard_stats(db: Session = Depends(get_db)):
     for c in complaints:
         # Deduce type from description or associated DNA
         c_type = "Other Scam"
-        if c.fraud_dna and c.fraud_dna.family:
-            c_type = c.fraud_dna.family.main_scam_type
+        if c.family_membership and c.family_membership.family:
+            c_type = c.family_membership.family.main_scam_type
         categories[c_type] = categories.get(c_type, 0) + 1
 
     formatted_categories = [{"name": k, "value": v} for k, v in categories.items()]

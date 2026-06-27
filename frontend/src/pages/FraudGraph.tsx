@@ -194,7 +194,7 @@ export const FraudGraph: React.FC = () => {
           'Content-Type': 'application/json',
           ...(token ? { 'Authorization': `Bearer ${token}` } : {})
         };
-        const BASE_URL = 'http://localhost:8000/api/v1';
+        const BASE_URL = 'https://backend-gray-alpha-78.vercel.app/api/v1';
 
         // Load Full Graph
         let graphData = null;
@@ -333,7 +333,7 @@ export const FraudGraph: React.FC = () => {
         'Content-Type': 'application/json',
         ...(token ? { 'Authorization': `Bearer ${token}` } : {})
       };
-      const BASE_URL = 'http://localhost:8000/api/v1';
+      const BASE_URL = 'https://backend-gray-alpha-78.vercel.app/api/v1';
 
       const res = await fetch(`${BASE_URL}/graph/cluster/${encodeURIComponent(code)}`, { headers });
       if (res.ok) {
@@ -380,7 +380,7 @@ export const FraudGraph: React.FC = () => {
         'Content-Type': 'application/json',
         ...(token ? { 'Authorization': `Bearer ${token}` } : {})
       };
-      const BASE_URL = 'http://localhost:8000/api/v1';
+      const BASE_URL = 'https://backend-gray-alpha-78.vercel.app/api/v1';
 
       const res = await fetch(`${BASE_URL}/graph/network/${encodeURIComponent(nodeLabel)}?node_type=${encodeURIComponent(nodeType)}&radius=2`, { headers });
       if (res.ok) {

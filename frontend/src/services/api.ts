@@ -1,5 +1,5 @@
 // API Client for SHIELD FIOS
-const BASE_URL = 'http://localhost:8000/api/v1';
+const BASE_URL = 'https://backend-gray-alpha-78.vercel.app/api/v1';
 
 // Helper to get token
 const getHeaders = () => {

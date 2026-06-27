@@ -91,19 +91,27 @@ def get_family_awareness(
     language: Optional[str] = "English",
     db: Session = Depends(get_db)
 ):
-    """
-    GET /copilot/family-awareness/{family_id}
-    Retrieves simplified, citizen-facing explanations of a fraud syndicate family.
-    Consumes DNA stats to show the total number of affected victims in database.
-    """
-    awareness = copilot_service.explain_fraud_family(
-        family_id=family_id,
-        db=db,
-        language=language
-    )
-    if not awareness:
+    family = db.query(models.FraudFamily).filter(models.FraudFamily.id == family_id).first()
+    if not family:
         raise HTTPException(status_code=404, detail="Fraud family ID reference not found.")
-    return awareness
+        
+    victims_affected = db.query(models.FraudFamilyMembership).filter(models.FraudFamilyMembership.family_id == family_id).count()
+    
+    family_dict = {
+        "name": family.name,
+        "main_scam_type": family.main_scam_type,
+        "family_code": family.family_code
+    }
+    explanation = copilot_service.explain_fraud_family(family_dict, language)
+    
+    return {
+        "family_code": family.family_code,
+        "name": family.name,
+        "description": family.description or "",
+        "victims_affected": victims_affected,
+        "risk_level": family.risk_level,
+        "user_explanation": explanation
+    }
 
 @router.get("/prevention-tips", response_model=List[PreventionTip])
 def get_prevention_tips():

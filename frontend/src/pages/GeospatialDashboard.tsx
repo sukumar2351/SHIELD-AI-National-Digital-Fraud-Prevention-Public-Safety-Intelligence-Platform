@@ -140,7 +140,7 @@ export const GeospatialDashboard: React.FC = () => {
       'Content-Type': 'application/json',
       ...(token ? { 'Authorization': `Bearer ${token}` } : {})
     };
-    const BASE_URL = 'http://localhost:8000/api/v1';
+    const BASE_URL = 'https://backend-gray-alpha-78.vercel.app/api/v1';
 
     try {
       // 1. Fetch Overview
@@ -233,7 +233,7 @@ export const GeospatialDashboard: React.FC = () => {
       'Content-Type': 'application/json',
       ...(token ? { 'Authorization': `Bearer ${token}` } : {})
     };
-    const BASE_URL = 'http://localhost:8000/api/v1';
+    const BASE_URL = 'https://backend-gray-alpha-78.vercel.app/api/v1';
 
     try {
       const res = await fetch(`${BASE_URL}/geospatial/family-spread/${familyId}`, { headers });

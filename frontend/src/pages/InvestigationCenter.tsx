@@ -87,7 +87,7 @@ export const InvestigationCenter: React.FC = () => {
         'Content-Type': 'application/json',
         ...(token ? { 'Authorization': `Bearer ${token}` } : {})
       };
-      const BASE_URL = 'http://localhost:8000/api/v1';
+      const BASE_URL = 'https://backend-gray-alpha-78.vercel.app/api/v1';
 
       try {
         // In the database model, each complaint has a unique investigation if run
@@ -138,7 +138,7 @@ export const InvestigationCenter: React.FC = () => {
       'Content-Type': 'application/json',
       ...(token ? { 'Authorization': `Bearer ${token}` } : {})
     };
-    const BASE_URL = 'http://localhost:8000/api/v1';
+    const BASE_URL = 'https://backend-gray-alpha-78.vercel.app/api/v1';
 
     try {
       const res = await fetch(`${BASE_URL}/investigation/analyze`, {
@@ -172,7 +172,7 @@ export const InvestigationCenter: React.FC = () => {
     if (!selectedComplaint) return;
     const token = localStorage.getItem('shield_token');
     const authQuery = token ? `?format=${exportFormat}&token=${token}` : `?format=${exportFormat}`;
-    const exportUrl = `http://localhost:8000/api/v1/fir/${selectedComplaint.id}/export${authQuery}`;
+    const exportUrl = `https://backend-gray-alpha-78.vercel.app/api/v1/fir/${selectedComplaint.id}/export${authQuery}`;
     
     // Trigger download
     const link = document.createElement('a');

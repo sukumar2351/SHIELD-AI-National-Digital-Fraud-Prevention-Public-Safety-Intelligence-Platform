@@ -70,8 +70,8 @@ def get_case_report(
 
     comp = investigation.complaint
     scam_type = "UPI Payment Fraud"
-    if comp.fraud_dna and comp.fraud_dna.family:
-        scam_type = comp.fraud_dna.family.main_scam_type
+    if comp.family_membership and comp.family_membership.family:
+        scam_type = comp.family_membership.family.main_scam_type
 
     # Format suspects and timelines
     suspects_list = []
@@ -99,7 +99,7 @@ def get_case_report(
         "executive_summary": f"This case dossier tracks a {scam_type} target campaign filed on {comp.created_at.strftime('%Y-%m-%d')}.",
         "key_findings": investigation.findings or "Evidence points to organized syndicate rings.",
         "connected_entities": suspects_list,
-        "fraud_family": comp.fraud_dna.family.name if (comp.fraud_dna and comp.fraud_dna.family) else "Unknown Syndicate",
+        "fraud_family": comp.family_membership.family.name if (comp.family_membership and comp.family_membership.family) else "Unknown Syndicate",
         "risk_assessment": {
             "threat_level": comp.threat_level,
             "priority": "Critical" if comp.threat_level == "Critical" else "High" if comp.threat_level == "High Risk" else "Medium",
@@ -128,7 +128,7 @@ def compile_fir(
         raise HTTPException(status_code=404, detail="Investigation case docket not found.")
 
     comp = investigation.complaint
-    scam_type = comp.fraud_dna.family.main_scam_type if (comp.fraud_dna and comp.fraud_dna.family) else "UPI Payment Fraud"
+    scam_type = comp.family_membership.family.main_scam_type if (comp.family_membership and comp.family_membership.family) else "UPI Payment Fraud"
     legal = investigator_agent.map_legal_sections(scam_type)
 
     return {
@@ -156,7 +156,7 @@ def get_compiled_fir(
         raise HTTPException(status_code=404, detail="Investigation case docket not found.")
 
     comp = investigation.complaint
-    scam_type = comp.fraud_dna.family.main_scam_type if (comp.fraud_dna and comp.fraud_dna.family) else "UPI Payment Fraud"
+    scam_type = comp.family_membership.family.main_scam_type if (comp.family_membership and comp.family_membership.family) else "UPI Payment Fraud"
     legal = investigator_agent.map_legal_sections(scam_type)
 
     return {

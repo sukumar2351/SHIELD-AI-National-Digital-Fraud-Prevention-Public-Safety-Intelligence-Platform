@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<title>SHIELD AI – Video Production Script</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Rajdhani:wght@600;700&family=Source+Code+Pro:wght@400;600&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Inter',sans-serif;background:#f8fafc;color:#1e293b;font-size:11pt;line-height:1.7;}
+@media print{body{-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
+.page{width:210mm;min-height:297mm;margin:0 auto;background:#fff;padding:15mm 18mm;position:relative;}
+.page+.page{page-break-before:always;}
+h1{font-family:'Rajdhani',sans-serif;font-size:28pt;font-weight:700;color:#020817;margin-bottom:4mm;}
+h2{font-family:'Rajdhani',sans-serif;font-size:16pt;font-weight:700;color:#0f2044;border-left:4px solid #1e90ff;padding-left:4mm;margin:6mm 0 3mm;}
+h3{font-size:12pt;font-weight:700;color:#1e3a5f;margin:4mm 0 2mm;}
+p{margin-bottom:3mm;color:#334155;text-align:justify;}
+.cover{background:linear-gradient(160deg,#020817,#0a1628,#0f2044);min-height:297mm;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20mm;}
+.cover h1{color:#fff;font-size:36pt;-webkit-text-fill-color:transparent;background:linear-gradient(90deg,#fff,#1e90ff,#00d4ff);-webkit-background-clip:text;letter-spacing:2px;}
+.cover .sub{color:#00d4ff;font-size:14pt;margin:4mm 0;letter-spacing:4px;text-transform:uppercase;font-weight:300;}
+.cover .tag{background:rgba(245,158,11,0.2);border:1px solid rgba(245,158,11,0.5);border-radius:30px;padding:8px 24px;color:#fbbf24;font-size:13pt;display:inline-block;margin-top:6mm;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:2px;}
+.cover .meta{color:#64748b;font-size:10pt;margin-top:8mm;line-height:2;}
+.scene-card{border:1px solid #e2ecf8;border-radius:12px;margin:4mm 0;overflow:hidden;}
+.scene-header{background:linear-gradient(90deg,#0a1628,#1e3a5f);color:#fff;padding:3mm 5mm;display:flex;justify-content:space-between;align-items:center;}
+.scene-num{font-family:'Rajdhani',sans-serif;font-size:10pt;color:#00d4ff;letter-spacing:2px;text-transform:uppercase;}
+.scene-title{font-family:'Rajdhani',sans-serif;font-size:14pt;font-weight:700;}
+.scene-dur{font-size:9pt;color:#94a3b8;font-family:'Source Code Pro',monospace;}
+.scene-body{padding:4mm 5mm;}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:4mm;margin:2mm 0;}
+.col-label{font-size:8.5pt;font-weight:700;color:#64748b;letter-spacing:2px;text-transform:uppercase;margin-bottom:2mm;}
+.visual-box{background:#f0f6ff;border-radius:8px;padding:3mm 4mm;font-size:9.5pt;color:#334155;}
+.vo-box{background:#fff8e7;border:1px solid #fcd34d;border-radius:8px;padding:3mm 4mm;font-size:10pt;color:#334155;font-style:italic;line-height:1.6;}
+.music-box{background:#f0fff4;border:1px solid #6ee7b7;border-radius:6px;padding:2mm 4mm;font-size:9pt;color:#065f46;margin-top:2mm;}
+.highlight-box{background:linear-gradient(135deg,rgba(30,144,255,0.06),rgba(0,212,255,0.04));border:1px solid rgba(30,144,255,0.2);border-radius:8px;padding:3mm 5mm;margin:3mm 0;}
+.highlight-box .hl-title{font-weight:700;color:#0f2044;font-size:10.5pt;margin-bottom:2mm;}
+ul{padding-left:5mm;margin-bottom:2mm;}
+li{margin-bottom:1.5mm;font-size:9.5pt;color:#334155;}
+.badge{display:inline-block;border-radius:4px;padding:1px 8px;font-size:8.5pt;font-weight:700;}
+.badge-blue{background:rgba(30,144,255,0.12);color:#1e40af;border:1px solid rgba(30,144,255,0.3);}
+.badge-red{background:rgba(239,68,68,0.12);color:#dc2626;border:1px solid rgba(239,68,68,0.3);}
+.badge-green{background:rgba(16,185,129,0.12);color:#047857;border:1px solid rgba(16,185,129,0.3);}
+.badge-gold{background:rgba(245,158,11,0.12);color:#b45309;border:1px solid rgba(245,158,11,0.3);}
+.timeline{margin:4mm 0;}
+.tl-item{display:flex;gap:4mm;margin-bottom:4mm;}
+.tl-time{font-family:'Source Code Pro',monospace;font-size:9pt;font-weight:700;color:#1e90ff;min-width:20mm;flex-shrink:0;}
+.tl-content{flex:1;background:#f8fafd;border:1px solid #e2ecf8;border-radius:8px;padding:3mm 4mm;}
+.tl-scene{font-weight:700;color:#0f2044;font-size:10.5pt;margin-bottom:1mm;}
+.tl-vo{font-size:9pt;color:#475569;font-style:italic;}
+table{width:100%;border-collapse:collapse;margin:3mm 0;font-size:9.5pt;}
+thead tr{background:linear-gradient(90deg,#0a1628,#1e3a5f);color:#fff;}
+thead th{padding:2.5mm 4mm;text-align:left;font-family:'Rajdhani',sans-serif;font-size:10pt;font-weight:700;letter-spacing:.5px;}
+tbody tr{border-bottom:1px solid #e8edf4;}
+tbody tr:nth-child(even){background:#f5f8fc;}
+tbody td{padding:2mm 4mm;color:#334155;vertical-align:top;}
+.footer{position:absolute;bottom:8mm;left:18mm;right:18mm;display:flex;justify-content:space-between;font-size:8pt;color:#94a3b8;border-top:1px solid #e2ecf8;padding-top:3mm;}
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="page cover">
+  <div style="font-size:50px;margin-bottom:8mm;">🎬</div>
+  <h1>SHIELD AI</h1>
+  <div class="sub">Demo Video Production Script</div>
+  <div style="color:#94a3b8;font-size:12pt;margin-top:4mm;">National Fraud Intelligence Operating System</div>
+  <div class="tag">⚡ ET AI Hackathon 2.0</div>
+  <div class="meta">
+    Duration: 3 minutes 30 seconds (210 seconds)<br/>
+    Format: 1920×1080 | 60fps | MP4<br/>
+    Style: Cinematic Cyber Intelligence Presentation<br/>
+    Team SHIELD | Nalanda Degree College<br/>
+    <br/>
+    <strong style="color:#e2e8f0;">Sukumar Karanam · Shaik Mujeeb Basha · Bondada Tejendra</strong>
+  </div>
+</div>
+
+<!-- PAGE 2: PRODUCTION OVERVIEW -->
+<div class="page">
+  <h1>Production Overview</h1>
+  <hr style="border:none;height:2px;background:linear-gradient(90deg,#1e90ff,#00d4ff,transparent);margin-bottom:5mm;"/>
+
+  <h2>Video Brief</h2>
+  <div class="highlight-box">
+    <div class="hl-title">Project: SHIELD AI Demo Video</div>
+    <table>
+      <tbody>
+        <tr><td style="color:#64748b;width:120px;">Duration</td><td><strong>3 minutes 30 seconds (210 sec)</strong></td></tr>
+        <tr><td style="color:#64748b;">Resolution</td><td><strong>1920×1080 (Full HD)</strong></td></tr>
+        <tr><td style="color:#64748b;">Frame Rate</td><td><strong>60 fps</strong></td></tr>
+        <tr><td style="color:#64748b;">Style</td><td><strong>Cinematic Cyber Intelligence | AI Startup Pitch</strong></td></tr>
+        <tr><td style="color:#64748b;">Theme</td><td><strong>Dark Navy + Electric Blue + HUD Overlays</strong></td></tr>
+        <tr><td style="color:#64748b;">Voice</td><td><strong>Professional English (Male/Female, Indian accent preferred)</strong></td></tr>
+        <tr><td style="color:#64748b;">Music</td><td><strong>Epic Cinematic Orchestral + Electronic Hybrid</strong></td></tr>
+        <tr><td style="color:#64748b;">Output</td><td><strong>MP4 (H.264), YouTube-ready</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Scene Breakdown Summary</h2>
+  <table>
+    <thead><tr><th>#</th><th>Scene Name</th><th>Duration</th><th>Key Visual</th></tr></thead>
+    <tbody>
+      <tr><td><span class="badge badge-red">01</span></td><td>National Crisis Opening</td><td>0:00 – 0:25</td><td>India map, attack alerts, fraud stats</td></tr>
+      <tr><td><span class="badge badge-blue">02</span></td><td>SHIELD AI Reveal</td><td>0:25 – 0:40</td><td>Shield logo formation, brand title</td></tr>
+      <tr><td><span class="badge badge-blue">03</span></td><td>Executive Command Center</td><td>0:40 – 1:00</td><td>Dashboard with live metrics</td></tr>
+      <tr><td><span class="badge badge-blue">04</span></td><td>Fraud DNA Genome Index</td><td>1:00 – 1:25</td><td>DNA vector bars, family classification</td></tr>
+      <tr><td><span class="badge badge-blue">05</span></td><td>Fraud Entity Graph</td><td>1:25 – 1:45</td><td>Network nodes connecting</td></tr>
+      <tr><td><span class="badge badge-blue">06</span></td><td>Investigation Operations Desk</td><td>1:45 – 2:05</td><td>Case queue, FIR generation</td></tr>
+      <tr><td><span class="badge badge-blue">07</span></td><td>National Threat Intelligence Map</td><td>2:05 – 2:25</td><td>India heatmap, hotspot pins</td></tr>
+      <tr><td><span class="badge badge-blue">08</span></td><td>Citizen Copilot AI</td><td>2:25 – 2:45</td><td>Chat interface, SHIELD score</td></tr>
+      <tr><td><span class="badge badge-green">09</span></td><td>Impact & Results</td><td>2:45 – 3:05</td><td>Metric cards animation</td></tr>
+      <tr><td><span class="badge badge-gold">10</span></td><td>Grand Finale</td><td>3:05 – 3:30</td><td>Shield + team reveal + tagline</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Technical Production Notes</h2>
+  <div class="row">
+    <div>
+      <h3>Screen Recording Method</h3>
+      <div class="visual-box">
+        <ul>
+          <li>Open <code>SHIELD_AI_Demo_Video.html</code> in Chrome</li>
+          <li>Press <strong>F</strong> key for fullscreen mode</li>
+          <li>Use <strong>OBS Studio</strong> to record the screen</li>
+          <li>Set OBS: 1920×1080, 60fps, MP4</li>
+          <li>Press SPACE to pause between scenes for narration</li>
+          <li>Record separate voice-over audio</li>
+          <li>Mix in Adobe Premiere / DaVinci Resolve</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <h3>Music Recommendations</h3>
+      <div class="visual-box">
+        <ul>
+          <li><strong>Opening:</strong> Hans Zimmer – "Cornfield Chase" (Epic)</li>
+          <li><strong>Problem:</strong> Dark tension underscore</li>
+          <li><strong>Reveal:</strong> Epic orchestral swell</li>
+          <li><strong>Modules:</strong> Electronic cyberpunk ambient</li>
+          <li><strong>Impact:</strong> Rising epic orchestral</li>
+          <li><strong>Finale:</strong> Full orchestral crescendo</li>
+          <li>Source: Epidemic Sound, Artlist, Pixabay (free)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <span>SHIELD AI – Video Production Script | ET AI Hackathon 2.0</span>
+    <span>Page 2</span>
+  </div>
+</div>
+
+<!-- PAGE 3: COMPLETE VOICE-OVER SCRIPT -->
+<div class="page">
+  <h1>Complete Voice-Over Script</h1>
+  <hr style="border:none;height:2px;background:linear-gradient(90deg,#1e90ff,#00d4ff,transparent);margin-bottom:5mm;"/>
+  <p style="font-style:italic;color:#64748b;">[Read naturally. Pause at <strong>[PAUSE]</strong>. Emphasize <u>underlined</u> words. Total reading time: ~3 min 20 sec at 130 words/minute.]</p>
+
+  <div class="scene-card">
+    <div class="scene-header">
+      <div><div class="scene-num">Scene 01 · 0:00–0:25</div><div class="scene-title">National Crisis Opening</div></div>
+      <div class="scene-dur">25 sec</div>
+    </div>
+    <div class="scene-body">
+      <div class="vo-box">
+        "Every single day, <u>thousands of Indian citizens</u> — doctors, teachers, farmers, senior citizens — lose their life savings to organized cybercrime syndicates. [PAUSE] UPI frauds. Digital arrests. OTP scams. Phishing attacks. Identity theft. [PAUSE] India loses over <u>ten thousand crores</u> to digital fraud annually. With over <u>twelve million complaints</u> and a resolution rate below twelve percent, the crisis is not just growing — it is <u>escalating</u>."
+      </div>
+    </div>
+  </div>
+
+  <div class="scene-card">
+    <div class="scene-header">
+      <div><div class="scene-num">Scene 02 · 0:25–0:40</div><div class="scene-title">SHIELD AI Brand Reveal</div></div>
+      <div class="scene-dur">15 sec</div>
+    </div>
+    <div class="scene-body">
+      <div class="vo-box">
+        "Introducing <u>SHIELD AI</u> — [PAUSE] — the National Fraud Intelligence Operating System. [PAUSE] An AI-powered platform designed to <u>transform</u> cybercrime investigation, fraud prevention, and citizen safety — at <u>national scale</u>."
+      </div>
+    </div>
+  </div>
+
+  <div class="scene-card">
+    <div class="scene-header">
+      <div><div class="scene-num">Scene 03 · 0:40–1:00</div><div class="scene-title">Executive Command Center</div></div>
+      <div class="scene-dur">20 sec</div>
+    </div>
+    <div class="scene-body">
+      <div class="vo-box">
+        "The <u>Executive Command Center</u> gives law enforcement a real-time, unified view of India's fraud landscape. [PAUSE] Twelve thousand eight hundred complaints tracked. Thirty-four active fraud families monitored. A SHIELD Threat Score of seventy-eight-point-four. And eight hundred and forty-seven FIRs generated — <u>automatically</u>. [PAUSE] Every metric. Every alert. Every threat. In one command interface."
+      </div>
+    </div>
+  </div>
+
+  <div class="scene-card">
+    <div class="scene-header">
+      <div><div class="scene-num">Scene 04 · 1:00–1:25</div><div class="scene-title">Fraud DNA Genome Index</div></div>
+      <div class="scene-dur">25 sec</div>
+    </div>
+    <div class="scene-body">
+      <div class="vo-box">
+        "SHIELD AI's most powerful innovation is the <u>Fraud DNA Engine</u>. [PAUSE] Every fraud complaint is processed into a six-vector digital fingerprint — profiling the fraudster's communication channels, financial patterns, behavioral tactics, geographic spread, language signatures, and temporal cycles. [PAUSE] This multi-dimensional DNA profile is then matched against our database of known fraud families — identifying syndicates with up to <u>ninety-six percent confidence</u> — automatically."
+      </div>
+    </div>
+  </div>
+
+  <div class="scene-card">
+    <div class="scene-header">
+      <div><div class="scene-num">Scene 05 · 1:25–1:45</div><div class="scene-title">Fraud Entity Graph Intelligence</div></div>
+      <div class="scene-dur">20 sec</div>
+    </div>
+    <div class="scene-body">
+      <div class="vo-box">
+        "The <u>Fraud Graph Intelligence Engine</u> makes the invisible visible. [PAUSE] Every fraudster, every victim, every phone number, every UPI ID, every bank account — mapped as nodes in an interactive network. [PAUSE] What once took investigators <u>months</u> to piece together manually, SHIELD AI reveals in <u>seconds</u> — exposing syndicate hierarchies, money trails, and criminal clusters across jurisdictions."
+      </div>
+    </div>
+  </div>
+
+  <div class="scene-card">
+    <div class="scene-header">
+      <div><div class="scene-num">Scene 06 · 1:45–2:05</div><div class="scene-title">Investigation Operations Desk</div></div>
+      <div class="scene-dur">20 sec</div>
+    </div>
+    <div class="scene-body">
+      <div class="vo-box">
+        "The <u>Investigation Operations Desk</u> transforms how cybercrime officers work. [PAUSE] Cases are automatically prioritized by threat level. AI-generated investigation briefs provide evidence checklists and suspect rankings. [PAUSE] And with <u>one click</u>, a fully formatted FIR — legally structured and pre-filled with all case intelligence — is generated and ready for filing. Reducing FIR preparation time by <u>seventy-four percent</u>."
+      </div>
+    </div>
+  </div>
+
+  <div class="scene-card">
+    <div class="scene-header">
+      <div><div class="scene-num">Scene 07 · 2:05–2:25</div><div class="scene-title">National Threat Intelligence Map</div></div>
+      <div class="scene-dur">20 sec</div>
+    </div>
+    <div class="scene-body">
+      <div class="vo-box">
+        "The <u>National Threat Intelligence Map</u> gives law enforcement geographic sight where none existed before. [PAUSE] A real-time heatmap across all thirty-six Indian states and union territories. Hotspot districts highlighted. Fraud family spread tracked. Risk rankings updated in real time. [PAUSE] From Jamtara to Mewat to Mumbai — <u>no fraud hotspot is invisible</u> to SHIELD AI."
+      </div>
+    </div>
+  </div>
+
+  <div class="scene-card">
+    <div class="scene-header">
+      <div><div class="scene-num">Scene 08 · 2:25–2:45</div><div class="scene-title">Citizen Copilot AI</div></div>
+      <div class="scene-dur">20 sec</div>
+    </div>
+    <div class="scene-body">
+      <div class="vo-box">
+        "For citizens, SHIELD AI provides the <u>Citizen Copilot</u> — a multilingual AI safety assistant available in Hindi, English, Tamil, Bengali, and Telugu. [PAUSE] Before making any payment, citizens can verify a phone number, UPI ID, or describe a suspicious message — and receive an instant <u>SHIELD Safety Score</u>, fraud family identification, and personalized protection guidance. [PAUSE] Bringing <u>national intelligence</u> directly to the pocket of every Indian."
+      </div>
+    </div>
+  </div>
+
+  <div class="scene-card">
+    <div class="scene-header">
+      <div><div class="scene-num">Scene 09 · 2:45–3:05</div><div class="scene-title">Impact & Results</div></div>
+      <div class="scene-dur">20 sec</div>
+    </div>
+    <div class="scene-body">
+      <div class="vo-box">
+        "The results speak for themselves. [PAUSE] Eighty-seven percent fraud detection accuracy. Seventy-four percent faster investigations. Ten times faster syndicate discovery. Over four thousand eight hundred crores in fraud tracked and linked to active investigations. Thirty-four fraud families profiled. Five languages. [PAUSE] SHIELD AI is not a prototype — it is a <u>working, production-ready national intelligence platform</u>."
+      </div>
+    </div>
+  </div>
+
+  <div class="scene-card">
+    <div class="scene-header">
+      <div><div class="scene-num">Scene 10 · 3:05–3:30</div><div class="scene-title">Grand Finale</div></div>
+      <div class="scene-dur">25 sec</div>
+    </div>
+    <div class="scene-body">
+      <div class="vo-box">
+        "SHIELD AI. [PAUSE — 2s] Built by Team SHIELD — Sukumar Karanam, Shaik Mujeeb Basha, and Bondada Tejendra — from Nalanda Degree College. [PAUSE] For the ET AI Hackathon 2.0. [PAUSE — 1s] <u>Protecting citizens. Empowering investigators. Defending Digital India.</u>"
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>SHIELD AI – Video Production Script | ET AI Hackathon 2.0</span>
+    <span>Page 3</span>
+  </div>
+</div>
+
+<!-- PAGE 4: VISUAL DIRECTION -->
+<div class="page">
+  <h1>Visual Direction &amp; Camera Notes</h1>
+  <hr style="border:none;height:2px;background:linear-gradient(90deg,#1e90ff,#00d4ff,transparent);margin-bottom:5mm;"/>
+
+  <h2>Scene-by-Scene Visual Direction</h2>
+
+  <table>
+    <thead><tr><th>Scene</th><th>Camera / Motion</th><th>Visual Elements</th><th>Transition</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>01 Opening</strong></td>
+        <td>Slow push-in to India map. Drone-style top view.</td>
+        <td>Dark map → Red alert dots spread city by city. Stat counters appear floating. Grid lines glow.</td>
+        <td>Red shockwave cross-dissolve</td>
+      </tr>
+      <tr>
+        <td><strong>02 Reveal</strong></td>
+        <td>Camera stays centered. Shield emerges with scale + rotation.</td>
+        <td>SHIELD logo assembles from particles. Text appears letter by letter. Gold hackathon badge pulses.</td>
+        <td>Blue light expand / wipe</td>
+      </tr>
+      <tr>
+        <td><strong>03 Dashboard</strong></td>
+        <td>Slow zoom-in to screen. Metrics count up live.</td>
+        <td>Dark UI mock with glowing metric cards. Bar charts animate upward. Live alert feed ticks.</td>
+        <td>Slide left</td>
+      </tr>
+      <tr>
+        <td><strong>04 Fraud DNA</strong></td>
+        <td>Dynamic pan from left to DNA bars. Slight tilt.</td>
+        <td>Six DNA bars extend left to right. Each bar labeled. Confidence score counter animates to 96.2%.</td>
+        <td>Particle dissolve</td>
+      </tr>
+      <tr>
+        <td><strong>05 Graph</strong></td>
+        <td>Zoom out from center node. Nodes appear with pop.</td>
+        <td>Network nodes appear one by one with connecting lines drawing between them. Colors: gold, red, blue, green.</td>
+        <td>Graph dissolve</td>
+      </tr>
+      <tr>
+        <td><strong>06 Investigation</strong></td>
+        <td>Scroll down through case queue. Close-up on FIR button.</td>
+        <td>Case list items slide in from left. Priority badges pulse. "Generate FIR" button highlighted with glow.</td>
+        <td>Slide right</td>
+      </tr>
+      <tr>
+        <td><strong>07 Geo Map</strong></td>
+        <td>Aerial view of India. Hotspots light up progressively.</td>
+        <td>Dark India map. Red/orange gradient hotspot circles pulse on cities. Risk ranking table updates live.</td>
+        <td>Zoom out / expand</td>
+      </tr>
+      <tr>
+        <td><strong>08 Copilot</strong></td>
+        <td>Split: chat interface left, SHIELD score ring right.</td>
+        <td>Chat bubbles appear sequentially. SHIELD score ring animates conic gradient. Score number counts up.</td>
+        <td>Soft fade</td>
+      </tr>
+      <tr>
+        <td><strong>09 Impact</strong></td>
+        <td>Camera stays wide. Cards pop in with scale animation.</td>
+        <td>Six metric cards scale from 0 to final value. Numbers counter-animate. Particle background intense.</td>
+        <td>Flash cut</td>
+      </tr>
+      <tr>
+        <td><strong>10 Finale</strong></td>
+        <td>Slow zoom out from shield to full scene. Camera holds.</td>
+        <td>Shield pulses with max glow. Brand text glows. Team cards fade in. Tagline appears letter by letter.</td>
+        <td>Cinematic black fade</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Design System Reference</h2>
+  <div class="row">
+    <div>
+      <h3>Color Palette</h3>
+      <div class="visual-box">
+        <ul>
+          <li><span style="display:inline-block;width:14px;height:14px;background:#020817;border:1px solid #333;border-radius:3px;vertical-align:middle;margin-right:6px;"></span> Deep Navy: #020817</li>
+          <li><span style="display:inline-block;width:14px;height:14px;background:#1e90ff;border-radius:3px;vertical-align:middle;margin-right:6px;"></span> Electric Blue: #1E90FF</li>
+          <li><span style="display:inline-block;width:14px;height:14px;background:#00d4ff;border-radius:3px;vertical-align:middle;margin-right:6px;"></span> Cyber Bright: #00D4FF</li>
+          <li><span style="display:inline-block;width:14px;height:14px;background:#f59e0b;border-radius:3px;vertical-align:middle;margin-right:6px;"></span> Hackathon Gold: #F59E0B</li>
+          <li><span style="display:inline-block;width:14px;height:14px;background:#ef4444;border-radius:3px;vertical-align:middle;margin-right:6px;"></span> Alert Red: #EF4444</li>
+          <li><span style="display:inline-block;width:14px;height:14px;background:#10b981;border-radius:3px;vertical-align:middle;margin-right:6px;"></span> Safe Green: #10B981</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <h3>Typography</h3>
+      <div class="visual-box">
+        <ul>
+          <li><strong>Brand Text:</strong> Orbitron Black 900</li>
+          <li><strong>Headings:</strong> Rajdhani Bold 700</li>
+          <li><strong>Body Text:</strong> Inter Regular 400</li>
+          <li><strong>Code / API:</strong> Source Code Pro</li>
+          <li><strong>Metrics:</strong> Orbitron ExtraBold</li>
+          <li><strong>Labels:</strong> Rajdhani Medium, CAPS</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <h2>Recommended Free Video Tools</h2>
+  <table>
+    <thead><tr><th>Tool</th><th>Purpose</th><th>Cost</th></tr></thead>
+    <tbody>
+      <tr><td><strong>OBS Studio</strong></td><td>Screen recording of HTML demo</td><td>Free</td></tr>
+      <tr><td><strong>DaVinci Resolve</strong></td><td>Full video editing, color grading, audio mixing</td><td>Free</td></tr>
+      <tr><td><strong>Canva Video</strong></td><td>Simple text animations, intro/outro</td><td>Free tier</td></tr>
+      <tr><td><strong>Pixabay / Mixkit</strong></td><td>Royalty-free epic orchestral music</td><td>Free</td></tr>
+      <tr><td><strong>ElevenLabs</strong></td><td>AI voice-over generation (professional quality)</td><td>Free tier: 10k chars</td></tr>
+      <tr><td><strong>VEED.io</strong></td><td>Browser-based editor with captions and subtitles</td><td>Free tier</td></tr>
+      <tr><td><strong>Kdenlive</strong></td><td>Open source video editor (Windows/Linux/Mac)</td><td>Free</td></tr>
+    </tbody>
+  </table>
+
+  <div class="footer">
+    <span>SHIELD AI – Video Production Script | ET AI Hackathon 2.0</span>
+    <span>Page 4</span>
+  </div>
+</div>
+
+<!-- PAGE 5: SCREEN RECORDING GUIDE -->
+<div class="page">
+  <h1>Screen Recording &amp; Export Guide</h1>
+  <hr style="border:none;height:2px;background:linear-gradient(90deg,#1e90ff,#00d4ff,transparent);margin-bottom:5mm;"/>
+
+  <h2>Step-by-Step Recording Instructions</h2>
+
+  <div class="highlight-box">
+    <div class="hl-title">Step 1 — Open the Demo in Chrome</div>
+    <p>Double-click <code>SHIELD_AI_Demo_Video.html</code> to open it in Google Chrome. Press <strong>F</strong> to enter fullscreen. Press <strong>F5</strong> to reload if needed. The demo will auto-play through all 10 scenes.</p>
+  </div>
+
+  <div class="highlight-box">
+    <div class="hl-title">Step 2 — Configure OBS Studio</div>
+    <ul>
+      <li>Download OBS from <strong>obsproject.com</strong></li>
+      <li>Add a <strong>Display Capture</strong> or <strong>Window Capture</strong> source targeting Chrome</li>
+      <li>Set Output: <strong>1920×1080 @ 60fps</strong></li>
+      <li>Format: <strong>MP4</strong> | Encoder: <strong>x264</strong> | Quality: CRF 18</li>
+      <li>Audio: Add a separate <strong>Microphone</strong> input for voice-over</li>
+    </ul>
+  </div>
+
+  <div class="highlight-box">
+    <div class="hl-title">Step 3 — Record with Keyboard Controls</div>
+    <ul>
+      <li>Press <strong>SPACE</strong> to pause auto-advance during recording if you need extra time</li>
+      <li>Press <strong>→</strong> (right arrow) to advance to the next scene manually</li>
+      <li>Press <strong>←</strong> (left arrow) to go back to any scene</li>
+      <li>Each scene auto-advances: 7–8 seconds per scene</li>
+    </ul>
+  </div>
+
+  <div class="highlight-box">
+    <div class="hl-title">Step 4 — Record Voice-Over Separately</div>
+    <ul>
+      <li>Use Audacity (free) or OBS audio track for voice-over recording</li>
+      <li>OR use ElevenLabs AI voice generator (elevenlabs.io) for professional AI narration</li>
+      <li>Paste each scene's voice-over text into ElevenLabs — select "Rachel" or "Antoni" voice</li>
+      <li>Export each scene as separate MP3, then mix in DaVinci Resolve</li>
+    </ul>
+  </div>
+
+  <div class="highlight-box">
+    <div class="hl-title">Step 5 — Edit in DaVinci Resolve (Free)</div>
+    <ul>
+      <li>Import screen recording + voice-over audio + background music</li>
+      <li>Sync voice-over to corresponding scenes using markers</li>
+      <li>Apply <strong>Color Grading</strong>: Increase blue/cyan channel, deepen shadows</li>
+      <li>Add <strong>HUD overlays</strong>: Corner brackets, scanlines (DaVinci Resolve templates)</li>
+      <li>Layer music: Lower volume during voice-over, raise during transitions</li>
+      <li>Add <strong>captions/subtitles</strong> from voice-over script (VEED.io auto-captions)</li>
+    </ul>
+  </div>
+
+  <div class="highlight-box">
+    <div class="hl-title">Step 6 — Export Final Video</div>
+    <ul>
+      <li>Format: <strong>MP4 (H.264)</strong></li>
+      <li>Resolution: <strong>1920×1080</strong></li>
+      <li>Frame rate: <strong>60fps</strong></li>
+      <li>Bitrate: <strong>15–20 Mbps</strong> (high quality)</li>
+      <li>Audio: <strong>AAC 320kbps</strong></li>
+      <li>File name: <strong>SHIELD_AI_Demo_ET_Hackathon2.mp4</strong></li>
+    </ul>
+  </div>
+
+  <h2>Alternative: AI Video Generation (CapCut / Runway)</h2>
+  <p>If you prefer AI-assisted video generation instead of screen recording:</p>
+  <ul>
+    <li><strong>CapCut PC (free)</strong>: Import screenshots from the HTML demo, apply cinematic transitions, add AI voice-over and music automatically</li>
+    <li><strong>Runway ML (runwayml.com)</strong>: Use "Text to Video" for opening scene — India map with cyber alerts emerging</li>
+    <li><strong>Canva Video Pro</strong>: Drag-and-drop each scene screenshot, apply dark transitions, add professional voice-over</li>
+    <li><strong>Invideo AI (invideo.io)</strong>: Paste the voice-over script + upload screenshots — AI auto-assembles the video</li>
+  </ul>
+
+  <div class="highlight-box" style="background:rgba(245,158,11,0.06);border-color:rgba(245,158,11,0.2);">
+    <div class="hl-title" style="color:#b45309;">🏆 Pro Tip for Hackathon Judges</div>
+    <p>Keep the demo video to exactly <strong>3 minutes 30 seconds</strong>. Judges typically have limited time. The most impactful moments are: the SHIELD reveal (0:25), the Fraud DNA animation (1:00), and the finale tagline (3:25). Make sure these three moments are visually the strongest.</p>
+  </div>
+
+  <div class="footer">
+    <span>SHIELD AI – Video Production Script | ET AI Hackathon 2.0</span>
+    <span>Page 5</span>
+  </div>
+</div>
+
+</body>
+</html>
