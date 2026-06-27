@@ -65,7 +65,7 @@ def verify_google_token(id_token: str) -> dict:
         return {
             "sub": f"mock_google_id_{id_token}",
             "email": "sukumar@shield.gov",
-            "name": "Sukumar Karanam",
+            "name": "Sukumar",
             "picture": "https://lh3.googleusercontent.com/a/mock-pic"
         }
     url = f"https://oauth2.googleapis.com/tokeninfo?id_token={id_token}"

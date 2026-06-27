@@ -25,7 +25,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
     return () => clearInterval(interval);
   }, []);
 
-  const fullName = user?.full_name || user?.username || 'Sukumar Karanam';
+  const fullName = user?.full_name || user?.username || 'Sukumar';
   const displayRole = user?.role || 'INVESTIGATOR';
   const profilePic = user?.profile_picture;
 

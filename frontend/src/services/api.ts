@@ -101,8 +101,8 @@ export const api = {
       console.warn("Using offline Google auth bypass");
       localStorage.setItem('shield_token', 'mock_google_jwt_token');
       localStorage.setItem('shield_role', 'Investigator');
-      localStorage.setItem('shield_username', 'Sukumar Karanam');
-      return { access_token: 'mock_google_jwt_token', role: 'Investigator', username: 'Sukumar Karanam' };
+      localStorage.setItem('shield_username', 'Sukumar');
+      return { access_token: 'mock_google_jwt_token', role: 'Investigator', username: 'Sukumar' };
     }
   },
 
@@ -113,7 +113,7 @@ export const api = {
       return await res.json();
     } catch (e) {
       console.warn("Using offline user fallback");
-      const username = localStorage.getItem('shield_username') || 'Sukumar Karanam';
+      const username = localStorage.getItem('shield_username') || 'Sukumar';
       const role = localStorage.getItem('shield_role') || 'Investigator';
       return {
         id: 1,

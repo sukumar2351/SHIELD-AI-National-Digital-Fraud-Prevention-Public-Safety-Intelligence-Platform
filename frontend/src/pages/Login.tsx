@@ -116,10 +116,7 @@ export const Login: React.FC = () => {
           from { transform: rotate(0deg); }
           to { transform: rotate(360deg); }
         }
-        @keyframes grid-scan-line {
-          0% { transform: translateY(-100%); }
-          100% { transform: translateY(100vh); }
-        }
+
         @keyframes cyber-rotate {
           from { transform: rotate(0deg); }
           to { transform: rotate(360deg); }
@@ -138,17 +135,7 @@ export const Login: React.FC = () => {
             box-shadow: 0 0 35px rgba(0, 210, 255, 0.2);
           }
         }
-        .grid-scanner-line {
-          position: absolute;
-          width: 100%;
-          height: 3px;
-          background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.25), transparent);
-          top: 0;
-          left: 0;
-          animation: grid-scan-line 6s linear infinite;
-          z-index: 1;
-          pointer-events: none;
-        }
+
         .radial-radar {
           position: absolute;
           width: 800px;
@@ -166,8 +153,7 @@ export const Login: React.FC = () => {
       {/* Visual Scanning Background Grid */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(18,25,41,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(18,25,41,0.08)_1px,transparent_1px)] bg-[size:40px_40px] opacity-40 z-0"></div>
       
-      {/* Grid Scan Laser */}
-      <div className="grid-scanner-line"></div>
+
 
       {/* Animated Radar Sweeper */}
       <div className="radial-radar flex items-center justify-center z-0">
