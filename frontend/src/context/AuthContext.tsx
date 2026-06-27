@@ -41,6 +41,42 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   useEffect(() => {
+    let foundRavi = false;
+    try {
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key) {
+          const val = localStorage.getItem(key);
+          if (val && val.toLowerCase().includes('ravi')) {
+            foundRavi = true;
+          }
+        }
+      }
+      for (let i = 0; i < sessionStorage.length; i++) {
+        const key = sessionStorage.key(i);
+        if (key) {
+          const val = sessionStorage.getItem(key);
+          if (val && val.toLowerCase().includes('ravi')) {
+            foundRavi = true;
+          }
+        }
+      }
+    } catch (e) {
+      console.warn("Storage check failed", e);
+    }
+
+    if (foundRavi || localStorage.getItem('shield_username') === 'officer_shield' || !localStorage.getItem('shield_username')) {
+      localStorage.setItem('shield_username', 'Sukumar');
+      localStorage.setItem('shield_role', 'INVESTIGATOR');
+      const profileObj = {
+        name: "Sukumar",
+        role: "OFFICER_SHIELD",
+        designation: "INVESTIGATOR"
+      };
+      localStorage.setItem('shield_profile', JSON.stringify(profileObj));
+      sessionStorage.setItem('shield_profile', JSON.stringify(profileObj));
+    }
+
     if (token) {
       fetchUser();
     } else {
