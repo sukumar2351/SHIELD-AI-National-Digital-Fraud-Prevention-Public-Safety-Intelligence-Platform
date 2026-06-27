@@ -82,7 +82,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
         {dropdownOpen && (
           <>
             <div className="fixed inset-0 z-40" onClick={() => setDropdownOpen(false)}></div>
-            <div className="absolute right-4 top-12 w-56 rounded-xl bg-gray-950 border border-blue-500/20 shadow-2xl z-50 p-2 font-mono text-xs divide-y divide-blue-500/10 backdrop-blur-xl bg-opacity-95">
+            <div className="absolute right-4 top-12 w-56 rounded-2xl glass-panel border border-white/10 shadow-2xl z-50 p-2 font-mono text-xs divide-y divide-blue-500/10">
               <div className="p-3 text-left">
                 <p className="text-white font-medium truncate">{fullName}</p>
                 <span className="mt-1.5 inline-block px-2 py-0.5 rounded bg-blue-500/10 border border-blue-500/30 text-blue-400 text-[8px] font-bold uppercase tracking-wider">

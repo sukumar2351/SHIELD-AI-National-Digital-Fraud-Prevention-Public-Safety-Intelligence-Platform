@@ -4,14 +4,12 @@
 
 @layer base {
   body {
-    background-color: #020617;
+    background-color: #050913;
     background-image: 
-      radial-gradient(at 0% 0%, rgba(9, 23, 48, 0.45) 0px, transparent 50%),
-      radial-gradient(at 50% 0%, rgba(2, 6, 23, 0.95) 0px, transparent 65%),
-      radial-gradient(at 100% 0%, rgba(10, 15, 30, 0.35) 0px, transparent 50%),
-      linear-gradient(rgba(18, 25, 41, 0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(18, 25, 41, 0.05) 1px, transparent 1px);
-    background-size: 100% 100%, 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+      radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.12) 0px, transparent 50%),
+      radial-gradient(at 50% 0%, rgba(14, 22, 40, 0.95) 0px, transparent 65%),
+      radial-gradient(at 100% 0%, rgba(34, 211, 238, 0.08) 0px, transparent 50%);
+    background-size: 100% 100%, 100% 100%, 100% 100%;
     font-family: 'Outfit', 'Inter', system-ui, -apple-system, sans-serif;
     position: relative;
     overflow-x: hidden;
@@ -23,56 +21,87 @@
     height: 6px;
   }
   ::-webkit-scrollbar-track {
-    background: #020617;
+    background: #050913;
   }
   ::-webkit-scrollbar-thumb {
-    background: #0f172a;
+    background: rgba(255, 255, 255, 0.05);
     border-radius: 4px;
-    border: 1px solid rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.08);
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #1e40af;
-    border-color: rgba(59, 130, 246, 0.3);
+    background: rgba(59, 130, 246, 0.25);
+    border-color: rgba(59, 130, 246, 0.4);
   }
 }
 
 /* Glassmorphism Styles */
 .glass-panel {
-  background: rgba(4, 9, 24, 0.65);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(59, 130, 246, 0.15);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.45);
+  background: rgba(14, 22, 40, 0.45) !important;
+  backdrop-filter: blur(18px) !important;
+  -webkit-backdrop-filter: blur(18px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.35) !important;
+  border-radius: 18px !important;
   position: relative;
   overflow: hidden;
 }
 
+/* Specific resets for layouts to align glass design */
+header {
+  background: rgba(14, 22, 40, 0.45) !important;
+  backdrop-filter: blur(18px) !important;
+  -webkit-backdrop-filter: blur(18px) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+}
+
+@media (min-width: 1024px) {
+  aside {
+    background: rgba(14, 22, 40, 0.45) !important;
+    backdrop-filter: blur(18px) !important;
+    -webkit-backdrop-filter: blur(18px) !important;
+    border-radius: 18px !important;
+    margin: 16px;
+    height: calc(100vh - 7rem) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  }
+}
+
 .glass-panel-critical {
-  background: rgba(20, 6, 6, 0.65);
-  backdrop-filter: blur(14px);
-  border: 1px solid rgba(239, 68, 68, 0.25);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.55);
+  background: rgba(20, 6, 6, 0.45) !important;
+  backdrop-filter: blur(18px) !important;
+  border: 1px solid rgba(239, 68, 68, 0.25) !important;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.45) !important;
+  border-radius: 18px !important;
 }
 
 .glass-panel-warning {
-  background: rgba(20, 15, 6, 0.65);
-  backdrop-filter: blur(14px);
-  border: 1px solid rgba(245, 158, 11, 0.22);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.48);
+  background: rgba(20, 15, 6, 0.45) !important;
+  backdrop-filter: blur(18px) !important;
+  border: 1px solid rgba(245, 158, 11, 0.22) !important;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4) !important;
+  border-radius: 18px !important;
 }
 
 .glass-card {
-  background: rgba(15, 23, 42, 0.35);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(14, 22, 40, 0.45) !important;
+  backdrop-filter: blur(18px) !important;
+  -webkit-backdrop-filter: blur(18px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 18px !important;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25) !important;
   transition: all 0.25s ease-in-out;
   position: relative;
   overflow: hidden;
 }
 
 .glass-card:hover {
-  background: rgba(15, 23, 42, 0.55);
-  border-color: rgba(0, 210, 255, 0.35);
-  box-shadow: 0 0 20px rgba(0, 210, 255, 0.12);
+  background: rgba(14, 22, 40, 0.6) !important;
+  border-color: rgba(0, 210, 255, 0.35) !important;
+  box-shadow: 0 0 20px rgba(0, 210, 255, 0.12) !important;
+  transform: translateY(-2px);
 }
 
 /* Grid Matrix scanning */
