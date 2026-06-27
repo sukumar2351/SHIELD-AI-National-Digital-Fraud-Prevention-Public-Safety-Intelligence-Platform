@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Shield, Radio, LogOut, User } from 'lucide-react';
+import { Shield, Radio, LogOut, User, Menu } from 'lucide-react';
 import { api } from '../services/api';
 
 interface NavbarProps {
@@ -34,15 +34,25 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
   };
 
   return (
-    <header className="h-16 border-b border-blue-500/20 bg-gray-950/70 backdrop-blur-md px-6 flex items-center justify-between sticky top-0 z-50">
-      {/* Brand Logo */}
-      <div className="flex items-center gap-3 cursor-pointer" onClick={() => onNavigate('/dashboard')}>
-        <div className="w-10 h-10 rounded-lg bg-blue-500/10 border border-blue-500/30 flex items-center justify-center p-2 text-blue-400 shadow-blue-500/20 shadow-md">
-          <Shield className="w-6 h-6 animate-pulse" />
-        </div>
-        <div>
-          <span className="font-bold text-white text-lg tracking-wider font-mono">SHIELD <span className="text-blue-500">AI</span></span>
-          <p className="text-[10px] text-gray-400 tracking-widest font-mono uppercase">National Intelligence Operating System</p>
+    <header className="h-16 border-b border-blue-500/20 bg-gray-950/70 backdrop-blur-md px-4 md:px-6 flex items-center justify-between sticky top-0 z-50">
+      {/* Brand Logo & Hamburger */}
+      <div className="flex items-center gap-3">
+        <button 
+          onClick={() => window.dispatchEvent(new Event('toggle-sidebar'))}
+          className="lg:hidden p-2 text-gray-400 hover:text-white transition-colors focus:outline-none"
+          title="Toggle Navigation"
+        >
+          <Menu className="w-5 h-5" />
+        </button>
+
+        <div className="flex items-center gap-3 cursor-pointer" onClick={() => onNavigate('/dashboard')}>
+          <div className="w-10 h-10 rounded-lg bg-blue-500/10 border border-blue-500/30 flex items-center justify-center p-2 text-blue-400 shadow-blue-500/20 shadow-md">
+            <Shield className="w-6 h-6 animate-pulse" />
+          </div>
+          <div className="hidden sm:block">
+            <span className="font-bold text-white text-lg tracking-wider font-mono">SHIELD <span className="text-blue-500">AI</span></span>
+            <p className="text-[10px] text-gray-400 tracking-widest font-mono uppercase">National Intelligence Operating System</p>
+          </div>
         </div>
       </div>
 

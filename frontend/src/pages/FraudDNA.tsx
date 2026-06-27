@@ -249,7 +249,7 @@ export const FraudDNA: React.FC = () => {
       <div className="flex flex-1 overflow-hidden">
         <Sidebar currentPath={currentPath} onNavigate={handleNavigate} />
 
-        <main className="flex-1 bg-gray-950/60 p-8 overflow-y-auto space-y-8 h-[calc(100vh-4rem)]">
+        <main className="flex-1 bg-gray-950/60 p-4 md:p-8 overflow-y-auto space-y-8 h-[calc(100vh-4rem)]">
           {/* Header Section */}
           <div className="flex flex-col md:flex-row md:items-center justify-between border-b border-blue-500/10 pb-6 gap-4">
             <div>
