@@ -36,13 +36,29 @@
 
   /* ─── PRINT / PAGE SETUP ─────────────────────────────── */
   @page {
-    size: A4;
-    margin: 0;
+    size: A4 portrait;
+    margin: 12mm;
   }
   @media print {
-    body { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
-    .page { page-break-after: always; page-break-inside: avoid; }
-    .no-break { page-break-inside: avoid; }
+    body {
+      background: #fff;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .page {
+      width: 186mm;
+      height: 273mm;
+      page-break-after: always !important;
+      page-break-inside: avoid !important;
+      break-after: page !important;
+      margin: 0 !important;
+      box-shadow: none !important;
+      border: 4px double var(--blue-primary) !important;
+    }
+    .no-break {
+      page-break-inside: avoid !important;
+      break-inside: avoid !important;
+    }
   }
 
   /* ─── SHARED PAGE WRAPPER ────────────────────────────── */
@@ -54,7 +70,9 @@
     display: flex;
     flex-direction: column;
     background: #fff;
-    margin: 0 auto;
+    margin: 10mm auto;
+    border: 4px double var(--blue-primary);
+    box-shadow: 0 0 15px rgba(0,0,0,0.15);
   }
 
   /* ─── DARK PAGES ─────────────────────────────────────── */
@@ -70,7 +88,7 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 30mm 20mm;
+    padding: 16mm 15mm;
     position: relative;
   }
   .cover-grid {
@@ -91,7 +109,7 @@
   .corner-br { bottom:-20mm; right:-20mm; background: radial-gradient(circle,#00d4ff,transparent 70%); }
 
   .shield-logo {
-    width: 40mm; height: 40mm; margin: 0 auto 6mm;
+    width: 32mm; height: 32mm; margin: 0 auto 4mm;
     background: linear-gradient(135deg,#1e90ff,#0050ff);
     clip-path: polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
     display: flex; align-items: center; justify-content: center;
@@ -108,11 +126,11 @@
     text-transform: uppercase;
     color: var(--blue-bright);
     display: inline-block;
-    margin-bottom: 6mm;
+    margin-bottom: 4mm;
   }
   .cover h1 {
     font-family: 'Rajdhani', sans-serif;
-    font-size: 38pt;
+    font-size: 32pt;
     font-weight: 900;
     background: linear-gradient(90deg,#fff,#1e90ff,#00d4ff);
     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
@@ -121,33 +139,33 @@
     text-shadow: none;
   }
   .cover-sub {
-    font-size: 13pt;
+    font-size: 12pt;
     color: var(--blue-bright);
     font-weight: 600;
     letter-spacing: 1px;
-    margin-bottom: 8mm;
+    margin-bottom: 5mm;
   }
   .cover-divider {
     width: 60mm; height: 2px;
     background: linear-gradient(90deg,transparent,#1e90ff,#00d4ff,transparent);
-    margin: 5mm auto;
+    margin: 3mm auto;
   }
   .cover-hackathon {
     background: linear-gradient(135deg,rgba(245,158,11,.2),rgba(251,191,36,.1));
     border: 1px solid rgba(245,158,11,.5);
     border-radius: 12px;
-    padding: 5mm 12mm;
+    padding: 4mm 10mm;
     display: inline-block;
-    margin: 4mm 0;
+    margin: 2mm 0;
   }
   .cover-hackathon .ht { font-size: 9pt; color: var(--gold-light); letter-spacing: 2px; text-transform: uppercase; }
   .cover-hackathon .hn { font-family:'Rajdhani',sans-serif; font-size: 18pt; font-weight:700; color: #fff; }
   .cover-team-box {
-    margin-top: 10mm;
+    margin-top: 5mm;
     background: rgba(255,255,255,.04);
     border: 1px solid var(--border);
     border-radius: 14px;
-    padding: 6mm 14mm;
+    padding: 4.5mm 12mm;
     display: inline-block;
     text-align: left;
   }
@@ -159,7 +177,7 @@
   /* ─── STANDARD CONTENT PAGES ─────────────────────────── */
   .page-header {
     background: linear-gradient(90deg,#020817,#0a1628,#0f2044);
-    padding: 4mm 12mm;
+    padding: 3mm 10mm;
     display: flex; align-items: center; justify-content: space-between;
     border-bottom: 2px solid var(--blue-primary);
   }
@@ -175,7 +193,7 @@
 
   .page-footer {
     background: #020817;
-    padding: 3mm 12mm;
+    padding: 2mm 10mm;
     display: flex; align-items: center; justify-content: space-between;
     border-top: 1px solid var(--border);
     margin-top: auto;
@@ -184,7 +202,7 @@
   .page-footer .pf-right { font-size: 8pt; color: var(--blue-primary); font-weight:600; }
 
   .page-body {
-    padding: 8mm 14mm 6mm;
+    padding: 6mm 10mm 4mm;
     flex: 1;
     background: #fff;
     color: #1e293b;
@@ -193,36 +211,36 @@
   /* ─── TYPOGRAPHY ─────────────────────────────────────── */
   h2.section-title {
     font-family: 'Rajdhani', sans-serif;
-    font-size: 22pt;
+    font-size: 19pt;
     font-weight: 800;
     color: #020817;
     border-left: 5px solid var(--blue-primary);
-    padding-left: 5mm;
-    margin-bottom: 5mm;
+    padding-left: 4mm;
+    margin-bottom: 3.5mm;
     line-height: 1.2;
   }
   h3.sub-title {
     font-family: 'Rajdhani', sans-serif;
-    font-size: 14pt;
+    font-size: 13pt;
     font-weight: 700;
     color: #0f2044;
-    margin: 5mm 0 2mm;
+    margin: 4mm 0 1.5mm;
     display: flex; align-items: center; gap: 6px;
   }
   h3.sub-title::before {
     content: ''; display: inline-block;
-    width: 14px; height: 14px;
+    width: 12px; height: 12px;
     background: linear-gradient(135deg,#1e90ff,#00d4ff);
     border-radius: 3px;
     flex-shrink: 0;
   }
   h4.mini-title {
-    font-size: 11pt; font-weight:700; color: #1e3a5f;
-    margin: 4mm 0 1.5mm;
-    padding-bottom: 1mm;
+    font-size: 10.5pt; font-weight:700; color: #1e3a5f;
+    margin: 3mm 0 1mm;
+    padding-bottom: 0.5mm;
     border-bottom: 1px solid #e2e8f0;
   }
-  p { margin-bottom: 3mm; text-align: justify; color: #334155; }
+  p { margin-bottom: 2mm; text-align: justify; color: #334155; }
 
   /* ─── CALLOUT BOX ────────────────────────────────────── */
   .callout {
@@ -230,8 +248,8 @@
     border: 1px solid rgba(30,144,255,.25);
     border-left: 4px solid var(--blue-primary);
     border-radius: 8px;
-    padding: 4mm 6mm;
-    margin: 4mm 0;
+    padding: 3mm 5mm;
+    margin: 3mm 0;
   }
   .callout-gold {
     background: rgba(245,158,11,.07);
@@ -249,7 +267,7 @@
   /* ─── TABLES ─────────────────────────────────────────── */
   table {
     width: 100%; border-collapse: collapse;
-    margin: 4mm 0; font-size: 9.5pt;
+    margin: 3mm 0; font-size: 9.5pt;
   }
   thead tr {
     background: linear-gradient(90deg,#0a1628,#1e3a5f);
@@ -279,7 +297,7 @@
   /* ─── METRICS ROW ────────────────────────────────────── */
   .metrics-row {
     display: grid; grid-template-columns: repeat(4,1fr); gap: 4mm;
-    margin: 4mm 0;
+    margin: 3mm 0;
   }
   .metric-card {
     background: linear-gradient(135deg,#020817,#0a1628);
@@ -294,7 +312,7 @@
   /* ─── FEATURE GRID ───────────────────────────────────── */
   .feature-grid {
     display: grid; grid-template-columns: 1fr 1fr; gap: 4mm;
-    margin: 4mm 0;
+    margin: 3mm 0;
   }
   .feature-item {
     background: #f8fafd;
@@ -311,8 +329,8 @@
     background: linear-gradient(160deg,#020817,#0a1628);
     border: 1px solid var(--border);
     border-radius: 12px;
-    padding: 6mm 8mm;
-    margin: 4mm 0;
+    padding: 4mm 6mm;
+    margin: 3mm 0;
     color: #fff;
   }
   .arch-row {
@@ -341,7 +359,7 @@
   /* ─── WORKFLOW ───────────────────────────────────────── */
   .workflow {
     display: flex; align-items: center; gap: 2mm;
-    flex-wrap: wrap; margin: 4mm 0;
+    flex-wrap: wrap; margin: 3mm 0;
   }
   .wf-step {
     background: linear-gradient(135deg,#0a1628,#0f2044);
@@ -370,7 +388,7 @@
 
   /* ─── ER DIAGRAM ─────────────────────────────────────── */
   .er-grid {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; margin:4mm 0;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; margin:3mm 0;
   }
   .er-entity {
     background: #f0f6ff;
@@ -397,8 +415,8 @@
     background: #f8fafd;
     border: 1px solid #e2ecf8;
     border-radius: 12px;
-    padding: 5mm 6mm;
-    margin: 4mm 0;
+    padding: 4mm 5mm;
+    margin: 3mm 0;
   }
   .module-card .mc-header {
     display:flex; align-items:center; gap:4mm;
@@ -421,7 +439,7 @@
     border: 1px solid var(--border);
     border-radius: 12px;
     overflow: hidden;
-    margin: 4mm 0;
+    margin: 3mm 0;
     box-shadow: 0 8px 40px rgba(0,0,0,.4);
   }
   .sm-bar {
@@ -599,7 +617,9 @@
   <div class="cover-corner corner-tl"></div>
   <div class="cover-corner corner-br"></div>
 
-  <div class="shield-logo">🛡</div>
+  <div class="shield-logo">
+    <svg viewBox="0 0 24 24" width="40" height="40" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+  </div>
   <div class="cover-badge">National Fraud Intelligence System</div>
   <h1>SHIELD AI</h1>
   <div class="cover-sub">National Fraud Intelligence Operating System</div>
@@ -614,20 +634,20 @@
 
   <div class="cover-hackathon">
     <div class="ht">Submitted To</div>
-    <div class="hn">⚡ ET AI Hackathon 2.0</div>
+    <div class="hn">ET AI Hackathon 2.0</div>
   </div>
 
   <br/>
 
   <div class="cover-team-box">
-    <div class="tl">Team Information</div>
-    <div class="tn">⚡ sukumarkarnam4</div>
+    <div class="tl">TEAM INFORMATION</div>
+    <div class="tn">Sukumarkarnam4</div>
     <div class="tm">
-      👤 Sukumar — Lead Developer &amp; AI Architect<br/>
-      👤 Shaik Mujeeb Basha — Backend &amp; Data Engineering<br/>
-      👤 Bondada Tejendra — Frontend &amp; UX Design
+      Sukumar Karanam &mdash; Lead Developer &amp; AI Architect<br/>
+      Shaik Mujeeb Basha &mdash; Backend &amp; Data Engineering<br/>
+      Bondada Tejendra &mdash; Frontend &amp; UX Design
     </div>
-    <div class="cname">🏛 Nalanda degree collegre | Computer Science Department</div>
+    <div class="cname">Nalanda Degree College | Computer Science Department</div>
   </div>
 
   <div style="margin-top:6mm;color:#94a3b8;font-size:8pt;letter-spacing:1px;">
@@ -640,12 +660,14 @@
 <!-- ═══════════════════════════════════════════════════════ -->
 <div class="page page-dark">
   <div class="page-header">
-    <div class="ph-logo">🛡 SHIELD AI</div>
+    <div class="ph-logo">SHIELD AI</div>
     <div class="ph-section">Certificate of Authenticity</div>
   </div>
   <div class="page-body" style="background:linear-gradient(160deg,#020817,#0a1628);color:#e2e8f0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16mm 20mm;">
     <div style="border:2px solid rgba(30,144,255,.4);border-radius:16px;padding:12mm 16mm;text-align:center;max-width:150mm;background:rgba(255,255,255,.03);">
-      <div style="font-size:22pt;margin-bottom:4mm;">🏅</div>
+      <div style="margin-bottom:4mm;">
+      <svg viewBox="0 0 24 24" width="48" height="48" stroke="#00d4ff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 4px;"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+    </div>
       <div style="font-family:'Rajdhani',sans-serif;font-size:14pt;font-weight:700;color:#94a3b8;letter-spacing:3px;text-transform:uppercase;margin-bottom:3mm;">Certificate of Authenticity</div>
       <div style="font-family:'Rajdhani',sans-serif;font-size:24pt;font-weight:900;background:linear-gradient(90deg,#1e90ff,#00d4ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:4mm;">SHIELD AI</div>
       <p style="color:#94a3b8;font-size:10pt;line-height:1.8;margin-bottom:5mm;">
@@ -686,7 +708,7 @@
 <!-- ═══════════════════════════════════════════════════════ -->
 <div class="page">
   <div class="page-header">
-    <div class="ph-logo">🛡 SHIELD AI</div>
+    <div class="ph-logo">SHIELD AI</div>
     <div class="ph-section">Acknowledgement</div>
   </div>
   <div class="page-body">
@@ -739,7 +761,7 @@
 <!-- ═══════════════════════════════════════════════════════ -->
 <div class="page">
   <div class="page-header">
-    <div class="ph-logo">🛡 SHIELD AI</div>
+    <div class="ph-logo">SHIELD AI</div>
     <div class="ph-section">Table of Contents</div>
   </div>
   <div class="page-body">
@@ -791,43 +813,43 @@
 <!-- ═══════════════════════════════════════════════════════ -->
 <div class="page">
   <div class="page-header">
-    <div class="ph-logo">🛡 SHIELD AI</div>
+    <div class="ph-logo">SHIELD AI</div>
     <div class="ph-section">Live Project Links</div>
   </div>
   <div class="page-body">
-    <h2 class="section-title">Live Project Links</h2>
+    <h2 class="section-title">LIVE PROJECT LINKS</h2>
     <p>
-      The SHIELD AI platform is deployed across serverless staging environments. The table below provides public access points, API endpoints, interactive documentation hubs, and the underlying version control repository:
+      Judges can directly access the live deployed application, core backend services, and interactive API documentation using the links in the table below. These resources are hosted on cloud environments and are fully optimized for real-time evaluation.
     </p>
     
-    <table style="margin-top: 6mm; margin-bottom: 6mm;">
+    <table style="margin-top: 5mm; margin-bottom: 5mm; border: 1px solid var(--border);">
       <thead>
         <tr>
-          <th style="width: 40%;">Resource</th>
-          <th style="width: 60%;">URL</th>
+          <th style="width: 40%; border: 1px solid var(--border); padding: 2.5mm 3.5mm;">Resource</th>
+          <th style="width: 60%; border: 1px solid var(--border); padding: 2.5mm 3.5mm;">URL</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td><span class="td-badge">01</span> Frontend Application</td>
-          <td><a href="https://frontend-smoky-psi-23.vercel.app" target="_blank" style="color: #1e90ff; text-decoration: none; font-weight: 600;">https://frontend-smoky-psi-23.vercel.app</a></td>
+          <td style="border: 1px solid var(--border); padding: 2mm 3.5mm;"><span class="td-badge">01</span> Live Demo (Frontend)</td>
+          <td style="border: 1px solid var(--border); padding: 2mm 3.5mm;"><a href="https://frontend-smoky-psi-23.vercel.app" target="_blank" style="color: #1e90ff; text-decoration: none; font-weight: 600;">https://frontend-smoky-psi-23.vercel.app</a></td>
         </tr>
         <tr>
-          <td><span class="td-badge">02</span> Backend API</td>
-          <td><a href="https://backend-gray-alpha-78.vercel.app" target="_blank" style="color: #1e90ff; text-decoration: none; font-weight: 600;">https://backend-gray-alpha-78.vercel.app</a></td>
+          <td style="border: 1px solid var(--border); padding: 2mm 3.5mm;"><span class="td-badge">02</span> Core API (Backend)</td>
+          <td style="border: 1px solid var(--border); padding: 2mm 3.5mm;"><a href="https://backend-gray-alpha-78.vercel.app" target="_blank" style="color: #1e90ff; text-decoration: none; font-weight: 600;">https://backend-gray-alpha-78.vercel.app</a></td>
         </tr>
         <tr>
-          <td><span class="td-badge">03</span> Swagger API Documentation</td>
-          <td><a href="https://backend-gray-alpha-78.vercel.app/docs" target="_blank" style="color: #1e90ff; text-decoration: none; font-weight: 600;">https://backend-gray-alpha-78.vercel.app/docs</a></td>
+          <td style="border: 1px solid var(--border); padding: 2mm 3.5mm;"><span class="td-badge">03</span> Swagger API Documentation</td>
+          <td style="border: 1px solid var(--border); padding: 2mm 3.5mm;"><a href="https://backend-gray-alpha-78.vercel.app/docs" target="_blank" style="color: #1e90ff; text-decoration: none; font-weight: 600;">https://backend-gray-alpha-78.vercel.app/docs</a></td>
         </tr>
         <tr>
-          <td><span class="td-badge">04</span> GitHub Repository</td>
-          <td><a href="https://github.com/sukumar2351/SHIELD-AI-National-Digital-Fraud-Prevention-Public-Safety-Intelligence-Platform" target="_blank" style="color: #1e90ff; text-decoration: none; font-weight: 600;">https://github.com/sukumar2351/SHIELD-AI-National-Digital-Fraud-Prevention-Public-Safety-Intelligence-Platform</a></td>
+          <td style="border: 1px solid var(--border); padding: 2mm 3.5mm;"><span class="td-badge">04</span> GitHub Repository</td>
+          <td style="border: 1px solid var(--border); padding: 2mm 3.5mm;"><a href="https://github.com/sukumar2351/SHIELD-AI-National-Digital-Fraud-Prevention-Public-Safety-Intelligence-Platform" target="_blank" style="color: #1e90ff; text-decoration: none; font-weight: 600;">https://github.com/sukumar2351/SHIELD-AI-National-Digital-Fraud-Prevention-Public-Safety-Intelligence-Platform</a></td>
         </tr>
       </tbody>
     </table>
 
-    <div class="callout callout-green" style="margin-top: 8mm;">
+    <div class="callout callout-green" style="margin-top: 6mm;">
       <strong>Jury Deployment Note:</strong> The backend core operates on a Vercel-managed Python serverless runtime, utilizing an ephemeral, auto-initializing database instance mapped to <code>/tmp</code>. All dashboards, spatial maps, and analysis metrics compile in real-time from the database.
     </div>
   </div>
@@ -842,7 +864,7 @@
 <!-- ═══════════════════════════════════════════════════════ -->
 <div class="page">
   <div class="page-header">
-    <div class="ph-logo">🛡 SHIELD AI</div>
+    <div class="ph-logo">SHIELD AI</div>
     <div class="ph-section">Executive Summary &amp; Abstract</div>
   </div>
   <div class="page-body">
@@ -901,7 +923,7 @@
 <!-- ═══════════════════════════════════════════════════════ -->
 <div class="page">
   <div class="page-header">
-    <div class="ph-logo">🛡 SHIELD AI</div>
+    <div class="ph-logo">SHIELD AI</div>
     <div class="ph-section">Problem Statement &amp; Existing Limitations</div>
   </div>
   <div class="page-body">
@@ -940,27 +962,27 @@
     <h2 class="section-title">Existing System Limitations</h2>
     <div class="feature-grid">
       <div class="feature-item">
-        <div class="fi-title">🔴 Siloed Data Architecture</div>
+        <div class="fi-title">Siloed Data Architecture</div>
         <div class="fi-desc">NCRP complaints are not cross-referenced with financial transaction data, telecom records, or social media intelligence. Each case is treated in isolation.</div>
       </div>
       <div class="feature-item">
-        <div class="fi-title">🔴 No Graph Intelligence</div>
+        <div class="fi-title">No Graph Intelligence</div>
         <div class="fi-desc">Current systems cannot map entity relationships. Connecting 100 complaints to a single fraud ring requires months of manual investigation.</div>
       </div>
       <div class="feature-item">
-        <div class="fi-title">🔴 Manual FIR Generation</div>
+        <div class="fi-title">Manual FIR Generation</div>
         <div class="fi-desc">FIR preparation is entirely manual, often incomplete, and lacks standardized AI-assisted recommendations for evidence collection or case prioritization.</div>
       </div>
       <div class="feature-item">
-        <div class="fi-title">🔴 No Public-Facing Intelligence</div>
+        <div class="fi-title">No Public-Facing Intelligence</div>
         <div class="fi-desc">Citizens have no real-time tool to verify a UPI ID, phone number, or payment request before transacting — creating a massive preventable-fraud gap.</div>
       </div>
       <div class="feature-item">
-        <div class="fi-title">🔴 Geospatial Blindness</div>
+        <div class="fi-title">Geospatial Blindness</div>
         <div class="fi-desc">No visual geographic intelligence system exists for law enforcement to identify district-level fraud hotspots or allocate investigative resources efficiently.</div>
       </div>
       <div class="feature-item">
-        <div class="fi-title">🔴 Pattern Recognition Gap</div>
+        <div class="fi-title">Pattern Recognition Gap</div>
         <div class="fi-desc">Without Fraud DNA profiling, fraud family classification, or behavioral fingerprinting, syndicate evolution goes undetected until victims are already impacted.</div>
       </div>
     </div>
@@ -976,7 +998,7 @@
 <!-- ═══════════════════════════════════════════════════════ -->
 <div class="page">
   <div class="page-header">
-    <div class="ph-logo">🛡 SHIELD AI</div>
+    <div class="ph-logo">SHIELD AI</div>
     <div class="ph-section">Proposed Solution &amp; Objectives</div>
   </div>
   <div class="page-body">
@@ -991,12 +1013,12 @@
     <table>
       <thead><tr><th>Pillar</th><th>Module</th><th>Key Capability</th></tr></thead>
       <tbody>
-        <tr><td class="td-highlight">📊 Intelligence Command</td><td>Executive Dashboard</td><td>Unified national threat overview with real-time KPIs and alerts</td></tr>
-        <tr><td class="td-highlight">🧬 Fraud DNA Engine</td><td>Fraud DNA Module</td><td>Multi-dimensional fingerprinting of fraud families across 6 DNA vectors</td></tr>
-        <tr><td class="td-highlight">🕸 Network Graph</td><td>Fraud Graph</td><td>Interactive entity-relationship mapping of fraud networks using React Flow</td></tr>
-        <tr><td class="td-highlight">⚖️ Case Intelligence</td><td>Investigation Center</td><td>AI-powered case management with automated FIR generation</td></tr>
-        <tr><td class="td-highlight">🗺 Geo Intelligence</td><td>Geospatial Dashboard</td><td>State &amp; district threat heatmaps with fraud family geographic spread</td></tr>
-        <tr><td class="td-highlight">🤖 Citizen Defense</td><td>Citizen Copilot</td><td>Multilingual conversational AI for real-time public fraud prevention</td></tr>
+        <tr><td class="td-highlight"> Intelligence Command</td><td>Executive Dashboard</td><td>Unified national threat overview with real-time KPIs and alerts</td></tr>
+        <tr><td class="td-highlight"> Fraud DNA Engine</td><td>Fraud DNA Module</td><td>Multi-dimensional fingerprinting of fraud families across 6 DNA vectors</td></tr>
+        <tr><td class="td-highlight"> Network Graph</td><td>Fraud Graph</td><td>Interactive entity-relationship mapping of fraud networks using React Flow</td></tr>
+        <tr><td class="td-highlight"> Case Intelligence</td><td>Investigation Center</td><td>AI-powered case management with automated FIR generation</td></tr>
+        <tr><td class="td-highlight"> Geo Intelligence</td><td>Geospatial Dashboard</td><td>State &amp; district threat heatmaps with fraud family geographic spread</td></tr>
+        <tr><td class="td-highlight"> Citizen Defense</td><td>Citizen Copilot</td><td>Multilingual conversational AI for real-time public fraud prevention</td></tr>
       </tbody>
     </table>
 
@@ -1005,27 +1027,27 @@
     <h2 class="section-title">Objectives</h2>
     <div class="feature-grid">
       <div class="feature-item">
-        <div class="fi-title">🎯 Objective 1 — Unified Intelligence Hub</div>
+        <div class="fi-title"> Objective 1 — Unified Intelligence Hub</div>
         <div class="fi-desc">Build a single, real-time intelligence platform for national fraud monitoring, eliminating data silos between law enforcement agencies.</div>
       </div>
       <div class="feature-item">
-        <div class="fi-title">🎯 Objective 2 — Fraud DNA Profiling</div>
+        <div class="fi-title"> Objective 2 — Fraud DNA Profiling</div>
         <div class="fi-desc">Develop a six-vector DNA fingerprinting system to identify, classify, and track fraud families across communication, financial, behavioral, geo, language, and temporal patterns.</div>
       </div>
       <div class="feature-item">
-        <div class="fi-title">🎯 Objective 3 — Network Graph Intelligence</div>
+        <div class="fi-title"> Objective 3 — Network Graph Intelligence</div>
         <div class="fi-desc">Create an interactive graph visualization engine that maps relationships between fraudsters, victims, UPI IDs, phone numbers, and bank accounts.</div>
       </div>
       <div class="feature-item">
-        <div class="fi-title">🎯 Objective 4 — Investigation Automation</div>
+        <div class="fi-title"> Objective 4 — Investigation Automation</div>
         <div class="fi-desc">Automate case prioritization, timeline reconstruction, and FIR generation using AI, reducing investigation time from weeks to hours.</div>
       </div>
       <div class="feature-item">
-        <div class="fi-title">🎯 Objective 5 — Geospatial Threat Mapping</div>
+        <div class="fi-title"> Objective 5 — Geospatial Threat Mapping</div>
         <div class="fi-desc">Deliver district-level geographic intelligence allowing law enforcement to allocate resources based on real-time threat hotspot data.</div>
       </div>
       <div class="feature-item">
-        <div class="fi-title">🎯 Objective 6 — Citizen Empowerment</div>
+        <div class="fi-title"> Objective 6 — Citizen Empowerment</div>
         <div class="fi-desc">Deploy a multilingual AI copilot accessible to every Indian citizen for real-time fraud detection, SHIELD scoring, and preventive safety guidance.</div>
       </div>
     </div>
@@ -1041,7 +1063,7 @@
 <!-- ═══════════════════════════════════════════════════════ -->
 <div class="page">
   <div class="page-header">
-    <div class="ph-logo">🛡 SHIELD AI</div>
+    <div class="ph-logo">SHIELD AI</div>
     <div class="ph-section">Key Innovations</div>
   </div>
   <div class="page-body">
@@ -1055,11 +1077,11 @@
     <table>
       <thead><tr><th>DNA Vector</th><th>What It Profiles</th><th>Example Signals</th></tr></thead>
       <tbody>
-        <tr><td class="td-highlight">🧬 Communication DNA</td><td>How fraudsters contact victims</td><td>WhatsApp, Telegram, SMS, cold calls, social media</td></tr>
-        <tr><td class="td-highlight">💰 Financial DNA</td><td>Money movement patterns</td><td>UPI networks, mule chains, crypto mixers, layering</td></tr>
-        <tr><td class="td-highlight">🧠 Behavioral DNA</td><td>Psychological manipulation tactics</td><td>Urgency triggers, authority impersonation, romantic grooming</td></tr>
-        <tr><td class="td-highlight">🌍 Geo DNA</td><td>Geographic concentration &amp; spread</td><td>Origin states, target corridors, jurisdictional spread</td></tr>
-        <tr><td class="td-highlight">🗣 Language DNA</td><td>Linguistic fingerprints</td><td>Script used, dialect patterns, loanword frequency</td></tr>
+        <tr><td class="td-highlight"> Communication DNA</td><td>How fraudsters contact victims</td><td>WhatsApp, Telegram, SMS, cold calls, social media</td></tr>
+        <tr><td class="td-highlight"> Financial DNA</td><td>Money movement patterns</td><td>UPI networks, mule chains, crypto mixers, layering</td></tr>
+        <tr><td class="td-highlight"> Behavioral DNA</td><td>Psychological manipulation tactics</td><td>Urgency triggers, authority impersonation, romantic grooming</td></tr>
+        <tr><td class="td-highlight"> Geo DNA</td><td>Geographic concentration &amp; spread</td><td>Origin states, target corridors, jurisdictional spread</td></tr>
+        <tr><td class="td-highlight"> Language DNA</td><td>Linguistic fingerprints</td><td>Script used, dialect patterns, loanword frequency</td></tr>
         <tr><td class="td-highlight">⏱ Temporal DNA</td><td>Time-based attack patterns</td><td>Peak hours, monthly cycles, festive season spikes</td></tr>
       </tbody>
     </table>
@@ -1098,7 +1120,7 @@
 <!-- ═══════════════════════════════════════════════════════ -->
 <div class="page">
   <div class="page-header">
-    <div class="ph-logo">🛡 SHIELD AI</div>
+    <div class="ph-logo">SHIELD AI</div>
     <div class="ph-section">Technology Stack</div>
   </div>
   <div class="page-body">
@@ -1111,39 +1133,39 @@
         </tr>
       </thead>
       <tbody>
-        <tr><td class="td-highlight">🖥 Frontend UI</td><td><strong>React + TypeScript</strong></td><td>18.3 / 5.x</td><td>Component-based SPA with full type safety</td></tr>
-        <tr><td class="td-highlight">🎨 Styling</td><td><strong>Tailwind CSS</strong></td><td>3.x</td><td>Utility-first responsive dark-theme design system</td></tr>
-        <tr><td class="td-highlight">📊 Data Visualization</td><td><strong>Recharts</strong></td><td>2.x</td><td>Pie, Bar, Area, and Trend analytics charts</td></tr>
-        <tr><td class="td-highlight">🕸 Graph Engine</td><td><strong>React Flow</strong></td><td>11.x</td><td>Interactive fraud network node-link visualization</td></tr>
-        <tr><td class="td-highlight">⚡ Backend API</td><td><strong>FastAPI (Python)</strong></td><td>0.110+</td><td>High-performance async REST API server</td></tr>
-        <tr><td class="td-highlight">🗄 Database</td><td><strong>PostgreSQL / SQLite</strong></td><td>16 / 3.x</td><td>Relational data storage with ORM layer</td></tr>
-        <tr><td class="td-highlight">🔄 ORM</td><td><strong>SQLAlchemy + Alembic</strong></td><td>2.x</td><td>Database abstraction and migration management</td></tr>
-        <tr><td class="td-highlight">🔐 Authentication</td><td><strong>JWT (python-jose)</strong></td><td>3.3+</td><td>Stateless token-based auth with RBAC</td></tr>
-        <tr><td class="td-highlight">🐳 Containerization</td><td><strong>Docker + Compose</strong></td><td>24 / 2.x</td><td>Multi-service container orchestration</td></tr>
-        <tr><td class="td-highlight">🌐 Web Server</td><td><strong>Nginx</strong></td><td>1.25</td><td>Reverse proxy and static file serving</td></tr>
-        <tr><td class="td-highlight">🔧 Build Tool</td><td><strong>Vite</strong></td><td>5.x</td><td>Lightning-fast frontend development server</td></tr>
-        <tr><td class="td-highlight">🤖 AI Layer</td><td><strong>Custom Fraud DNA Engine</strong></td><td>1.0</td><td>Multi-vector fraud profiling and scoring engine</td></tr>
-        <tr><td class="td-highlight">🗺 Mapping</td><td><strong>Geospatial Analytics API</strong></td><td>1.0</td><td>District &amp; state-level threat mapping</td></tr>
-        <tr><td class="td-highlight">🔔 Icons</td><td><strong>Lucide React</strong></td><td>0.344</td><td>Consistent, accessible UI iconography</td></tr>
+        <tr><td class="td-highlight"> Frontend UI</td><td><strong>React + TypeScript</strong></td><td>18.3 / 5.x</td><td>Component-based SPA with full type safety</td></tr>
+        <tr><td class="td-highlight"> Styling</td><td><strong>Tailwind CSS</strong></td><td>3.x</td><td>Utility-first responsive dark-theme design system</td></tr>
+        <tr><td class="td-highlight"> Data Visualization</td><td><strong>Recharts</strong></td><td>2.x</td><td>Pie, Bar, Area, and Trend analytics charts</td></tr>
+        <tr><td class="td-highlight"> Graph Engine</td><td><strong>React Flow</strong></td><td>11.x</td><td>Interactive fraud network node-link visualization</td></tr>
+        <tr><td class="td-highlight">Backend API</td><td><strong>FastAPI (Python)</strong></td><td>0.110+</td><td>High-performance async REST API server</td></tr>
+        <tr><td class="td-highlight"> Database</td><td><strong>PostgreSQL / SQLite</strong></td><td>16 / 3.x</td><td>Relational data storage with ORM layer</td></tr>
+        <tr><td class="td-highlight"> ORM</td><td><strong>SQLAlchemy + Alembic</strong></td><td>2.x</td><td>Database abstraction and migration management</td></tr>
+        <tr><td class="td-highlight"> Authentication</td><td><strong>JWT (python-jose)</strong></td><td>3.3+</td><td>Stateless token-based auth with RBAC</td></tr>
+        <tr><td class="td-highlight"> Containerization</td><td><strong>Docker + Compose</strong></td><td>24 / 2.x</td><td>Multi-service container orchestration</td></tr>
+        <tr><td class="td-highlight"> Web Server</td><td><strong>Nginx</strong></td><td>1.25</td><td>Reverse proxy and static file serving</td></tr>
+        <tr><td class="td-highlight"> Build Tool</td><td><strong>Vite</strong></td><td>5.x</td><td>Lightning-fast frontend development server</td></tr>
+        <tr><td class="td-highlight"> AI Layer</td><td><strong>Custom Fraud DNA Engine</strong></td><td>1.0</td><td>Multi-vector fraud profiling and scoring engine</td></tr>
+        <tr><td class="td-highlight"> Mapping</td><td><strong>Geospatial Analytics API</strong></td><td>1.0</td><td>District &amp; state-level threat mapping</td></tr>
+        <tr><td class="td-highlight"> Icons</td><td><strong>Lucide React</strong></td><td>0.344</td><td>Consistent, accessible UI iconography</td></tr>
       </tbody>
     </table>
 
     <h3 class="sub-title">Development Tools</h3>
     <div class="feature-grid">
       <div class="feature-item">
-        <div class="fi-title">🛠 Version Control</div>
+        <div class="fi-title"> Version Control</div>
         <div class="fi-desc">Git + GitHub for source control with structured branching strategy and PR-based code review.</div>
       </div>
       <div class="feature-item">
-        <div class="fi-title">🧪 Testing Framework</div>
+        <div class="fi-title"> Testing Framework</div>
         <div class="fi-desc">Pytest for backend API testing across all four core service modules — DNA, Geospatial, Graph, and Investigation.</div>
       </div>
       <div class="feature-item">
-        <div class="fi-title">📋 API Documentation</div>
+        <div class="fi-title"> API Documentation</div>
         <div class="fi-desc">Auto-generated Swagger UI and ReDoc documentation via FastAPI's built-in OpenAPI integration.</div>
       </div>
       <div class="feature-item">
-        <div class="fi-title">🔐 Security Tooling</div>
+        <div class="fi-title"> Security Tooling</div>
         <div class="fi-desc">Passlib + Bcrypt for password hashing; python-jose for JWT signing; CORS middleware for origin control.</div>
       </div>
     </div>
@@ -1163,7 +1185,7 @@
 <!-- ═══════════════════════════════════════════════════════ -->
 <div class="page">
   <div class="page-header">
-    <div class="ph-logo">🛡 SHIELD AI</div>
+    <div class="ph-logo">SHIELD AI</div>
     <div class="ph-section">System Architecture</div>
   </div>
   <div class="page-body">
@@ -1174,34 +1196,34 @@
       <div class="arch-label">[ PRESENTATION LAYER ]</div>
       <div class="arch-row">
         <div class="arch-box">
-          <div class="ab-icon">📊</div>
+          <div class="ab-icon"></div>
           <div class="ab-title">Dashboard</div>
           <div class="ab-tech">React + Recharts</div>
         </div>
         <div class="arch-box">
-          <div class="ab-icon">🕸</div>
+          <div class="ab-icon"></div>
           <div class="ab-title">Fraud Graph</div>
           <div class="ab-tech">React Flow</div>
         </div>
         <div class="arch-box">
-          <div class="ab-icon">🤖</div>
+          <div class="ab-icon"></div>
           <div class="ab-title">Citizen Copilot</div>
           <div class="ab-tech">React + Chat UI</div>
         </div>
       </div>
       <div class="arch-row">
         <div class="arch-box">
-          <div class="ab-icon">🧬</div>
+          <div class="ab-icon"></div>
           <div class="ab-title">Fraud DNA</div>
           <div class="ab-tech">Recharts + Tables</div>
         </div>
         <div class="arch-box">
-          <div class="ab-icon">⚖️</div>
+          <div class="ab-icon"></div>
           <div class="ab-title">Investigation</div>
           <div class="ab-tech">React + Download</div>
         </div>
         <div class="arch-box">
-          <div class="ab-icon">🗺</div>
+          <div class="ab-icon"></div>
           <div class="ab-title">Geospatial Map</div>
           <div class="ab-tech">React + Heat Layer</div>
         </div>
@@ -1212,17 +1234,17 @@
       <div class="arch-label">[ APPLICATION LAYER ]</div>
       <div class="arch-row">
         <div class="arch-box">
-          <div class="ab-icon">⚡</div>
+          <div class="ab-icon"></div>
           <div class="ab-title">FastAPI Server</div>
           <div class="ab-tech">Python 3.10+ / Uvicorn</div>
         </div>
         <div class="arch-box">
-          <div class="ab-icon">🔐</div>
+          <div class="ab-icon"></div>
           <div class="ab-title">Auth Service</div>
           <div class="ab-tech">JWT + RBAC</div>
         </div>
         <div class="arch-box">
-          <div class="ab-icon">🧬</div>
+          <div class="ab-icon"></div>
           <div class="ab-title">AI Engine</div>
           <div class="ab-tech">DNA + Graph + Copilot</div>
         </div>
@@ -1231,17 +1253,17 @@
       <div class="arch-label">[ DATA LAYER ]</div>
       <div class="arch-row">
         <div class="arch-box">
-          <div class="ab-icon">🗄</div>
+          <div class="ab-icon"></div>
           <div class="ab-title">PostgreSQL DB</div>
           <div class="ab-tech">SQLAlchemy ORM</div>
         </div>
         <div class="arch-box">
-          <div class="ab-icon">🔄</div>
+          <div class="ab-icon"></div>
           <div class="ab-title">Alembic Migrations</div>
           <div class="ab-tech">Schema versioning</div>
         </div>
         <div class="arch-box">
-          <div class="ab-icon">🌱</div>
+          <div class="ab-icon"></div>
           <div class="ab-title">Seed Engine</div>
           <div class="ab-tech">Realistic data gen</div>
         </div>
@@ -1270,7 +1292,7 @@ docker-compose up --build<br/>
 <!-- ═══════════════════════════════════════════════════════ -->
 <div class="page">
   <div class="page-header">
-    <div class="ph-logo">🛡 SHIELD AI</div>
+    <div class="ph-logo">SHIELD AI</div>
     <div class="ph-section">Workflow Diagram</div>
   </div>
   <div class="page-body">
@@ -1278,19 +1300,19 @@ docker-compose up --build<br/>
     <p>SHIELD AI's end-to-end intelligence workflow converts a raw citizen complaint into actionable law enforcement intelligence through seven automated stages:</p>
 
     <div class="workflow">
-      <div class="wf-step"><div class="ws-num">01</div><div class="ws-label">📝 Citizen Complaint</div></div>
+      <div class="wf-step"><div class="ws-num">01</div><div class="ws-label"> Citizen Complaint</div></div>
       <div class="wf-arrow">→</div>
-      <div class="wf-step"><div class="ws-num">02</div><div class="ws-label">🤖 AI Processing</div></div>
+      <div class="wf-step"><div class="ws-num">02</div><div class="ws-label"> AI Processing</div></div>
       <div class="wf-arrow">→</div>
-      <div class="wf-step"><div class="ws-num">03</div><div class="ws-label">🧬 Fraud DNA</div></div>
+      <div class="wf-step"><div class="ws-num">03</div><div class="ws-label"> Fraud DNA</div></div>
       <div class="wf-arrow">→</div>
-      <div class="wf-step"><div class="ws-num">04</div><div class="ws-label">🕸 Graph Intel</div></div>
+      <div class="wf-step"><div class="ws-num">04</div><div class="ws-label"> Graph Intel</div></div>
       <div class="wf-arrow">→</div>
-      <div class="wf-step"><div class="ws-num">05</div><div class="ws-label">⚖️ Investigation</div></div>
+      <div class="wf-step"><div class="ws-num">05</div><div class="ws-label"> Investigation</div></div>
       <div class="wf-arrow">→</div>
-      <div class="wf-step"><div class="ws-num">06</div><div class="ws-label">🌐 Threat Intel</div></div>
+      <div class="wf-step"><div class="ws-num">06</div><div class="ws-label"> Threat Intel</div></div>
       <div class="wf-arrow">→</div>
-      <div class="wf-step"><div class="ws-num">07</div><div class="ws-label">✅ Output</div></div>
+      <div class="wf-step"><div class="ws-num">07</div><div class="ws-label"> Output</div></div>
     </div>
 
     <table style="margin-top:5mm;">
@@ -1355,7 +1377,7 @@ docker-compose up --build<br/>
 <!-- ═══════════════════════════════════════════════════════ -->
 <div class="page">
   <div class="page-header">
-    <div class="ph-logo">🛡 SHIELD AI</div>
+    <div class="ph-logo">SHIELD AI</div>
     <div class="ph-section">Database Design &amp; ER Diagram</div>
   </div>
   <div class="page-body">
@@ -1364,7 +1386,7 @@ docker-compose up --build<br/>
 
     <div class="er-grid">
       <div class="er-entity">
-        <div class="ee-head">👤 Users</div>
+        <div class="ee-head"> Users</div>
         <div class="ee-field"><span>id</span><span class="ee-pk">PK · INT</span></div>
         <div class="ee-field"><span>username</span><span>VARCHAR(100)</span></div>
         <div class="ee-field"><span>email</span><span>VARCHAR(200)</span></div>
@@ -1374,7 +1396,7 @@ docker-compose up --build<br/>
         <div class="ee-field"><span>created_at</span><span>TIMESTAMP</span></div>
       </div>
       <div class="er-entity">
-        <div class="ee-head">📝 Complaints</div>
+        <div class="ee-head"> Complaints</div>
         <div class="ee-field"><span>id</span><span class="ee-pk">PK · INT</span></div>
         <div class="ee-field"><span>user_id</span><span class="ee-fk">FK → Users</span></div>
         <div class="ee-field"><span>fraud_type</span><span>VARCHAR(100)</span></div>
@@ -1387,7 +1409,7 @@ docker-compose up --build<br/>
         <div class="ee-field"><span>created_at</span><span>TIMESTAMP</span></div>
       </div>
       <div class="er-entity">
-        <div class="ee-head">🧬 FraudFamilies</div>
+        <div class="ee-head"> FraudFamilies</div>
         <div class="ee-field"><span>id</span><span class="ee-pk">PK · INT</span></div>
         <div class="ee-field"><span>name</span><span>VARCHAR(150)</span></div>
         <div class="ee-field"><span>code_name</span><span>VARCHAR(50)</span></div>
@@ -1400,7 +1422,7 @@ docker-compose up --build<br/>
         <div class="ee-field"><span>language_dna_score</span><span>FLOAT</span></div>
       </div>
       <div class="er-entity">
-        <div class="ee-head">⚖️ Investigations</div>
+        <div class="ee-head"> Investigations</div>
         <div class="ee-field"><span>id</span><span class="ee-pk">PK · INT</span></div>
         <div class="ee-field"><span>complaint_id</span><span class="ee-fk">FK → Complaints</span></div>
         <div class="ee-field"><span>assigned_to</span><span class="ee-fk">FK → Users</span></div>
@@ -1411,7 +1433,7 @@ docker-compose up --build<br/>
         <div class="ee-field"><span>created_at</span><span>TIMESTAMP</span></div>
       </div>
       <div class="er-entity">
-        <div class="ee-head">🕸 FraudEntities</div>
+        <div class="ee-head"> FraudEntities</div>
         <div class="ee-field"><span>id</span><span class="ee-pk">PK · INT</span></div>
         <div class="ee-field"><span>family_id</span><span class="ee-fk">FK → FraudFamilies</span></div>
         <div class="ee-field"><span>entity_type</span><span>ENUM(fraudster/victim/upi/phone/account)</span></div>
@@ -1421,7 +1443,7 @@ docker-compose up --build<br/>
         <div class="ee-field"><span>first_seen</span><span>TIMESTAMP</span></div>
       </div>
       <div class="er-entity">
-        <div class="ee-head">🗺 GeospatialThreats</div>
+        <div class="ee-head"> GeospatialThreats</div>
         <div class="ee-field"><span>id</span><span class="ee-pk">PK · INT</span></div>
         <div class="ee-field"><span>state</span><span>VARCHAR(50)</span></div>
         <div class="ee-field"><span>district</span><span>VARCHAR(50)</span></div>
@@ -1449,7 +1471,7 @@ docker-compose up --build<br/>
 <!-- ═══════════════════════════════════════════════════════ -->
 <div class="page">
   <div class="page-header">
-    <div class="ph-logo">🛡 SHIELD AI</div>
+    <div class="ph-logo">SHIELD AI</div>
     <div class="ph-section">Module Description</div>
   </div>
   <div class="page-body">
@@ -1458,7 +1480,7 @@ docker-compose up --build<br/>
 
     <div class="module-card">
       <div class="mc-header">
-        <div class="mc-icon">📊</div>
+        <div class="mc-icon"></div>
         <div><div class="mc-title">Executive Command Center Dashboard</div><div class="mc-route">Route: /dashboard</div></div>
       </div>
       <p class="small">The operational nerve center providing unified, real-time national threat intelligence. Aggregates KPIs from all modules into a single command view with threat alerts, distribution charts, and risk rankings. Built with Recharts for analytics visualization and polling-based live data refresh.</p>
@@ -1466,7 +1488,7 @@ docker-compose up --build<br/>
 
     <div class="module-card">
       <div class="mc-header">
-        <div class="mc-icon" style="background:linear-gradient(135deg,#7c3aed,#4f46e5);">🧬</div>
+        <div class="mc-icon" style="background:linear-gradient(135deg,#7c3aed,#4f46e5);"></div>
         <div><div class="mc-title">Fraud DNA Genome Intelligence System</div><div class="mc-route">Route: /dna</div></div>
       </div>
       <p class="small">The AI backbone of SHIELD AI. Profiles every fraud family across six DNA vectors using a proprietary scoring engine. Provides interactive DNA distribution charts, behavioral pattern analysis, temporal trend visualization, and the Fraud Family Directory with confidence scores.</p>
@@ -1474,7 +1496,7 @@ docker-compose up --build<br/>
 
     <div class="module-card">
       <div class="mc-header">
-        <div class="mc-icon" style="background:linear-gradient(135deg,#0891b2,#0e7490);">🕸</div>
+        <div class="mc-icon" style="background:linear-gradient(135deg,#0891b2,#0e7490);"></div>
         <div><div class="mc-title">Fraud Entity Graph Intelligence Engine</div><div class="mc-route">Route: /graph</div></div>
       </div>
       <p class="small">An interactive React Flow-based network visualization engine mapping relationships between fraudsters, victims, UPI IDs, phone numbers, and bank accounts. Supports zoom, pan, node expansion, cluster filtering, entity search, and connection highlighting for deep network forensics.</p>
@@ -1482,7 +1504,7 @@ docker-compose up --build<br/>
 
     <div class="module-card">
       <div class="mc-header">
-        <div class="mc-icon" style="background:linear-gradient(135deg,#059669,#047857);">⚖️</div>
+        <div class="mc-icon" style="background:linear-gradient(135deg,#059669,#047857);"></div>
         <div><div class="mc-title">Investigation Operations Desk</div><div class="mc-route">Route: /investigations</div></div>
       </div>
       <p class="small">A complete case management system for law enforcement officers. Provides a prioritized investigation queue with threat level badges, full case timelines, AI-generated investigation briefs, and one-click FIR generation with preview and download capabilities.</p>
@@ -1490,7 +1512,7 @@ docker-compose up --build<br/>
 
     <div class="module-card">
       <div class="mc-header">
-        <div class="mc-icon" style="background:linear-gradient(135deg,#b45309,#92400e);">🗺</div>
+        <div class="mc-icon" style="background:linear-gradient(135deg,#b45309,#92400e);"></div>
         <div><div class="mc-title">National Threat Intelligence Map</div><div class="mc-route">Route: /geospatial</div></div>
       </div>
       <p class="small">A geographic intelligence layer providing state and district-level fraud hotspot visualization, heatmap rendering, fraud family geographic spread analysis, and risk ranking tables for 36 Indian states and UTs. Enables data-driven resource allocation for cybercrime units.</p>
@@ -1498,7 +1520,7 @@ docker-compose up --build<br/>
 
     <div class="module-card">
       <div class="mc-header">
-        <div class="mc-icon" style="background:linear-gradient(135deg,#be185d,#9d174d);">🤖</div>
+        <div class="mc-icon" style="background:linear-gradient(135deg,#be185d,#9d174d);"></div>
         <div><div class="mc-title">Citizen Copilot — AI Safety Assistant</div><div class="mc-route">Route: /copilot</div></div>
       </div>
       <p class="small">A multilingual conversational AI interface for the Indian public. Citizens can submit phone numbers, UPI IDs, or describe suspicious activity to receive an instant SHIELD Safety Score, threat level assessment, fraud family awareness briefing, and preventive safety guidance in their preferred language.</p>
@@ -1515,7 +1537,7 @@ docker-compose up --build<br/>
 <!-- ═══════════════════════════════════════════════════════ -->
 <div class="page">
   <div class="page-header">
-    <div class="ph-logo">🛡 SHIELD AI</div>
+    <div class="ph-logo">SHIELD AI</div>
     <div class="ph-section">Executive Command Center Dashboard</div>
   </div>
   <div class="page-body">
@@ -1532,7 +1554,7 @@ docker-compose up --build<br/>
       </div>
       <div class="sm-body">
         <div class="sm-title-row">
-          <div class="sm-page-title">🛡 SHIELD AI — Command Center</div>
+          <div class="sm-page-title">SHIELD AI — Command Center</div>
           <div style="font-size:7pt;color:#64748b;">LIVE • Updated 2s ago</div>
         </div>
         <div class="sm-metrics">
@@ -1544,7 +1566,7 @@ docker-compose up --build<br/>
         </div>
         <div class="sm-chart-row">
           <div class="sm-chart">
-            <div class="sm-chart-label">📊 High Risk States</div>
+            <div class="sm-chart-label"> High Risk States</div>
             <div class="sm-bar-row">
               <div class="sm-bbar" style="height:16mm;"></div>
               <div class="sm-bbar" style="height:14mm;"></div>
@@ -1555,7 +1577,7 @@ docker-compose up --build<br/>
             </div>
           </div>
           <div class="sm-chart">
-            <div class="sm-chart-label">🍩 Fraud Family Distribution</div>
+            <div class="sm-chart-label"> Fraud Family Distribution</div>
             <div class="sm-pie"></div>
           </div>
         </div>
@@ -1568,9 +1590,9 @@ docker-compose up --build<br/>
       <tbody>
         <tr><td>Total Complaints Registered</td><td>12,847</td><td>+18.4%</td><td><span class="td-badge td-badge-red">⬆ Critical</span></td></tr>
         <tr><td>Active Fraud Families Tracked</td><td>34</td><td>+2 new families</td><td><span class="td-badge td-badge-red">⬆ Rising</span></td></tr>
-        <tr><td>SHIELD National Threat Score</td><td>78.4 / 100</td><td>+5.1 pts</td><td><span class="td-badge td-badge-red">⚠ High</span></td></tr>
-        <tr><td>Active Investigations</td><td>1,293</td><td>+234 new</td><td><span class="td-badge">⚡ Active</span></td></tr>
-        <tr><td>FIRs Auto-Generated</td><td>847</td><td>+127 this week</td><td><span class="td-badge td-badge-green">✓ Active</span></td></tr>
+        <tr><td>SHIELD National Threat Score</td><td>78.4 / 100</td><td>+5.1 pts</td><td><span class="td-badge td-badge-red">WARNING: High</span></td></tr>
+        <tr><td>Active Investigations</td><td>1,293</td><td>+234 new</td><td><span class="td-badge">Active</span></td></tr>
+        <tr><td>FIRs Auto-Generated</td><td>847</td><td>+127 this week</td><td><span class="td-badge td-badge-green"> Active</span></td></tr>
         <tr><td>Fraud Amount Tracked</td><td>₹4,820 Cr</td><td>+₹340 Cr</td><td><span class="td-badge td-badge-red">⬆ Rising</span></td></tr>
       </tbody>
     </table>
@@ -1578,19 +1600,19 @@ docker-compose up --build<br/>
     <h3 class="sub-title">Intelligence Insights &amp; Benefits</h3>
     <div class="feature-grid">
       <div class="feature-item">
-        <div class="fi-title">🔴 Live Threat Alerts</div>
+        <div class="fi-title"> Live Threat Alerts</div>
         <div class="fi-desc">Real-time threat alert feed with severity color-coding. Officers see emerging threats within seconds of detection by the AI engine.</div>
       </div>
       <div class="feature-item">
-        <div class="fi-title">📍 High-Risk District Rankings</div>
+        <div class="fi-title"> High-Risk District Rankings</div>
         <div class="fi-desc">Auto-ranked list of the top 10 most impacted districts, enabling targeted resource deployment by cybercrime units.</div>
       </div>
       <div class="feature-item">
-        <div class="fi-title">📈 Threat Timeline</div>
+        <div class="fi-title"> Threat Timeline</div>
         <div class="fi-desc">30-day trend visualization of fraud complaint volume, helping policymakers identify seasonal patterns and syndicate escalations.</div>
       </div>
       <div class="feature-item">
-        <div class="fi-title">🍩 Fraud Family Distribution</div>
+        <div class="fi-title"> Fraud Family Distribution</div>
         <div class="fi-desc">Pie chart showing percentage contribution of each active fraud family, enabling strategic prioritization of enforcement resources.</div>
       </div>
     </div>
@@ -1606,7 +1628,7 @@ docker-compose up --build<br/>
 <!-- ═══════════════════════════════════════════════════════ -->
 <div class="page">
   <div class="page-header">
-    <div class="ph-logo">🛡 SHIELD AI</div>
+    <div class="ph-logo">SHIELD AI</div>
     <div class="ph-section">Fraud DNA Genome Index</div>
   </div>
   <div class="page-body">
@@ -1623,7 +1645,7 @@ docker-compose up --build<br/>
       </div>
       <div class="sm-body">
         <div class="sm-title-row">
-          <div class="sm-page-title">🧬 Fraud DNA Genome Index</div>
+          <div class="sm-page-title"> Fraud DNA Genome Index</div>
         </div>
         <div style="margin-bottom:3mm;">
           <div class="sm-chart-label">DNA Vector Analysis — Pig Butchering Syndicate</div>
@@ -1690,7 +1712,7 @@ docker-compose up --build<br/>
 <!-- ═══════════════════════════════════════════════════════ -->
 <div class="page">
   <div class="page-header">
-    <div class="ph-logo">🛡 SHIELD AI</div>
+    <div class="ph-logo">SHIELD AI</div>
     <div class="ph-section">DNA Analytics Engine</div>
   </div>
   <div class="page-body">
@@ -1707,7 +1729,7 @@ docker-compose up --build<br/>
       <div class="sm-body">
         <div class="sm-chart-row">
           <div class="sm-chart">
-            <div class="sm-chart-label">📈 Fraud Trend (12 months)</div>
+            <div class="sm-chart-label"> Fraud Trend (12 months)</div>
             <div class="sm-bar-row">
               <div class="sm-bbar" style="height:8mm;background:linear-gradient(to top,#7c3aed,#4f46e5);"></div>
               <div class="sm-bbar" style="height:10mm;background:linear-gradient(to top,#7c3aed,#4f46e5);"></div>
@@ -1720,7 +1742,7 @@ docker-compose up --build<br/>
             </div>
           </div>
           <div class="sm-chart">
-            <div class="sm-chart-label">🌐 Geo DNA Spread</div>
+            <div class="sm-chart-label"> Geo DNA Spread</div>
             <div class="sm-bar-row">
               <div class="sm-bbar" style="height:16mm;"></div>
               <div class="sm-bbar" style="height:13mm;"></div>
@@ -1737,19 +1759,19 @@ docker-compose up --build<br/>
     <h3 class="sub-title">Chart Analytics Explained</h3>
     <div class="feature-grid">
       <div class="feature-item">
-        <div class="fi-title">📊 Pie Chart — DNA Vector Distribution</div>
+        <div class="fi-title"> Pie Chart — DNA Vector Distribution</div>
         <div class="fi-desc">Shows the relative weight of each DNA vector (Communication, Financial, Behavioral, Geo, Language, Temporal) across all active fraud families. Analysts use this to identify the dominant operational mode of current fraud syndicates — e.g., if Financial DNA dominates, syndicates are scaling money movement operations.</div>
       </div>
       <div class="feature-item">
-        <div class="fi-title">📊 Bar Chart — Communication DNA</div>
+        <div class="fi-title"> Bar Chart — Communication DNA</div>
         <div class="fi-desc">Compares communication channel preferences across fraud families. Channels analyzed include WhatsApp, Telegram, SMS, email, phone calls, and social media ads. Enables targeting of specific communication vectors for interception operations.</div>
       </div>
       <div class="feature-item">
-        <div class="fi-title">📈 Area Chart — Fraud Trend Timeline</div>
+        <div class="fi-title"> Area Chart — Fraud Trend Timeline</div>
         <div class="fi-desc">12-month rolling area chart of complaint volume per fraud family. Seasonality analysis reveals festive-season spikes, lockdown-driven surges, and cyclical patterns that predict future escalation periods.</div>
       </div>
       <div class="feature-item">
-        <div class="fi-title">📊 Grouped Bar — Financial DNA</div>
+        <div class="fi-title"> Grouped Bar — Financial DNA</div>
         <div class="fi-desc">Multi-series bar chart comparing financial DNA vectors: average transaction size, mule chain depth, layering frequency, and withdrawal speed across fraud families. Identifies which syndicates pose the highest financial risk per incident.</div>
       </div>
     </div>
@@ -1773,7 +1795,7 @@ docker-compose up --build<br/>
 <!-- ═══════════════════════════════════════════════════════ -->
 <div class="page">
   <div class="page-header">
-    <div class="ph-logo">🛡 SHIELD AI</div>
+    <div class="ph-logo">SHIELD AI</div>
     <div class="ph-section">Fraud Entity Graph Intelligence</div>
   </div>
   <div class="page-body">
@@ -1790,7 +1812,7 @@ docker-compose up --build<br/>
       </div>
       <div class="sm-body">
         <div class="sm-title-row">
-          <div class="sm-page-title">🕸 Fraud Network — Pig Butchering Syndicate</div>
+          <div class="sm-page-title"> Fraud Network — Pig Butchering Syndicate</div>
         </div>
         <div class="sm-node-row">
           <div class="sm-node fraud">PB-01<br/>Syndicate</div>
@@ -1822,19 +1844,19 @@ docker-compose up --build<br/>
     <h3 class="sub-title">Network Mapping Capabilities</h3>
     <div class="feature-grid">
       <div class="feature-item">
-        <div class="fi-title">🔍 Entity Search</div>
+        <div class="fi-title"> Entity Search</div>
         <div class="fi-desc">Search any phone number, UPI ID, or bank account across the entire fraud network graph. Returns all connected nodes and relationship paths instantly.</div>
       </div>
       <div class="feature-item">
-        <div class="fi-title">🔗 Node Expansion</div>
+        <div class="fi-title"> Node Expansion</div>
         <div class="fi-desc">Click any node to expand its connections. Recursively reveals hidden relationships up to 4 degrees of separation from the selected entity.</div>
       </div>
       <div class="feature-item">
-        <div class="fi-title">🎯 Cluster Filtering</div>
+        <div class="fi-title"> Cluster Filtering</div>
         <div class="fi-desc">Filter the graph by fraud family cluster to isolate specific syndicate networks. Color-coded clusters make visual identification immediate.</div>
       </div>
       <div class="feature-item">
-        <div class="fi-title">💡 Connection Highlighting</div>
+        <div class="fi-title"> Connection Highlighting</div>
         <div class="fi-desc">Select any entity to highlight all its direct and indirect connections. Non-connected nodes are dimmed, bringing the active network into sharp focus.</div>
       </div>
     </div>
@@ -1866,7 +1888,7 @@ docker-compose up --build<br/>
 <!-- ═══════════════════════════════════════════════════════ -->
 <div class="page">
   <div class="page-header">
-    <div class="ph-logo">🛡 SHIELD AI</div>
+    <div class="ph-logo">SHIELD AI</div>
     <div class="ph-section">Investigation Operations Desk</div>
   </div>
   <div class="page-body">
@@ -1883,7 +1905,7 @@ docker-compose up --build<br/>
       </div>
       <div class="sm-body">
         <div class="sm-title-row">
-          <div class="sm-page-title">⚖️ Investigation Operations Desk</div>
+          <div class="sm-page-title"> Investigation Operations Desk</div>
         </div>
         <div class="sm-list-item" style="background:rgba(239,68,68,.08);border-radius:6px;padding:2mm 3mm;margin-bottom:2mm;">
           <div>
@@ -1912,19 +1934,19 @@ docker-compose up --build<br/>
     <h3 class="sub-title">Case Management System</h3>
     <div class="feature-grid">
       <div class="feature-item">
-        <div class="fi-title">🔍 Case Search &amp; Filter</div>
+        <div class="fi-title"> Case Search &amp; Filter</div>
         <div class="fi-desc">Full-text search across all case fields. Filter by threat level (Critical, High, Medium, Low), fraud type, state, date range, and officer assignment status.</div>
       </div>
       <div class="feature-item">
-        <div class="fi-title">⚡ Priority Queue Sorting</div>
+        <div class="fi-title"> Priority Queue Sorting</div>
         <div class="fi-desc">Cases automatically sorted by composite priority score (threat level × amount lost × complaint count). Highest-impact cases surface at the top of every officer's queue.</div>
       </div>
       <div class="feature-item">
-        <div class="fi-title">📅 Investigation Timeline</div>
+        <div class="fi-title"> Investigation Timeline</div>
         <div class="fi-desc">Chronological case timeline showing every event — complaint receipt, entity extraction, DNA profiling, officer assignment, updates, and FIR generation.</div>
       </div>
       <div class="feature-item">
-        <div class="fi-title">🤖 AI Investigation Brief</div>
+        <div class="fi-title"> AI Investigation Brief</div>
         <div class="fi-desc">AI-generated investigation summary including suspect entity list, recommended evidence collection steps, jurisdictional transfer recommendations, and estimated resolution pathway.</div>
       </div>
     </div>
@@ -1957,7 +1979,7 @@ docker-compose up --build<br/>
 <!-- ═══════════════════════════════════════════════════════ -->
 <div class="page">
   <div class="page-header">
-    <div class="ph-logo">🛡 SHIELD AI</div>
+    <div class="ph-logo">SHIELD AI</div>
     <div class="ph-section">National Threat Intelligence Map</div>
   </div>
   <div class="page-body">
@@ -1974,19 +1996,19 @@ docker-compose up --build<br/>
       </div>
       <div class="sm-body">
         <div class="sm-title-row">
-          <div class="sm-page-title">🗺 National Threat Intelligence Map</div>
+          <div class="sm-page-title"> National Threat Intelligence Map</div>
         </div>
-        <div class="sm-map">🗺</div>
+        <div class="sm-map"></div>
         <div class="sm-chart-row" style="margin-top:3mm;">
           <div class="sm-chart">
-            <div class="sm-chart-label">🔴 High Risk States Ranking</div>
+            <div class="sm-chart-label"> High Risk States Ranking</div>
             <div class="sm-list-item"><span class="sli-l">Maharashtra</span><span class="sli-r">2,847 cases</span></div>
             <div class="sm-list-item"><span class="sli-l">Delhi NCR</span><span class="sli-r">2,391 cases</span></div>
             <div class="sm-list-item"><span class="sli-l">Uttar Pradesh</span><span class="sli-r">1,934 cases</span></div>
             <div class="sm-list-item"><span class="sli-l">Rajasthan</span><span class="sli-r">1,201 cases</span></div>
           </div>
           <div class="sm-chart">
-            <div class="sm-chart-label">📈 Threat Growth Trend</div>
+            <div class="sm-chart-label"> Threat Growth Trend</div>
             <div class="sm-bar-row">
               <div class="sm-bbar" style="height:6mm;"></div>
               <div class="sm-bbar" style="height:8mm;"></div>
@@ -2003,19 +2025,19 @@ docker-compose up --build<br/>
     <h3 class="sub-title">Geographic Intelligence Features</h3>
     <div class="feature-grid">
       <div class="feature-item">
-        <div class="fi-title">🔥 Heatmap Visualization</div>
+        <div class="fi-title"> Heatmap Visualization</div>
         <div class="fi-desc">Color-gradient heatmap overlaid on India's administrative map. Intensity reflects complaint density — from low (blue) to extreme (deep red). Updated in real-time as new complaints arrive.</div>
       </div>
       <div class="feature-item">
-        <div class="fi-title">📍 Threat Hotspot Pins</div>
+        <div class="fi-title"> Threat Hotspot Pins</div>
         <div class="fi-desc">Dynamic pin markers for districts exceeding risk thresholds. Click any pin to view district-level fraud statistics, dominant fraud type, and recent complaint trend.</div>
       </div>
       <div class="feature-item">
-        <div class="fi-title">🏳️ Fraud Family Spread</div>
+        <div class="fi-title"> Fraud Family Spread</div>
         <div class="fi-desc">Filter by specific fraud family to see their geographic footprint across India — origin states vs. target states, highlighting cross-state jurisdiction requirements.</div>
       </div>
       <div class="feature-item">
-        <div class="fi-title">📊 Risk Ranking Table</div>
+        <div class="fi-title"> Risk Ranking Table</div>
         <div class="fi-desc">Sortable table of all 36 Indian states and UTs ranked by composite risk score, complaint volume, amount lost, and active investigation count.</div>
       </div>
     </div>
@@ -2043,7 +2065,7 @@ docker-compose up --build<br/>
 <!-- ═══════════════════════════════════════════════════════ -->
 <div class="page">
   <div class="page-header">
-    <div class="ph-logo">🛡 SHIELD AI</div>
+    <div class="ph-logo">SHIELD AI</div>
     <div class="ph-section">Citizen Copilot — AI Safety Assistant</div>
   </div>
   <div class="page-body">
@@ -2060,15 +2082,15 @@ docker-compose up --build<br/>
       </div>
       <div class="sm-body">
         <div class="sm-title-row">
-          <div class="sm-page-title">🤖 Citizen Copilot</div>
-          <div style="font-size:7pt;color:#64748b;">🌐 EN | HI | TA | BN | TE</div>
+          <div class="sm-page-title"> Citizen Copilot</div>
+          <div style="font-size:7pt;color:#64748b;"> EN | HI | TA | BN | TE</div>
         </div>
         <div class="sm-chart-row">
           <div class="sm-chat">
             <div class="sm-msg user">Someone asked me to send ₹50 to get my prize money of ₹5 lakh. Is this safe?</div>
-            <div class="sm-msg bot">🚨 ALERT: This is a classic advance fee fraud. Pattern matches <strong>FakeReward Syndicate (FR-09)</strong>. Do NOT send any money. SHIELD Score: <strong style="color:#ef4444;">12/100 — VERY HIGH RISK</strong>.</div>
+            <div class="sm-msg bot">ALERT: This is a classic advance fee fraud. Pattern matches <strong>FakeReward Syndicate (FR-09)</strong>. Do NOT send any money. SHIELD Score: <strong style="color:#ef4444;">12/100 — VERY HIGH RISK</strong>.</div>
             <div class="sm-msg user">Check UPI ID: suspicious@xyz</div>
-            <div class="sm-msg bot">⚠️ This UPI ID appears in 47 fraud complaints. Linked to OTP Mafia Network. SHIELD Safety Score: <strong style="color:#ef4444;">8/100</strong>. Block immediately and report to cybercrime.gov.in.</div>
+            <div class="sm-msg bot">WARNING: This UPI ID appears in 47 fraud complaints. Linked to OTP Mafia Network. SHIELD Safety Score: <strong style="color:#ef4444;">8/100</strong>. Block immediately and report to cybercrime.gov.in.</div>
           </div>
           <div style="padding:3mm;text-align:center;">
             <div style="font-size:7.5pt;color:#94a3b8;margin-bottom:2mm;">SHIELD Safety Score</div>
@@ -2086,19 +2108,19 @@ docker-compose up --build<br/>
     <h3 class="sub-title">Core Capabilities</h3>
     <div class="feature-grid">
       <div class="feature-item">
-        <div class="fi-title">🔍 Real-Time Fraud Detection</div>
+        <div class="fi-title"> Real-Time Fraud Detection</div>
         <div class="fi-desc">Submit any phone number, UPI ID, bank account, or describe a suspicious interaction. The AI cross-references against live fraud entity databases and returns an instant risk verdict.</div>
       </div>
       <div class="feature-item">
-        <div class="fi-title">🌐 Multilingual Support</div>
+        <div class="fi-title"> Multilingual Support</div>
         <div class="fi-desc">Supports English, Hindi, Tamil, Bengali, and Telugu — ensuring accessibility for citizens across all of India's linguistic regions regardless of education level.</div>
       </div>
       <div class="feature-item">
-        <div class="fi-title">📊 SHIELD Safety Score</div>
+        <div class="fi-title"> SHIELD Safety Score</div>
         <div class="fi-desc">A proprietary 0–100 composite risk score synthesizing historical fraud data, entity blacklists, behavioral patterns, and real-time threat intelligence into a single actionable number.</div>
       </div>
       <div class="feature-item">
-        <div class="fi-title">🛡 Preventive Guidance</div>
+        <div class="fi-title"> Preventive Guidance</div>
         <div class="fi-desc">Personalized safety recommendations based on the specific fraud type detected — including reporting links, emergency contacts, and step-by-step recovery actions for victims.</div>
       </div>
     </div>
@@ -2122,7 +2144,7 @@ docker-compose up --build<br/>
 <!-- ═══════════════════════════════════════════════════════ -->
 <div class="page">
   <div class="page-header">
-    <div class="ph-logo">🛡 SHIELD AI</div>
+    <div class="ph-logo">SHIELD AI</div>
     <div class="ph-section">API Documentation</div>
   </div>
   <div class="page-body">
@@ -2186,14 +2208,14 @@ Content-Type: application/json
 <!-- ═══════════════════════════════════════════════════════ -->
 <div class="page">
   <div class="page-header">
-    <div class="ph-logo">🛡 SHIELD AI</div>
+    <div class="ph-logo">SHIELD AI</div>
     <div class="ph-section">Security Features</div>
   </div>
   <div class="page-body">
     <h2 class="section-title">Security Features</h2>
     <p>SHIELD AI is designed with a defense-in-depth security posture. Given the sensitive nature of fraud intelligence data and law enforcement operations, security is not an afterthought — it is embedded at every layer of the platform architecture.</p>
 
-    <h3 class="sub-title">🔐 JWT Authentication System</h3>
+    <h3 class="sub-title"> JWT Authentication System</h3>
     <p>
       All API endpoints (except the public Citizen Copilot endpoints) are protected by <strong>JSON Web Token (JWT) authentication</strong> implemented via <code>python-jose</code>. Tokens are signed using the HS256 algorithm with a configurable secret key stored in environment variables. Access tokens expire after 24 hours; refresh token rotation is supported for production deployments.
     </p>
@@ -2201,43 +2223,43 @@ Content-Type: application/json
       <strong>Token Structure:</strong> JWTs contain the user ID, role, issue timestamp, and expiry timestamp. The signature ensures token integrity — any tampering immediately invalidates the token.
     </div>
 
-    <h3 class="sub-title">👥 Role-Based Access Control (RBAC)</h3>
+    <h3 class="sub-title"> Role-Based Access Control (RBAC)</h3>
     <table>
       <thead><tr><th>Role</th><th>Permissions</th><th>Accessible Modules</th></tr></thead>
       <tbody>
-        <tr><td class="td-highlight">🔴 Admin</td><td>Full system access + user management + configuration</td><td>All modules + Admin panel</td></tr>
+        <tr><td class="td-highlight">Admin</td><td>Full system access + user management + configuration</td><td>All modules + Admin panel</td></tr>
         <tr><td class="td-highlight">🟡 Senior Analyst</td><td>Read/write on all intelligence modules, FIR generation</td><td>Dashboard, DNA, Graph, Investigation, Geospatial</td></tr>
         <tr><td class="td-highlight">🟢 Field Officer</td><td>Read investigations, update case status, download FIRs</td><td>Investigation Center, Dashboard (read-only)</td></tr>
-        <tr><td class="td-highlight">⚪ Citizen</td><td>Copilot access only, complaint submission</td><td>Citizen Copilot, Complaint Form</td></tr>
+        <tr><td class="td-highlight">Citizen</td><td>Copilot access only, complaint submission</td><td>Citizen Copilot, Complaint Form</td></tr>
       </tbody>
     </table>
 
-    <h3 class="sub-title">🔒 Password Security</h3>
+    <h3 class="sub-title"> Password Security</h3>
     <p>
       User passwords are hashed using <strong>Bcrypt</strong> via the <code>passlib</code> library with a work factor of 12. Plaintext passwords are never stored or transmitted. Password strength validation is enforced at the API layer before hashing.
     </p>
 
-    <h3 class="sub-title">📋 Audit Logging</h3>
+    <h3 class="sub-title"> Audit Logging</h3>
     <p>
       All sensitive operations — login/logout events, FIR generation, case status changes, admin actions — are recorded in a tamper-evident audit log. Audit records include the actor's user ID, role, IP address, timestamp, and action description. Audit logs are append-only and cannot be modified through the standard API.
     </p>
 
-    <h3 class="sub-title">🛡 Data Encryption &amp; Transport Security</h3>
+    <h3 class="sub-title"> Data Encryption &amp; Transport Security</h3>
     <div class="feature-grid">
       <div class="feature-item">
-        <div class="fi-title">🌐 HTTPS / TLS Enforcement</div>
+        <div class="fi-title"> HTTPS / TLS Enforcement</div>
         <div class="fi-desc">All production traffic is routed through Nginx with TLS 1.3 enforcement. HTTP requests are automatically redirected to HTTPS. HSTS headers are configured with a 1-year max-age.</div>
       </div>
       <div class="feature-item">
-        <div class="fi-title">🔐 Environment Secrets Management</div>
+        <div class="fi-title"> Environment Secrets Management</div>
         <div class="fi-desc">All secrets (JWT secret, database credentials) are stored in environment variables loaded at runtime, never hardcoded. The .env file is excluded from version control via .gitignore.</div>
       </div>
       <div class="feature-item">
-        <div class="fi-title">🚫 CORS Policy</div>
+        <div class="fi-title"> CORS Policy</div>
         <div class="fi-desc">FastAPI CORS middleware is configured with explicit origin allowlists. Cross-origin requests from untrusted domains are blocked at the API gateway level.</div>
       </div>
       <div class="feature-item">
-        <div class="fi-title">🔑 Database Access Control</div>
+        <div class="fi-title"> Database Access Control</div>
         <div class="fi-desc">Database is accessible only from within the Docker network (not exposed externally). Separate read-only credentials used for reporting queries vs. read-write credentials for transactional operations.</div>
       </div>
     </div>
@@ -2253,7 +2275,7 @@ Content-Type: application/json
 <!-- ═══════════════════════════════════════════════════════ -->
 <div class="page">
   <div class="page-header">
-    <div class="ph-logo">🛡 SHIELD AI</div>
+    <div class="ph-logo">SHIELD AI</div>
     <div class="ph-section">Innovation &amp; Uniqueness</div>
   </div>
   <div class="page-body">
@@ -2273,73 +2295,73 @@ Content-Type: application/json
       <tbody>
         <tr>
           <td>Unified National Dashboard</td>
-          <td class="cross">✗ No</td>
-          <td class="cross">✗ Siloed</td>
-          <td class="cross">✗ State-only</td>
-          <td class="check">✓ Full National</td>
+          <td class="cross"> No</td>
+          <td class="cross"> Siloed</td>
+          <td class="cross"> State-only</td>
+          <td class="check"> Full National</td>
         </tr>
         <tr>
           <td>Fraud DNA Fingerprinting</td>
-          <td class="cross">✗ None</td>
-          <td class="cross">✗ None</td>
-          <td class="cross">✗ None</td>
-          <td class="check">✓ 6-Vector DNA</td>
+          <td class="cross"> None</td>
+          <td class="cross"> None</td>
+          <td class="cross"> None</td>
+          <td class="check"> 6-Vector DNA</td>
         </tr>
         <tr>
           <td>Fraud Network Graph</td>
-          <td class="cross">✗ None</td>
-          <td class="cross">✗ Internal only</td>
-          <td class="cross">✗ Manual</td>
-          <td class="check">✓ Interactive Graph</td>
+          <td class="cross"> None</td>
+          <td class="cross"> Internal only</td>
+          <td class="cross"> Manual</td>
+          <td class="check"> Interactive Graph</td>
         </tr>
         <tr>
           <td>AI-Assisted FIR Generation</td>
-          <td class="cross">✗ Manual</td>
-          <td class="cross">✗ N/A</td>
-          <td class="cross">✗ Manual</td>
-          <td class="check">✓ Automated AI Draft</td>
+          <td class="cross"> Manual</td>
+          <td class="cross"> N/A</td>
+          <td class="cross"> Manual</td>
+          <td class="check"> Automated AI Draft</td>
         </tr>
         <tr>
           <td>Geospatial Threat Heatmap</td>
-          <td class="cross">✗ None</td>
-          <td class="cross">✗ None</td>
-          <td class="cross">✗ Limited</td>
-          <td class="check">✓ District-Level</td>
+          <td class="cross"> None</td>
+          <td class="cross"> None</td>
+          <td class="cross"> Limited</td>
+          <td class="check"> District-Level</td>
         </tr>
         <tr>
           <td>Citizen Fraud Detection AI</td>
-          <td class="cross">✗ None</td>
-          <td class="cross">✗ App-specific</td>
-          <td class="cross">✗ None</td>
-          <td class="check">✓ Multilingual Copilot</td>
+          <td class="cross"> None</td>
+          <td class="cross"> App-specific</td>
+          <td class="cross"> None</td>
+          <td class="check"> Multilingual Copilot</td>
         </tr>
         <tr>
           <td>Real-Time Threat Intelligence</td>
-          <td class="cross">✗ Batch reports</td>
-          <td class="cross">✗ T+1 reporting</td>
-          <td class="cross">✗ Weekly</td>
-          <td class="check">✓ Sub-30s refresh</td>
+          <td class="cross"> Batch reports</td>
+          <td class="cross"> T+1 reporting</td>
+          <td class="cross"> Weekly</td>
+          <td class="check"> Sub-30s refresh</td>
         </tr>
         <tr>
           <td>Open REST API Integration</td>
-          <td class="cross">✗ No public API</td>
-          <td class="cross">✗ Proprietary</td>
-          <td class="cross">✗ None</td>
-          <td class="check">✓ Full OpenAPI</td>
+          <td class="cross"> No public API</td>
+          <td class="cross"> Proprietary</td>
+          <td class="cross"> None</td>
+          <td class="check"> Full OpenAPI</td>
         </tr>
         <tr>
           <td>Fraud Family Classification</td>
-          <td class="cross">✗ None</td>
-          <td class="cross">✗ Rule-based only</td>
-          <td class="cross">✗ Manual</td>
-          <td class="check">✓ AI-Classified</td>
+          <td class="cross"> None</td>
+          <td class="cross"> Rule-based only</td>
+          <td class="cross"> Manual</td>
+          <td class="check"> AI-Classified</td>
         </tr>
         <tr>
           <td>Production Deployment Ready</td>
-          <td class="check">✓ Live</td>
-          <td class="check">✓ Live</td>
-          <td class="cross">✗ Varies</td>
-          <td class="check">✓ Docker + Cloud</td>
+          <td class="check"> Live</td>
+          <td class="check"> Live</td>
+          <td class="cross"> Varies</td>
+          <td class="check"> Docker + Cloud</td>
         </tr>
       </tbody>
     </table>
@@ -2359,7 +2381,7 @@ Content-Type: application/json
 <!-- ═══════════════════════════════════════════════════════ -->
 <div class="page">
   <div class="page-header">
-    <div class="ph-logo">🛡 SHIELD AI</div>
+    <div class="ph-logo">SHIELD AI</div>
     <div class="ph-section">Impact Analysis</div>
   </div>
   <div class="page-body">
@@ -2380,27 +2402,27 @@ Content-Type: application/json
       <thead><tr><th>Stakeholder</th><th>Current Situation</th><th>SHIELD AI Impact</th></tr></thead>
       <tbody>
         <tr>
-          <td class="td-highlight">🚔 Investigating Officers</td>
+          <td class="td-highlight"> Investigating Officers</td>
           <td>Manual complaint review; no cross-case intelligence; FIR preparation: 4–8 hrs</td>
           <td>AI investigation briefs; automated FIR drafts; real-time network intelligence. Time saved: 74%</td>
         </tr>
         <tr>
-          <td class="td-highlight">🏛 Senior Leadership</td>
+          <td class="td-highlight"> Senior Leadership</td>
           <td>No unified national threat picture; resource allocation by intuition</td>
           <td>Real-time national KPI dashboard; evidence-based resource deployment; trend forecasting</td>
         </tr>
         <tr>
-          <td class="td-highlight">🏦 Banking Sector</td>
+          <td class="td-highlight"> Banking Sector</td>
           <td>Isolated fraud detection; no network graph context; reactive blocking</td>
           <td>SHIELD API integration for mule account detection; real-time UPI risk scoring; proactive blocking</td>
         </tr>
         <tr>
-          <td class="td-highlight">🌍 Citizens</td>
+          <td class="td-highlight"> Citizens</td>
           <td>No pre-transaction fraud check tool; limited awareness; delayed complaint filing</td>
           <td>Real-time SHIELD score for any entity; multilingual safety guidance; instant complaint pre-check</td>
         </tr>
         <tr>
-          <td class="td-highlight">📊 Policymakers</td>
+          <td class="td-highlight"> Policymakers</td>
           <td>Lag-based reports; no geographic granularity; reactive policy formulation</td>
           <td>Real-time geospatial intelligence; fraud family trend data; evidence-base for legislative action</td>
         </tr>
@@ -2410,19 +2432,19 @@ Content-Type: application/json
     <h3 class="sub-title">Economic Impact Projection</h3>
     <div class="feature-grid">
       <div class="feature-item">
-        <div class="fi-title">💰 Direct Fraud Prevention</div>
+        <div class="fi-title"> Direct Fraud Prevention</div>
         <div class="fi-desc">If SHIELD AI enables even a 10% increase in case resolution rates across India's 12.3M annual complaints, the economic impact exceeds <strong>₹12,500 crore</strong> in prevented or recovered fraud losses annually.</div>
       </div>
       <div class="feature-item">
-        <div class="fi-title">⚡ Investigation Efficiency</div>
+        <div class="fi-title">Investigation Efficiency</div>
         <div class="fi-desc">With 74% reduction in FIR preparation time, 5,000 cybercrime officers across India collectively save over <strong>35 lakh man-hours annually</strong> — equivalent to 1,700 additional officers at zero cost.</div>
       </div>
       <div class="feature-item">
-        <div class="fi-title">🌐 Citizen Empowerment</div>
+        <div class="fi-title"> Citizen Empowerment</div>
         <div class="fi-desc">The Citizen Copilot targets India's 600 million smartphone users. If even 1% use it monthly to verify a suspicious contact, it potentially prevents <strong>6 lakh fraud attempts per month</strong>.</div>
       </div>
       <div class="feature-item">
-        <div class="fi-title">🏦 Banking Integration Potential</div>
+        <div class="fi-title"> Banking Integration Potential</div>
         <div class="fi-desc">Integration with India's UPI ecosystem (via NPCI API partnership) would enable real-time fraud scoring on 14 billion monthly UPI transactions, potentially detecting <strong>85-90% of mule account transactions</strong>.</div>
       </div>
     </div>
@@ -2438,7 +2460,7 @@ Content-Type: application/json
 <!-- ═══════════════════════════════════════════════════════ -->
 <div class="page">
   <div class="page-header">
-    <div class="ph-logo">🛡 SHIELD AI</div>
+    <div class="ph-logo">SHIELD AI</div>
     <div class="ph-section">Future Scope</div>
   </div>
   <div class="page-body">
@@ -2448,7 +2470,7 @@ Content-Type: application/json
     <div class="future-item">
       <div class="future-num">1</div>
       <div class="future-content">
-        <div class="ft">🎭 Deepfake Detection Module</div>
+        <div class="ft"> Deepfake Detection Module</div>
         <div class="fd">Integration of computer vision models to detect AI-generated deepfake video/audio used in impersonation fraud — particularly relevant for rising "Fake Video Call KYC" scams where fraudsters impersonate bank officials, government officers, or family members via AI-generated video. Detection accuracy target: >93%.</div>
       </div>
     </div>
@@ -2456,7 +2478,7 @@ Content-Type: application/json
     <div class="future-item">
       <div class="future-num">2</div>
       <div class="future-content">
-        <div class="ft">🎙 Voice Scam Detection Engine</div>
+        <div class="ft"> Voice Scam Detection Engine</div>
         <div class="fd">Real-time voice call analysis using speech pattern recognition and speaker verification to detect AI voice cloning and robocall fraud. Integration with telecom operators (Jio, Airtel, Vi) to flag suspicious call patterns before the victim is victimized. Prototype targets: <3-second real-time analysis latency.</div>
       </div>
     </div>
@@ -2464,7 +2486,7 @@ Content-Type: application/json
     <div class="future-item">
       <div class="future-num">3</div>
       <div class="future-content">
-        <div class="ft">🏦 Banking Integration API Layer</div>
+        <div class="ft"> Banking Integration API Layer</div>
         <div class="fd">Direct API integration with NPCI, RBI's Fraud Registry, and top 20 Indian banks to enable real-time transaction risk scoring, mule account flagging, and cross-bank fraud pattern sharing — all under the regulatory framework established by RBI Master Directions on Digital Payments fraud.</div>
       </div>
     </div>
@@ -2472,7 +2494,7 @@ Content-Type: application/json
     <div class="future-item">
       <div class="future-num">4</div>
       <div class="future-content">
-        <div class="ft">📡 Telecom Intelligence Integration</div>
+        <div class="ft"> Telecom Intelligence Integration</div>
         <div class="fd">Partnership with DoT's TRAI and telecom operators to access SIM card activation patterns, IMEI blacklists, and call record metadata (CDR analytics). This will enable SHIELD AI to identify SIM Box gangs, spoofed number patterns, and OTP interception operations at the network level before they reach victims.</div>
       </div>
     </div>
@@ -2480,7 +2502,7 @@ Content-Type: application/json
     <div class="future-item">
       <div class="future-num">5</div>
       <div class="future-content">
-        <div class="ft">🔮 Predictive Threat Intelligence</div>
+        <div class="ft"> Predictive Threat Intelligence</div>
         <div class="fd">Machine learning models trained on historical fraud patterns to predict upcoming fraud campaigns — including seasonal surge prediction (festive fraud spikes), new fraud family emergence alerts, and geographic spread forecasting. Target: 14-day advance warning on emerging fraud trends with 78% accuracy.</div>
       </div>
     </div>
@@ -2488,7 +2510,7 @@ Content-Type: application/json
     <div class="future-item">
       <div class="future-num">6</div>
       <div class="future-content">
-        <div class="ft">🌐 Social Media Intelligence Layer</div>
+        <div class="ft"> Social Media Intelligence Layer</div>
         <div class="fd">Integration with social media APIs to monitor fraud-related keywords, fake investment advertisements, and fraudulent account patterns across platforms — feeding real-time intelligence into SHIELD AI's Fraud DNA engine.</div>
       </div>
     </div>
@@ -2496,7 +2518,7 @@ Content-Type: application/json
     <div class="future-item">
       <div class="future-num">7</div>
       <div class="future-content">
-        <div class="ft">📱 Mobile App — SHIELD Safe</div>
+        <div class="ft"> Mobile App — SHIELD Safe</div>
         <div class="fd">A citizen-facing mobile application bringing the Citizen Copilot, SHIELD Safety Score, and real-time fraud alerts to Android and iOS platforms. Target: 50 million downloads within 24 months of national deployment, positioning SHIELD Safe as India's primary personal cybersecurity companion.</div>
       </div>
     </div>
@@ -2512,7 +2534,7 @@ Content-Type: application/json
 <!-- ═══════════════════════════════════════════════════════ -->
 <div class="page">
   <div class="page-header">
-    <div class="ph-logo">🛡 SHIELD AI</div>
+    <div class="ph-logo">SHIELD AI</div>
     <div class="ph-section">Conclusion</div>
   </div>
   <div class="page-body">
@@ -2535,19 +2557,19 @@ Content-Type: application/json
     <h3 class="sub-title">Summary of Achievements</h3>
     <div class="feature-grid">
       <div class="feature-item">
-        <div class="fi-title">✅ 6 Intelligence Modules Delivered</div>
+        <div class="fi-title"> 6 Intelligence Modules Delivered</div>
         <div class="fi-desc">Dashboard, Fraud DNA, Graph Intelligence, Investigation Desk, Geospatial Map, and Citizen Copilot — all fully functional and integrated.</div>
       </div>
       <div class="feature-item">
-        <div class="fi-title">✅ Production-Ready Architecture</div>
+        <div class="fi-title"> Production-Ready Architecture</div>
         <div class="fi-desc">Dockerized, environment-configured, API-documented, and cloud-deployable on Render, Railway, or any VPS within minutes.</div>
       </div>
       <div class="feature-item">
-        <div class="fi-title">✅ Novel Fraud DNA Innovation</div>
+        <div class="fi-title"> Novel Fraud DNA Innovation</div>
         <div class="fi-desc">First implementation of six-vector Fraud DNA fingerprinting for Indian cybercrime intelligence — a genuinely new approach to fraud family classification.</div>
       </div>
       <div class="feature-item">
-        <div class="fi-title">✅ Citizen-First Design</div>
+        <div class="fi-title"> Citizen-First Design</div>
         <div class="fi-desc">The Citizen Copilot provides multilingual fraud protection to citizens regardless of technical literacy — democratizing access to advanced AI safety tools.</div>
       </div>
     </div>
@@ -2561,7 +2583,7 @@ Content-Type: application/json
     </div>
 
     <div style="text-align:center;margin-top:6mm;padding:5mm;background:linear-gradient(135deg,rgba(30,144,255,.06),rgba(0,212,255,.04));border:1px solid rgba(30,144,255,.2);border-radius:12px;">
-      <div style="font-family:'Rajdhani',sans-serif;font-size:18pt;font-weight:900;color:#0f2044;">🛡 SHIELD AI</div>
+      <div style="font-family:'Rajdhani',sans-serif;font-size:18pt;font-weight:900;color:#0f2044;">SHIELD AI</div>
       <div style="font-size:10pt;color:#64748b;margin-top:1mm;font-style:italic;">"Every complaint. Every pattern. Every criminal. Identified."</div>
     </div>
   </div>
@@ -2576,7 +2598,7 @@ Content-Type: application/json
 <!-- ═══════════════════════════════════════════════════════ -->
 <div class="page">
   <div class="page-header">
-    <div class="ph-logo">🛡 SHIELD AI</div>
+    <div class="ph-logo">SHIELD AI</div>
     <div class="ph-section">References</div>
   </div>
   <div class="page-body">
@@ -2622,7 +2644,7 @@ Content-Type: application/json
     </ol>
 
     <div style="margin-top:6mm;padding:4mm;background:#f5f9ff;border:1px solid #dce8f8;border-radius:8px;">
-      <div style="font-weight:700;color:#0f2044;margin-bottom:2mm;">📁 Project Repository</div>
+      <div style="font-weight:700;color:#0f2044;margin-bottom:2mm;"> Project Repository</div>
       <div style="font-family:'Source Code Pro',monospace;font-size:9pt;color:#1e90ff;">
         https://github.com/sukumar2351/SHIELD-AI-National-Digital-Fraud-Prevention-Public-Safety-Intelligence-Platform
       </div>
