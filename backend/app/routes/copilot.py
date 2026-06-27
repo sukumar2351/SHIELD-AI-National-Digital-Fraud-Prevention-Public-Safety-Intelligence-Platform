@@ -58,10 +58,10 @@ def copilot_chat(
     if not payload.message.strip():
         raise HTTPException(status_code=400, detail="Message cannot be blank.")
         
-    guidance = copilot_service.generate_safety_guidance(
+    guidance = copilot_service.build_chat_response(
         complaint_text=payload.message,
-        db=db,
-        language=payload.language
+        language=payload.language,
+        db=db
     )
     return guidance
 
@@ -114,10 +114,18 @@ def get_family_awareness(
     }
 
 @router.get("/prevention-tips", response_model=List[PreventionTip])
-def get_prevention_tips():
+def get_prevention_tips(language: Optional[str] = "en"):
     """
     GET /copilot/prevention-tips
     Returns cybersecurity safety prevention tips with multi-language regional translations.
     """
-    tips = copilot_service.generate_prevention_tips()
-    return tips
+    tips = copilot_service.generate_prevention_tips(language or "en")
+    # Convert plain strings to PreventionTip-compatible dicts
+    result = []
+    for i, tip in enumerate(tips):
+        result.append({
+            "category": ["Digital Arrest", "UPI Security", "Phishing"][i % 3],
+            "tip": tip,
+            "regional_translations": {language or "en": tip}
+        })
+    return result

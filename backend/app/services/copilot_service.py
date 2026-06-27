@@ -155,6 +155,56 @@ SAFETY_GUIDANCE = {
         "Safe": [
             "സുരക്ഷിതം. പൊതുവായ സൈബർ സുരക്ഷാ മാനദണ്ഡങ്ങൾ പാലിക്കുക."
         ]
+    },
+    "mr": {
+        "Critical": [
+            "ताबडतोब कॉल बंद करा. कोणत्याही व्हिडिओ किंवा ऑडिओ कॉलवर थांबू नका.",
+            "कोणत्याही बँक तपशीलाची, ओटीपी किंवा यूपीआई पिनची माहिती देऊ नका.",
+            "1930 वर सायबर क्राइम हेल्पलाइनला संपर्क करा किंवा cybercrime.gov.in वर तक्रार नोंदवा."
+        ],
+        "High Risk": [
+            "अज्ञात संपर्कांनी पाठवलेल्या कोणत्याही लिंकवर क्लिक करू नका.",
+            "आधार किंवा बँकेचे कोणतेही तपशील शेअर करू नका.",
+            "नंबर ब्लॉक करा आणि व्हाट्सअॅपवर स्पॅम म्हणून रिपोर्ट करा."
+        ],
+        "Medium Risk": [
+            "नोकरी किंवा लॉटरीच्या नावाखाली येणाऱ्या कॉल्सबाबत सावधगिरी बाळगा.",
+            "अधिकृत माध्यमातून कॉलरची ओळख तपासा.",
+            "कोणत्याही प्रकारचे आगाऊ पेमेंट करू नका."
+        ],
+        "Low Risk": [
+            "तुमचे बँकिंग पासवर्ड आणि पिन वेळोवेळी बदला.",
+            "ओटीपी कोणाशीही शेअर करू नका.",
+            "स्पॅम संदेश दुर्लक्षित करा."
+        ],
+        "Safe": [
+            "सुरक्षित. सामान्य सायबर सुरक्षा नियमांचे पालन करत राहा."
+        ]
+    },
+    "bn": {
+        "Critical": [
+            "অবিলম্বে কল কেটে দিন। কোনো ভিডিও বা অডিও কলে থাকবেন না।",
+            "কোনো অর্থ পাঠাবেন না বা ব্যাংকের তথ্য, OTP বা UPI পিন শেয়ার করবেন না।",
+            "সাইবার ক্রাইম হেল্পলাইন 1930 এ কল করুন বা cybercrime.gov.in এ অভিযোগ করুন।"
+        ],
+        "High Risk": [
+            "অজানা পরিচিতি থেকে পাঠানো কোনো লিংকে ক্লিক করবেন না।",
+            "আধার বা ব্যাংক বিবরণ শেয়ার করবেন না।",
+            "নম্বরটি ব্লক করুন এবং হোয়াটসঅ্যাপে স্প্যাম হিসেবে রিপোর্ট করুন।"
+        ],
+        "Medium Risk": [
+            "চাকরি বা লটারির নামে আসা কলগুলি সম্পর্কে সতর্ক থাকুন।",
+            "সরকারি উপায়ে কলারের পরিচয় যাচাই করুন।",
+            "কোনো অগ্রিম অর্থ প্রদান করবেন না।"
+        ],
+        "Low Risk": [
+            "আপনার ব্যাংকিং পাসওয়ার্ড এবং পিন নিয়মিত পরিবর্তন করুন।",
+            "OTP কারো সাথে শেয়ার করবেন না।",
+            "স্প্যাম বার্তাগুলি উপেক্ষা করুন।"
+        ],
+        "Safe": [
+            "নিরাপদ। সাধারণ সাইবার নিরাপত্তা নিয়মগুলি মেনে চলুন।"
+        ]
     }
 }
 
@@ -188,42 +238,64 @@ PREVENTION_TIPS = {
         "പണം ലഭിക്കുന്നതിനായി ഒരിക്കലും യുപിഐ പിൻ എന്റർ ചെയ്യുകയോ ക്യുആർ കോഡ് സ്കാൻ ചെയ്യുകയോ ചെയ്യരുത്.",
         "പോലീസോ സിബിഐയോ ഒരിക്കലും 'ഡിജിറ്റൽ അറസ്റ്റ്' ഓർഡർ ചെയ്യുകയോ പണം ആവശ്യപ്പെടുകയോ ഇല്ല.",
         "സുഹൃത്തുക്കളോ ബന്ധുക്കളോ പണം ആവശ്യപ്പെട്ടാൽ നേരിട്ട് വിളിച്ച് ഉറപ്പുവരുത്തുക."
+    ],
+    "mr": [
+        "पैसे मिळवण्यासाठी कधीही यूपीआई पिन टाकू नका किंवा क्यूआर कोड स्कॅन करू नका.",
+        "सीबीआय किंवा पोलीस यांसारख्या सरकारी संस्था कधीही 'डिजिटल अटक' करण्याचे आदेश देत नाहीत.",
+        "नातेवाईकांच्या नावाने पैशांच्या अत्यावश्यक विनंत्यांना पैसे पाठवण्यापूर्वी सत्यापित करा."
+    ],
+    "bn": [
+        "অর্থ পেতে কখনো UPI পিন দেবেন না বা QR কোড স্ক্যান করবেন না।",
+        "সিবিআই বা পুলিশের মতো সরকারি সংস্থাগুলি কখনো 'ডিজিটাল গ্রেফতার' আদেশ দেয় না।",
+        "আত্মীয়দের নামে জরুরি অর্থের অনুরোধে পাঠানোর আগে যাচাই করুন।"
     ]
 }
 
 class CopilotService:
     def _normalize_lang(self, language: str) -> str:
+        if not language:
+            return "en"
         lang = language.lower().strip()
         if lang in ["en", "english"]:
             return "en"
-        if lang in ["hi", "hindi"]:
+        if lang in ["hi", "hindi", "हिन्दी"]:
             return "hi"
-        if lang in ["te", "telugu"]:
+        if lang in ["te", "telugu", "తెలుగు"]:
             return "te"
-        if lang in ["ta", "tamil"]:
+        if lang in ["ta", "tamil", "தமிழ்"]:
             return "ta"
-        if lang in ["kn", "kannada"]:
+        if lang in ["kn", "kannada", "ಕನ್ನಡ"]:
             return "kn"
-        if lang in ["ml", "malayalam"]:
+        if lang in ["ml", "malayalam", "മലയാളം"]:
             return "ml"
+        if lang in ["mr", "marathi", "मराठी"]:
+            return "mr"
+        if lang in ["bn", "bengali", "bengal", "বাংলা"]:
+            return "bn"
         return "en"
 
     def detect_language(self, text: str) -> str:
         """
-        Uses script block ranges to return language codes (en, hi, te, ta, kn, ml).
+        Uses Unicode script block ranges to detect language codes.
+        Supports: te, hi, ta, kn, ml, mr, bn.
         """
         if not text:
             return "en"
-        if re.search(r'[\u0c00-\u0c7f]', text):
+        if re.search(r'[\u0c00-\u0c7f]', text):  # Telugu
             return "te"
-        if re.search(r'[\u0900-\u097f]', text):
-            return "hi"
-        if re.search(r'[\u0b80-\u0bff]', text):
+        if re.search(r'[\u0b80-\u0bff]', text):  # Tamil
             return "ta"
-        if re.search(r'[\u0c80-\u0cff]', text):
+        if re.search(r'[\u0c80-\u0cff]', text):  # Kannada
             return "kn"
-        if re.search(r'[\u0d00-\u0d7f]', text):
+        if re.search(r'[\u0d00-\u0d7f]', text):  # Malayalam
             return "ml"
+        if re.search(r'[\u0980-\u09ff]', text):  # Bengali
+            return "bn"
+        if re.search(r'[\u0900-\u097f]', text):  # Hindi/Marathi (Devanagari)
+            # Marathi-specific check via common words
+            if any(w in text for w in ["आहे", "नाही", "आणि", "मला", "तुम्ही"]):
+                return "mr"
+            return "hi"
         return "en"
 
     def analyze_risk(self, text: str, fraud_dna: dict, shield_score: int) -> dict:
@@ -287,8 +359,9 @@ class CopilotService:
     def generate_safety_guidance(self, language: str, threat_level: str) -> List[str]:
         """
         Generates localized safety guidance. Returns list of safety steps.
+        Accepts both full language names (e.g. 'Telugu') and ISO codes (e.g. 'te').
         """
-        norm_lang = self._normalize_lang(language)
+        norm_lang = self._normalize_lang(language or "en")
         
         # Normalize threat level case-insensitively
         norm_threat = "Safe"
@@ -300,11 +373,77 @@ class CopilotService:
         lang_guidance = SAFETY_GUIDANCE.get(norm_lang, SAFETY_GUIDANCE["en"])
         return lang_guidance.get(norm_threat, lang_guidance["Safe"])
 
-    def generate_prevention_tips(self, language: str) -> List[str]:
+    def build_chat_response(self, complaint_text: str, language: Optional[str], db) -> dict:
+        """
+        Main entry point for the /copilot/chat route.
+        Auto-detects language from text if not provided, then returns
+        a fully localized guidance response.
+        """
+        # 1. Resolve language — prefer explicit selection, else auto-detect from text
+        if language and language.lower() not in ["english", "en", ""]:
+            lang_code = self._normalize_lang(language)
+        else:
+            detected = self.detect_language(complaint_text)
+            lang_code = detected if detected != "en" else self._normalize_lang(language or "en")
+
+        # 2. Score risk heuristically from keywords
+        text_lower = complaint_text.lower()
+        if any(w in text_lower for w in ["arrest", "cbi", "customs", "police", "skype", "narcotics", "digital arrest",
+                                          "అరెస్ట్", "పోలీస్", "गिरफ्तार", "கைது", "ಬಂಧನ", "അറസ്റ്റ്", "अटक", "গ্রেফতার"]):
+            threat_level = "Critical"
+        elif any(w in text_lower for w in ["qr", "otp", "pin", "upi", "link", "click", "phishing",
+                                            "పిన్", "ओटीपी", "ওটিপি"]):
+            threat_level = "High Risk"
+        elif any(w in text_lower for w in ["job", "lottery", "suspicious", "call", "unknown",
+                                            "ఉద్యోగం", "नौकरी", "வேலை", "ಉದ್ಯೋಗ", "ജോലി"]):
+            threat_level = "Medium Risk"
+        else:
+            threat_level = "Low Risk"
+
+        # 3. Retrieve localized guidance
+        guidance_steps = self.generate_safety_guidance(lang_code, threat_level)
+        risk_assessment = guidance_steps[0] if guidance_steps else "Suspicious activity detected."
+        safety_advice = " ".join(guidance_steps[1:]) if len(guidance_steps) > 1 else risk_assessment
+        reporting = guidance_steps[-1] if len(guidance_steps) >= 1 else "Call 1930 or visit cybercrime.gov.in"
+
+        # 4. Build localized modus operandi description
+        modus_map = {
+            "en": "Scammers impersonate authorities to create fear. They use urgency and threats to extract money or credentials.",
+            "hi": "जालसाज अधिकारियों का रूप धारण करके डर फैलाते हैं। वे धमकियों के ज़रिए पैसे या जानकारी लेते हैं।",
+            "te": "మోసగాళ్ళు అధికారుల పేరు చెప్పుకుని భయం కల్పిస్తారు. అత్యవసర పరిస్థితులు సృష్టించి డబ్బులు లేదా వ్యక్తిగత వివరాలు తీసుకుంటారు.",
+            "ta": "மோசடி செய்பவர்கள் அதிகாரிகளாக நடித்து பயமுறுத்துகிறார்கள். அவசரமான சூழல் உருவாக்கி பணம் அல்லது தகவல்கள் பெறுகிறார்கள்.",
+            "kn": "ವಂಚಕರು ಅಧಿಕಾರಿಗಳ ರೂಪ ಧರಿಸಿ ಭಯ ಹುಟ್ಟಿಸುತ್ತಾರೆ. ತುರ್ತು ಸ್ಥಿತಿ ಸೃಷ್ಟಿಸಿ ಹಣ ಅಥವಾ ಮಾಹಿತಿ ಕಸಿದುಕೊಳ್ಳುತ್ತಾರೆ.",
+            "ml": "തട്ടിപ്പുകാർ ഉദ്യോഗസ്ഥരായി ഭാവിച്ച് ഭയം ജനിപ്പിക്കുന്നു. അടിയന്തര സാഹചര്യം ഉണ്ടാക്കി പണം അല്ലെങ്കിൽ വിവരങ്ങൾ തട്ടിയെടുക്കുന്നു.",
+            "mr": "फसवणूक करणारे अधिकाऱ्यांचा आव आणतात आणि भीती निर्माण करतात. त्वरेची परिस्थिती निर्माण करून पैसे किंवा माहिती चोरतात.",
+            "bn": "প্রতারকরা কর্তৃপক্ষের ভূমিকা করে ভয় তৈরি করে। জরুরি পরিস্থিতি সৃষ্টি করে অর্থ বা তথ্য হাতিয়ে নেয়।"
+        }
+
+        immediate_map = {
+            "en": "Hang up immediately. Do not share OTP, PIN or transfer money. Call 1930.",
+            "hi": "तुरंत फोन काटें। ओटीपी, पिन शेयर न करें। 1930 पर कॉल करें।",
+            "te": "వెంటనే ఫోన్ కట్ చేయండి. ఓటీపీ లేదా పిన్ చెప్పకండి. 1930 కి కాల్ చేయండి.",
+            "ta": "உடனடியாக அழைப்பை துண்டியுங்கள். OTP அல்லது பின் பகிரவேண்டாம். 1930 ஐ அழையுங்கள்.",
+            "kn": "ತಕ್ಷಣ ಫೋನ್ ಕಟ್ ಮಾಡಿ. ಒಟಿಪಿ ಅಥವಾ ಪಿನ್ ಹಂಚಿಕೊಳ್ಳಬೇಡಿ. 1930 ಗೆ ಕರೆ ಮಾಡಿ.",
+            "ml": "ഉടൻ കോൾ കട്ട് ചെയ്യുക. OTP അല്ലെങ്കിൽ PIN പങ്കുവെക്കരുത്. 1930 ൽ വിളിക്കുക.",
+            "mr": "ताबडतोब कॉल बंद करा. ओटीपी किंवा पिन शेअर करू नका. 1930 वर कॉल करा.",
+            "bn": "অবিলম্বে কল কেটে দিন। OTP বা পিন শেয়ার করবেন না। 1930 এ কল করুন।"
+        }
+
+        return {
+            "risk_assessment": risk_assessment,
+            "threat_explanation": modus_map.get(lang_code, modus_map["en"]),
+            "safety_advice": safety_advice,
+            "reporting_instructions": reporting,
+            "immediate_actions": immediate_map.get(lang_code, immediate_map["en"]),
+            "language": lang_code
+        }
+
+    def generate_prevention_tips(self, language: str = "en") -> List[str]:
         """
         Generates fraud prevention tips in the target language.
+        Accepts full language names or ISO codes.
         """
-        norm_lang = self._normalize_lang(language)
+        norm_lang = self._normalize_lang(language or "en")
         return PREVENTION_TIPS.get(norm_lang, PREVENTION_TIPS["en"])
 
     def explain_fraud_family(self, fraud_family: dict, language: str) -> str:

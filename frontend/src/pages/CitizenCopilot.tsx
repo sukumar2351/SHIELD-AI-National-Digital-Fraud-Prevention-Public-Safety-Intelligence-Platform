@@ -58,8 +58,25 @@ export const CitizenCopilot: React.FC = () => {
     { code: 'Telugu', label: 'తెలుగు' },
     { code: 'Tamil', label: 'தமிழ்' },
     { code: 'Kannada', label: 'ಕನ್ನಡ' },
-    { code: 'Malayalam', label: 'മലയാളం' }
+    { code: 'Malayalam', label: 'മലയാളം' },
+    { code: 'Marathi', label: 'मराठी' },
+    { code: 'Bengali', label: 'বাংলা' }
   ];
+
+  // Auto-detect language from typed input
+  const detectInputLanguage = (text: string): string => {
+    if (/[\u0c00-\u0c7f]/.test(text)) return 'Telugu';
+    if (/[\u0b80-\u0bff]/.test(text)) return 'Tamil';
+    if (/[\u0c80-\u0cff]/.test(text)) return 'Kannada';
+    if (/[\u0d00-\u0d7f]/.test(text)) return 'Malayalam';
+    if (/[\u0980-\u09ff]/.test(text)) return 'Bengali';
+    if (/[\u0900-\u097f]/.test(text)) {
+      const marathiWords = ['आहे', 'नाही', 'आणि', 'मला', 'तुम्ही'];
+      if (marathiWords.some(w => text.includes(w))) return 'Marathi';
+      return 'Hindi';
+    }
+    return language; // keep current selection
+  };
 
   const quickActions = [
     { label: "🚨 Fake CBI customs call", text: "Received a WhatsApp call from someone claiming to be a CBI inspector. They showed an arrest memo and accused me of sending narcotics in a customs courier, forcing me onto Skype." },
@@ -102,7 +119,7 @@ export const CitizenCopilot: React.FC = () => {
     // Load prevention tips from API
     const loadTips = async () => {
       try {
-        const res = await fetch('https://backend-gray-alpha-78.vercel.app/api/v1/copilot/prevention-tips');
+        const res = await fetch(`https://backend-gray-alpha-78.vercel.app/api/v1/copilot/prevention-tips?language=${language}`);
         if (res.ok) {
           const tipsData = await res.json();
           setPreventionTips(tipsData);
@@ -114,7 +131,7 @@ export const CitizenCopilot: React.FC = () => {
       }
     };
     loadTips();
-  }, []);
+  }, [language]);
 
   // Scroll to bottom of chat
   useEffect(() => {
@@ -132,6 +149,13 @@ export const CitizenCopilot: React.FC = () => {
   const handleSendMessage = async (text: string) => {
     if (!text.trim()) return;
     setLoading(true);
+
+    // Auto-detect language from input text
+    const detectedLang = detectInputLanguage(text);
+    if (detectedLang !== language) {
+      setLanguage(detectedLang);
+    }
+    const activeLang = detectedLang;
 
     const userMessage: ChatMessage = {
       sender: 'citizen',
@@ -154,7 +178,7 @@ export const CitizenCopilot: React.FC = () => {
       const analyzeRes = await fetch(`${BASE_URL}/copilot/analyze`, {
         method: 'POST',
         headers,
-        body: JSON.stringify({ text, language })
+        body: JSON.stringify({ text, language: activeLang })
       });
 
       let analysisResult = null;
@@ -167,7 +191,7 @@ export const CitizenCopilot: React.FC = () => {
           try {
             // Find a family ID reference or use 1 for demo purposes
             const familyId = analysisResult.fraud_family.includes("ARREST") ? 1 : 2;
-            const famRes = await fetch(`${BASE_URL}/copilot/family-awareness/${familyId}?language=${language}`, { headers });
+            const famRes = await fetch(`${BASE_URL}/copilot/family-awareness/${familyId}?language=${activeLang}`, { headers });
             if (famRes.ok) {
               const famData = await famRes.json();
               setActiveFamilyAwareness(famData);
@@ -182,7 +206,7 @@ export const CitizenCopilot: React.FC = () => {
       const chatRes = await fetch(`${BASE_URL}/copilot/chat`, {
         method: 'POST',
         headers,
-        body: JSON.stringify({ message: text, language })
+        body: JSON.stringify({ message: text, language: activeLang })
       });
 
       if (chatRes.ok) {
@@ -200,34 +224,61 @@ export const CitizenCopilot: React.FC = () => {
 
     } catch (e) {
       console.warn("Using offline copilot response mapping");
-      // Fallback response parsing keywords
-      const isArrest = text.toLowerCase().includes('arrest') || text.toLowerCase().includes('cbi') || text.toLowerCase().includes('police') || text.toLowerCase().includes('custom');
-      const isQr = text.toLowerCase().includes('qr') || text.toLowerCase().includes('olx') || text.toLowerCase().includes('pin');
-      
-      let replyText = '';
-      let score = 40;
-      let level = 'Medium Risk';
-      let family = 'Unknown Scammer Group';
-      let guidance = 'Verify any official claims offline. Do not execute transfers.';
-      let actions = 'Hang up. Block the contact. Call cyber helpline 1930.';
+      // Localized offline fallback responses
+      const offlineFallback: Record<string, { arrest: string; qr: string; generic: string }> = {
+        'Telugu': {
+          arrest: "🚨 అత్యంత ప్రమాదకరం: 'డిజిటల్ అరెస్ట్' మోసం జరుగుతోంది.\n\nవెంటనే ఫోన్ కట్ చేయండి. ఏ పోలీస్ లేదా సీబీఐ అధికారి స్కైప్‌లో మీపై చర్య తీసుకోలేరు. 1930 కి కాల్ చేయండి.",
+          qr: "⚠️ అధిక ప్రమాదం: యూపీఐ క్యూఆర్ కోడ్ మోసం గుర్తించబడింది.\n\nక్యూఆర్ కోడ్ స్కాన్ చేయవద్దు మరియు మీ యూపీఐ పిన్ నమోదు చేయవద్దు. పిన్ పంచుకోవడం డబ్బులు పోతాయి.",
+          generic: "జాగ్రత్తగా ఉండండి. మోసగాళ్ళు అత్యవసర పరిస్థితులు సృష్టిస్తారు. డబ్బులు బదిలీ చేయవద్దు లేదా స్క్రీన్ షేరింగ్ సాఫ్ట్‌వేర్ డౌన్‌లోడ్ చేయవద్దు."
+        },
+        'Hindi': {
+          arrest: "🚨 गंभीर खतरा: 'डिजिटल अरेस्ट' स्कैम चल रहा है।\n\nतुरंत फोन काटें। कोई भी पुलिस या सीबीआई अधिकारी स्काइप पर आपको गिरफ्तार नहीं कर सकता। 1930 पर कॉल करें।",
+          qr: "⚠️ उच्च जोखिम: यूपीआई क्यूआर कोड स्कैम पाया गया।\n\nक्यूआर कोड स्कैन मत करें और अपना यूपीआई पिन दर्ज न करें। पिन डालने से पैसे कटते हैं।",
+          generic: "सावधान रहें। ठग आपात स्थिति बनाते हैं। कभी भी पैसे ट्रांसफर न करें।"
+        },
+        'Tamil': {
+          arrest: "🚨 மிக ஆபத்தானது: 'டிஜிட்டல் அரெஸ்ட்' மோசடி நடக்கிறது.\n\nஉடனடியாக அழைப்பை துண்டிக்கவும். எந்தவொரு போலீஸோ வீடியோ கோலிலும் கைது செய்ய முடியாது. 1930ஐ அழையுங்கள்.",
+          qr: "⚠️ உயர் ஆபத்து: UPI QR குறியீடு மோசடி கண்டறியப்பட்டது.\n\nQR குறியீட்டை ஸ்கேன் செய்யவோ UPI PIN ஐ உள்ளிடவோ வேண்டாம்.",
+          generic: "எச்சரிக்கையாக இருங்கள். மோசடியாளர்கள் அவசர நிலைமை உருவாக்குவார்கள். பணம் பரிமாற வேண்டாம்."
+        },
+        'Kannada': {
+          arrest: "🚨 ತೀವ್ರ ಅಪಾಯ: 'ಡಿಜಿಟಲ್ ಬಂಧನ' ವಂಚನೆ ನಡೆಯುತ್ತಿದೆ.\n\nತಕ್ಷಣ ಫೋನ್ ಕಡಿತಗೊಳಿಸಿ. ಯಾರೂ ವಿಡಿಯೋ ಕಾಲ್‌ನಲ್ಲಿ ಬಂಧಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ. 1930 ಗೆ ಕರೆ ಮಾಡಿ.",
+          qr: "⚠️ ಹೆಚ್ಚಿನ ಅಪಾಯ: UPI QR ಕೋಡ್ ವಂಚನೆ ಪತ್ತೆಯಾಗಿದೆ.\n\nQR ಕೋಡ್ ಸ್ಕ್ಯಾನ್ ಮಾಡಬೇಡಿ ಅಥವಾ UPI PIN ನಮೂದಿಸಬೇಡಿ.",
+          generic: "ಎಚ್ಚರಿಕೆಯಿಂದಿರಿ. ವಂಚಕರು ತುರ್ತು ಪರಿಸ್ಥಿತಿ ಸೃಷ್ಟಿಸುತ್ತಾರೆ. ಹಣ ವರ್ಗಾಯಿಸಬೇಡಿ."
+        },
+        'Malayalam': {
+          arrest: "🚨 ഗുരുതരമായ ഭീഷണി: 'ഡിജിറ്റൽ അറസ്റ്റ്' തട്ടിപ്പ് നടക്കുന്നു.\n\nഉടൻ കോൾ കട്ട് ചെയ്യുക. ഒരു പോലീസ് ഉദ്യോഗസ്ഥനും വീഡിയോ കോളിൽ അറസ്റ്റ് ചെയ്യില്ല. 1930 ൽ വിളിക്കുക.",
+          qr: "⚠️ ഉയർന്ന ഭീഷണി: UPI QR കോഡ് തട്ടിപ്പ് കണ്ടെത്തി.\n\nQR കോഡ് സ്കാൻ ചെയ്യരുത്, UPI PIN നൽകരുത്.",
+          generic: "ജാഗ്രത പാലിക്കുക. തട്ടിപ്പുകാർ അടിയന്തര സാഹചര്യം ഉണ്ടാക്കും. പണം കൈമാറരുത്."
+        },
+        'Marathi': {
+          arrest: "🚨 गंभीर धोका: 'डिजिटल अटक' घोटाळा सुरू आहे.\n\nताबडतोब कॉल बंद करा. कोणताही पोलीस अधिकारी व्हिडिओ कॉलवर तुम्हाला अटक करू शकत नाही. 1930 वर कॉल करा.",
+          qr: "⚠️ उच्च धोका: UPI QR कोड घोटाळा आढळला.\n\nQR कोड स्कॅन करू नका आणि UPI पिन टाकू नका.",
+          generic: "सावध राहा. फसवणूक करणारे आपत्कालीन परिस्थिती निर्माण करतात. पैसे हस्तांतरित करू नका."
+        },
+        'Bengali': {
+          arrest: "🚨 গুরুতর বিপদ: 'ডিজিটাল গ্রেফতার' প্রতারণা চলছে।\n\nঅবিলম্বে কল কেটে দিন। কোনো পুলিশ কর্মকর্তা ভিডিও কলে গ্রেফতার করতে পারেন না। 1930 এ কল করুন।",
+          qr: "⚠️ উচ্চ ঝুঁকি: UPI QR কোড প্রতারণা সনাক্ত হয়েছে।\n\nQR কোড স্ক্যান করবেন না এবং UPI পিন দেবেন না।",
+          generic: "সতর্ক থাকুন। প্রতারকরা জরুরি পরিস্থিতি তৈরি করে। কোনো অর্থ স্থানান্তর করবেন না."
+        },
+        'English': {
+          arrest: "🚨 CRITICAL RISK: Potential 'Digital Arrest' Scammer Syndicate in progress.\n\nHang up the call immediately. No customs officer or CBI investigator will force you onto Skype or keep you under digital arrest. Call the National Cyber Crime Helpline at 1930.",
+          qr: "⚠️ HIGH RISK: UPI Receive Money QR Code scam detected.\n\nDo not scan the QR code and do not enter your UPI PIN. UPI PIN is only required to pay money, never to receive it.",
+          generic: "We advise high caution. Scammers often create artificial urgency. Never transfer funds or download support screen-sharing software."
+        }
+      };
 
-      if (isArrest) {
-        score = 94;
-        level = 'Critical';
-        family = 'CBI Custom Arrest Syndicate';
-        guidance = 'No CBI or police authority executes arrests via video calls (Skype/WhatsApp). Hang up immediately. Do not share identity files.';
-        actions = 'Do not transfer verify funds. Ignore threats of custom cargo blocks. Disconnect Skype immediately.';
-        replyText = "🚨 CRITICAL RISK: Potential 'Digital Arrest' Scammer Syndicate in progress.\n\nImmediate Action: Hang up the call immediately. No customs officer or CBI investigator will force you onto Skype or keep you under digital arrest to verify your funds. Call the National Cyber Crime Helpline at 1930.";
-      } else if (isQr) {
-        score = 88;
-        level = 'High Risk';
-        family = 'OLX UPI Refund Ring';
-        guidance = 'Entering your UPI PIN always debits money. You never scan or enter your PIN to receive funds.';
-        actions = 'Cancel the transaction. Do not enter your UPI PIN. Report the UPI ID to payment node.';
-        replyText = "⚠️ HIGH RISK: UPI Receive Money QR Code scam detected.\n\nImmediate Action: Do not scan the QR code and do not enter your UPI PIN. UPI PIN is only required to pay money, never to receive it.";
-      } else {
-        replyText = "We advise high caution. Scammers often create artificial urgency. Never transfer funds or download support screen-sharing software (AnyDesk, TeamViewer) to clear complaints.";
-      }
+      const isArrest = text.toLowerCase().includes('arrest') || text.toLowerCase().includes('cbi') || text.toLowerCase().includes('police') || text.toLowerCase().includes('custom') || /అరెస్ట్|పోలీస్|गिरफ्तार|கைது|ಬಂಧನ|അറസ്റ്റ്|अटक|গ্রেফতার/.test(text);
+      const isQr = text.toLowerCase().includes('qr') || text.toLowerCase().includes('olx') || text.toLowerCase().includes('pin') || /పిన్|पिन|ওটিপি/.test(text);
+
+      const fallbackLang = offlineFallback[activeLang] || offlineFallback['English'];
+      const replyText = isArrest ? fallbackLang.arrest : isQr ? fallbackLang.qr : fallbackLang.generic;
+
+      const score = isArrest ? 94 : isQr ? 88 : 40;
+      const level = isArrest ? 'Critical' : isQr ? 'High Risk' : 'Medium Risk';
+      const family = isArrest ? 'CBI Custom Arrest Syndicate' : isQr ? 'OLX UPI Refund Ring' : 'Unknown Scammer Group';
+      const guidance = isArrest ? 'No CBI or police authority executes arrests via video calls.' : isQr ? 'Entering UPI PIN always debits money.' : 'Verify any official claims offline.';
+      const actions = isArrest ? 'Hang up. Block. Call 1930.' : isQr ? 'Cancel. Do not enter UPI PIN.' : 'Be cautious. Verify before acting.';
 
       const fallbackAnalysis = {
         shield_score: score,
@@ -291,7 +342,7 @@ export const CitizenCopilot: React.FC = () => {
           {/* Metrics header */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 shrink-0">
             <MetricCard label="Citizen Queries Solved" value="1,842" icon={BookOpen} color="blue" />
-            <MetricCard label="Languages Supported" value={6} icon={Globe} color="green" />
+            <MetricCard label="Languages Supported" value={8} icon={Globe} color="green" />
             <MetricCard label="Average Pre-Check Time" value="480ms" icon={Activity} color="blue" />
             <MetricCard label="Shield Interception rate" value="94.2%" icon={ShieldCheck} color="green" />
           </div>
