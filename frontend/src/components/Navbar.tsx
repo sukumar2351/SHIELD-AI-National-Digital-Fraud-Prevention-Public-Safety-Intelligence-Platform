@@ -85,7 +85,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
         {dropdownOpen && (
           <>
             <div className="fixed inset-0 z-40" onClick={() => setDropdownOpen(false)}></div>
-            <div className="absolute right-4 top-14 w-56 rounded-2xl glass-panel border border-white/10 shadow-2xl z-50 p-2 font-mono text-xs divide-y divide-blue-500/10">
+            <div className="absolute right-0 top-[58px] w-[320px] rounded-2xl glass-panel border border-white/10 shadow-2xl z-50 p-3 font-mono text-xs divide-y divide-blue-500/10">
               <div className="p-3 text-left space-y-1 font-mono">
                 <p className="text-white font-bold text-sm tracking-wide">{fullName}</p>
                 <p className="text-[9px] text-gray-400 uppercase tracking-widest">OFFICER_SHIELD</p>
@@ -95,15 +95,33 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
               </div>
               
               <div className="py-1">
-                <button className="w-full text-left px-3 py-2 rounded hover:bg-blue-500/10 text-gray-300 hover:text-white flex items-center gap-2 transition-colors">
+                <button 
+                  onClick={() => {
+                    onNavigate('/profile');
+                    setDropdownOpen(false);
+                  }}
+                  className="w-full text-left px-3 py-2 rounded hover:bg-blue-500/10 text-gray-300 hover:text-white flex items-center gap-2 transition-colors"
+                >
                   <User className="w-3.5 h-3.5 text-blue-400" />
                   Profile
                 </button>
-                <button className="w-full text-left px-3 py-2 rounded hover:bg-blue-500/10 text-gray-300 hover:text-white flex items-center gap-2 transition-colors">
+                <button 
+                  onClick={() => {
+                    onNavigate('/my-account');
+                    setDropdownOpen(false);
+                  }}
+                  className="w-full text-left px-3 py-2 rounded hover:bg-blue-500/10 text-gray-300 hover:text-white flex items-center gap-2 transition-colors"
+                >
                   <Award className="w-3.5 h-3.5 text-blue-400" />
                   My Account
                 </button>
-                <button className="w-full text-left px-3 py-2 rounded hover:bg-blue-500/10 text-gray-300 hover:text-white flex items-center gap-2 transition-colors">
+                <button 
+                  onClick={() => {
+                    onNavigate('/settings');
+                    setDropdownOpen(false);
+                  }}
+                  className="w-full text-left px-3 py-2 rounded hover:bg-blue-500/10 text-gray-300 hover:text-white flex items-center gap-2 transition-colors"
+                >
                   <Settings className="w-3.5 h-3.5 text-blue-400" />
                   Settings
                 </button>

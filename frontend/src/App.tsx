@@ -9,6 +9,9 @@ import { FraudGraph } from './pages/FraudGraph';
 import { InvestigationCenter } from './pages/InvestigationCenter';
 import { GeospatialDashboard } from './pages/GeospatialDashboard';
 import { CitizenCopilot } from './pages/CitizenCopilot';
+import { ProfilePage } from './pages/ProfilePage';
+import { MyAccountPage } from './pages/MyAccountPage';
+import { SettingsPage } from './pages/SettingsPage';
 
 function App() {
   return (
@@ -45,6 +48,21 @@ function App() {
           <Route path="/copilot" element={
             <ProtectedRoute>
               <CitizenCopilot />
+            </ProtectedRoute>
+          } />
+          <Route path="/profile" element={
+            <ProtectedRoute>
+              <ProfilePage />
+            </ProtectedRoute>
+          } />
+          <Route path="/my-account" element={
+            <ProtectedRoute>
+              <MyAccountPage />
+            </ProtectedRoute>
+          } />
+          <Route path="/settings" element={
+            <ProtectedRoute>
+              <SettingsPage />
             </ProtectedRoute>
           } />
           
